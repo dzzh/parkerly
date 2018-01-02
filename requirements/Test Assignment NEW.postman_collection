@@ -1,0 +1,137 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Test Assignment",
+		"_postman_id": "8a2fa079-26dc-2267-cf50-33c0ad7210d2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Zones",
+			"request": {
+				"url": "https://testapi-11cc3-657ec.firebaseio.com/parkingZones.json",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"address\": \"Amsterdam\",\n    \"lat\": \"test User 2 last name\",\n    \"lon\": \"user name 2\",\n    \"tariff\": \"5 eur/hr\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"url": "https://testapi-11cc3-657ec.firebaseio.com/users.json",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"test User 3 first name\",\n    \"lastName\": \"test User 3 last name\",\n    \"userName\": \"user name 3\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"url": "https://testapi-11cc3-657ec.firebaseio.com/users/defaultUser.json",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"test User 2 first name\",\n    \"lastName\": \"test User 2\n    \"city\": \"City Name\",\n    \"parkingZoneId\": \"parking zone id\",\n    \"zoneId\": \"zone id\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parking Action",
+			"request": {
+				"url": "https://testapi-11cc3-657ec.firebaseio.com/parkingActions.json",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"USER_ID\",\n    \"vehicleId\": \"VEHICLE_ID\",\n    \"zoneId\": \"ZONE_ID\",\n    \"startDate\": \"START_DATE\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Parking Action",
+			"request": {
+				"url": "https://testapi-11cc3-657ec.firebaseio.com/parkingActions/-KzQLcaOTSekGiv8_69j.json",
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n    {\n        \"stopDate\": \"END_DATE\"\n    }\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Parking Actions",
+			"request": {
+				"url": "https://testapi-11cc3-657ec.firebaseio.com/parkingActions.json",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"USER_ID\",\n    \"vehicleId\": \"VEHICLE_ID\",\n    \"zoneId\": \"ZONE_ID\",\n    \"startDate\": \"START_DATE\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Post New Zone",
+			"request": {
+				"url": "https://testapi-11cc3-657ec.firebaseio.com/parkingZones.json",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"address\": \"Amsterdam-Zuidoost, Develstein 100\",\n    \"lat\": 52.3268841,\n    \"lon\": 4.9499596,\n    \"tariff\": \"4 eur/hr\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Post New Vehicle",
+			"request": {
+				"url": "https://testapi-11cc3-657ec.firebaseio.com/vehicles.json",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"USER_ID\",\n    \"vrn\": \"XXX-XXX\",\n    \"title\": \"my car\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicles",
+			"request": {
+				"url": "https://testapi-11cc3-657ec.firebaseio.com/vehicles.json",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"USER_ID\",\n    \"vrn\": \"XXX-XXX\",\n    \"title\": \"my car\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
