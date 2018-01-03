@@ -7,17 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		75AB8CD41FFBC57B0058297C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AB8CD31FFBC57B0058297C /* AppDelegate.swift */; };
-		75AB8CD61FFBC57B0058297C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AB8CD51FFBC57B0058297C /* ViewController.swift */; };
-		75AB8CD91FFBC57B0058297C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75AB8CD71FFBC57B0058297C /* Main.storyboard */; };
+		756A36AC1FFC14C100C81E72 /* ParkerlyCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 756A36A31FFC14C000C81E72 /* ParkerlyCore.framework */; };
+		756A36B31FFC14C100C81E72 /* ParkerlyCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756A36B21FFC14C100C81E72 /* ParkerlyCoreTests.swift */; };
+		756A36B51FFC14C100C81E72 /* ParkerlyCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 756A36A51FFC14C100C81E72 /* ParkerlyCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		756A36B81FFC14C100C81E72 /* ParkerlyCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 756A36A31FFC14C000C81E72 /* ParkerlyCore.framework */; };
+		756A36B91FFC14C100C81E72 /* ParkerlyCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 756A36A31FFC14C000C81E72 /* ParkerlyCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75AB8CDB1FFBC57B0058297C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75AB8CDA1FFBC57B0058297C /* Assets.xcassets */; };
-		75AB8CDE1FFBC57B0058297C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75AB8CDC1FFBC57B0058297C /* LaunchScreen.storyboard */; };
 		75AB8CE91FFBC57B0058297C /* ParkerlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AB8CE81FFBC57B0058297C /* ParkerlyTests.swift */; };
 		A1357DEBE7AC1631CB1E4485 /* Pods_Parkerly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 636BD3AC833D5E7BA187EDFF /* Pods_Parkerly.framework */; };
 		D01BF051730C1CFC4224C334 /* Pods_ParkerlyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC8BE4C687BDA9712BD6D57 /* Pods_ParkerlyTests.framework */; };
+		F5AEB49D13A2BBE19BB17E3E /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBA639EF42D10AEDA0BD3 /* FlowCoordinator.swift */; };
+		F5AEB79B7EDFACF55B89B47A /* TableSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBE07B6062AEAE4EF81FF /* TableSectionDataSource.swift */; };
+		F5AEB8239D6D93B51D875B96 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBCFD85398E49E65ABE48 /* UIViewControllerExtensions.swift */; };
+		F5AEB91EBC2B871D210ABC44 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBDEFC2F57CD337251401 /* ServiceLocator.swift */; };
+		F5AEB99CFF46F750C7B604EA /* AbstractTableWithButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB8AA934AA24B78BD8F8F /* AbstractTableWithButtonView.swift */; };
+		F5AEBA07E6CE60657699338F /* AbstractTableWithButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBB46903F0823A9999017 /* AbstractTableWithButtonViewController.swift */; };
+		F5AEBA15AE1B87B3D1F07339 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBF42A8597A29347C8F19 /* AppDelegate.swift */; };
+		F5AEBA8C4F792FE20818D5BC /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB4091EEF6553E24442FC /* CollectionExtensions.swift */; };
+		F5AEBB3BABE95803B17E7F64 /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBEF8A9CB9B1A38078483 /* FilledButton.swift */; };
+		F5AEBB59DE124E570852158F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB6D2E3A96A59AFAF887D /* RootViewController.swift */; };
+		F5AEBBD7B93D40A25091B7CC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3672B82683C63BAF406 /* AppCoordinator.swift */; };
+		F5AEBCB42D94F4B390CD35FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5AEB537E1598673EDDF193C /* LaunchScreen.storyboard */; };
+		F5AEBD2D4F9E05B7F9C1ACA5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBDEA79836E259785AF1A /* UIViewExtensions.swift */; };
+		F5AEBE14F2CD9695536F3F2D /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB1F37CBE8C34F3C574BB /* LoginCoordinator.swift */; };
+		F5AEBE80A4FC2EF72F87B492 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3AF447792C7E4C70F0F /* ContainerViewController.swift */; };
+		F5AEBF597B6ACDDC59AAB9B3 /* AbstractTableWithButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB7520B0EACE9C4EF7092 /* AbstractTableWithButtonViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		756A36AD1FFC14C100C81E72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75AB8CC81FFBC57B0058297C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 756A36A21FFC14C000C81E72;
+			remoteInfo = ParkerlyCore;
+		};
+		756A36AF1FFC14C100C81E72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75AB8CC81FFBC57B0058297C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75AB8CCF1FFBC57B0058297C;
+			remoteInfo = Parkerly;
+		};
+		756A36B61FFC14C100C81E72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75AB8CC81FFBC57B0058297C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 756A36A21FFC14C000C81E72;
+			remoteInfo = ParkerlyCore;
+		};
 		75AB8CE51FFBC57B0058297C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75AB8CC81FFBC57B0058297C /* Project object */;
@@ -27,31 +65,79 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		756A36BF1FFC14C100C81E72 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				756A36B91FFC14C100C81E72 /* ParkerlyCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5E263CFE71A3FE861F16ADA8 /* Pods-ParkerlyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkerlyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParkerlyTests/Pods-ParkerlyTests.release.xcconfig"; sourceTree = "<group>"; };
 		636BD3AC833D5E7BA187EDFF /* Pods_Parkerly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parkerly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0059673C3008EF4DAAFA81 /* Pods-ParkerlyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParkerlyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParkerlyTests/Pods-ParkerlyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		756A36A31FFC14C000C81E72 /* ParkerlyCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ParkerlyCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		756A36A51FFC14C100C81E72 /* ParkerlyCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParkerlyCore.h; sourceTree = "<group>"; };
+		756A36A61FFC14C100C81E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		756A36AB1FFC14C100C81E72 /* ParkerlyCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParkerlyCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		756A36B21FFC14C100C81E72 /* ParkerlyCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkerlyCoreTests.swift; sourceTree = "<group>"; };
+		756A36B41FFC14C100C81E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75AB8CD01FFBC57B0058297C /* Parkerly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parkerly.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		75AB8CD31FFBC57B0058297C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		75AB8CD51FFBC57B0058297C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		75AB8CD81FFBC57B0058297C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		75AB8CDA1FFBC57B0058297C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		75AB8CDD1FFBC57B0058297C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		75AB8CDF1FFBC57B0058297C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75AB8CE41FFBC57B0058297C /* ParkerlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParkerlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75AB8CE81FFBC57B0058297C /* ParkerlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkerlyTests.swift; sourceTree = "<group>"; };
 		75AB8CEA1FFBC57B0058297C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83A6C6FE0FD2BC1D420D2878 /* Pods-Parkerly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkerly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Parkerly/Pods-Parkerly.debug.xcconfig"; sourceTree = "<group>"; };
 		DFC8BE4C687BDA9712BD6D57 /* Pods_ParkerlyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParkerlyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5AEB1F37CBE8C34F3C574BB /* LoginCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		F5AEB3672B82683C63BAF406 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		F5AEB3AF447792C7E4C70F0F /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		F5AEB4091EEF6553E24442FC /* CollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
+		F5AEB6D2E3A96A59AFAF887D /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		F5AEB7520B0EACE9C4EF7092 /* AbstractTableWithButtonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableWithButtonViewModel.swift; sourceTree = "<group>"; };
+		F5AEB788AE6F33938B93ADAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Parkerly/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		F5AEB85B880B011A54729E87 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		F5AEB8AA934AA24B78BD8F8F /* AbstractTableWithButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableWithButtonView.swift; sourceTree = "<group>"; };
+		F5AEBA639EF42D10AEDA0BD3 /* FlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
+		F5AEBB46903F0823A9999017 /* AbstractTableWithButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableWithButtonViewController.swift; sourceTree = "<group>"; };
+		F5AEBCFD85398E49E65ABE48 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		F5AEBDEA79836E259785AF1A /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		F5AEBDEFC2F57CD337251401 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		F5AEBE07B6062AEAE4EF81FF /* TableSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSectionDataSource.swift; sourceTree = "<group>"; };
+		F5AEBEF8A9CB9B1A38078483 /* FilledButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
+		F5AEBF42A8597A29347C8F19 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC63E1BB0F8BB7FDEDBB2467 /* Pods-Parkerly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkerly.release.xcconfig"; path = "Pods/Target Support Files/Pods-Parkerly/Pods-Parkerly.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		756A369F1FFC14C000C81E72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		756A36A81FFC14C100C81E72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				756A36AC1FFC14C100C81E72 /* ParkerlyCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75AB8CCD1FFBC57B0058297C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A1357DEBE7AC1631CB1E4485 /* Pods_Parkerly.framework in Frameworks */,
+				756A36B81FFC14C100C81E72 /* ParkerlyCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,11 +163,34 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		756A36A41FFC14C100C81E72 /* ParkerlyCore */ = {
+			isa = PBXGroup;
+			children = (
+				756A36A51FFC14C100C81E72 /* ParkerlyCore.h */,
+				756A36A61FFC14C100C81E72 /* Info.plist */,
+				F5AEB19E2DDE0B8CB77C3E3E /* Services */,
+				F5AEB70DE2CBC58797C2118B /* Models */,
+				F5AEBF7F73A17E7028A4EBC5 /* Extensions */,
+			);
+			path = ParkerlyCore;
+			sourceTree = "<group>";
+		};
+		756A36B11FFC14C100C81E72 /* ParkerlyCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				756A36B21FFC14C100C81E72 /* ParkerlyCoreTests.swift */,
+				756A36B41FFC14C100C81E72 /* Info.plist */,
+			);
+			path = ParkerlyCoreTests;
+			sourceTree = "<group>";
+		};
 		75AB8CC71FFBC57B0058297C = {
 			isa = PBXGroup;
 			children = (
 				75AB8CD21FFBC57B0058297C /* Parkerly */,
 				75AB8CE71FFBC57B0058297C /* ParkerlyTests */,
+				756A36A41FFC14C100C81E72 /* ParkerlyCore */,
+				756A36B11FFC14C100C81E72 /* ParkerlyCoreTests */,
 				75AB8CD11FFBC57B0058297C /* Products */,
 				3A79A377409A72DDFDA860D3 /* Pods */,
 				C718617607583B892B3BDFA0 /* Frameworks */,
@@ -93,6 +202,8 @@
 			children = (
 				75AB8CD01FFBC57B0058297C /* Parkerly.app */,
 				75AB8CE41FFBC57B0058297C /* ParkerlyTests.xctest */,
+				756A36A31FFC14C000C81E72 /* ParkerlyCore.framework */,
+				756A36AB1FFC14C100C81E72 /* ParkerlyCoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,12 +211,11 @@
 		75AB8CD21FFBC57B0058297C /* Parkerly */ = {
 			isa = PBXGroup;
 			children = (
-				75AB8CD31FFBC57B0058297C /* AppDelegate.swift */,
-				75AB8CD51FFBC57B0058297C /* ViewController.swift */,
-				75AB8CD71FFBC57B0058297C /* Main.storyboard */,
 				75AB8CDA1FFBC57B0058297C /* Assets.xcassets */,
-				75AB8CDC1FFBC57B0058297C /* LaunchScreen.storyboard */,
-				75AB8CDF1FFBC57B0058297C /* Info.plist */,
+				F5AEBAEAA9810CB9185E9DF9 /* Flows */,
+				F5AEBFEA0C0EB5BF14B2ECDF /* Scaffolding */,
+				F5AEB3A48E9AAC17A5F719F9 /* Extensions */,
+				F5AEB7C950927B2CD65C4E7E /* Launch */,
 			);
 			path = Parkerly;
 			sourceTree = "<group>";
@@ -128,9 +238,155 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F5AEB19E2DDE0B8CB77C3E3E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBDEFC2F57CD337251401 /* ServiceLocator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F5AEB3A48E9AAC17A5F719F9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBCFD85398E49E65ABE48 /* UIViewControllerExtensions.swift */,
+				F5AEBDEA79836E259785AF1A /* UIViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F5AEB50F12E4F508D579FDE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBEF8A9CB9B1A38078483 /* FilledButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F5AEB600C915F2B669D15C05 /* AbstractTableWithButton */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBB46903F0823A9999017 /* AbstractTableWithButtonViewController.swift */,
+				F5AEB8AA934AA24B78BD8F8F /* AbstractTableWithButtonView.swift */,
+				F5AEB7520B0EACE9C4EF7092 /* AbstractTableWithButtonViewModel.swift */,
+			);
+			path = AbstractTableWithButton;
+			sourceTree = "<group>";
+		};
+		F5AEB70DE2CBC58797C2118B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F5AEB7C950927B2CD65C4E7E /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBF42A8597A29347C8F19 /* AppDelegate.swift */,
+				F5AEB85B880B011A54729E87 /* Info.plist */,
+				F5AEB537E1598673EDDF193C /* LaunchScreen.storyboard */,
+				F5AEB3672B82683C63BAF406 /* AppCoordinator.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		F5AEB7E32EBE4F31489CAEA5 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEB600C915F2B669D15C05 /* AbstractTableWithButton */,
+				F5AEBE07B6062AEAE4EF81FF /* TableSectionDataSource.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
+		F5AEBAEAA9810CB9185E9DF9 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBBF988AF744759DC4526 /* Login */,
+				F5AEBA639EF42D10AEDA0BD3 /* FlowCoordinator.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		F5AEBBF988AF744759DC4526 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEB1F37CBE8C34F3C574BB /* LoginCoordinator.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		F5AEBF7F73A17E7028A4EBC5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEB4091EEF6553E24442FC /* CollectionExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F5AEBFEA0C0EB5BF14B2ECDF /* Scaffolding */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEB6D2E3A96A59AFAF887D /* RootViewController.swift */,
+				F5AEB3AF447792C7E4C70F0F /* ContainerViewController.swift */,
+				F5AEB50F12E4F508D579FDE0 /* Views */,
+				F5AEB7E32EBE4F31489CAEA5 /* Collections */,
+			);
+			path = Scaffolding;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		756A36A01FFC14C000C81E72 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				756A36B51FFC14C100C81E72 /* ParkerlyCore.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		756A36A21FFC14C000C81E72 /* ParkerlyCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 756A36BE1FFC14C100C81E72 /* Build configuration list for PBXNativeTarget "ParkerlyCore" */;
+			buildPhases = (
+				756A369E1FFC14C000C81E72 /* Sources */,
+				756A369F1FFC14C000C81E72 /* Frameworks */,
+				756A36A01FFC14C000C81E72 /* Headers */,
+				756A36A11FFC14C000C81E72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ParkerlyCore;
+			productName = ParkerlyCore;
+			productReference = 756A36A31FFC14C000C81E72 /* ParkerlyCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		756A36AA1FFC14C100C81E72 /* ParkerlyCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 756A36C01FFC14C100C81E72 /* Build configuration list for PBXNativeTarget "ParkerlyCoreTests" */;
+			buildPhases = (
+				756A36A71FFC14C100C81E72 /* Sources */,
+				756A36A81FFC14C100C81E72 /* Frameworks */,
+				756A36A91FFC14C100C81E72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				756A36AE1FFC14C100C81E72 /* PBXTargetDependency */,
+				756A36B01FFC14C100C81E72 /* PBXTargetDependency */,
+			);
+			name = ParkerlyCoreTests;
+			productName = ParkerlyCoreTests;
+			productReference = 756A36AB1FFC14C100C81E72 /* ParkerlyCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		75AB8CCF1FFBC57B0058297C /* Parkerly */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75AB8CED1FFBC57B0058297C /* Build configuration list for PBXNativeTarget "Parkerly" */;
@@ -141,10 +397,12 @@
 				75AB8CCE1FFBC57B0058297C /* Resources */,
 				476EFD718574C13DA7FA9EFF /* [CP] Embed Pods Frameworks */,
 				BF5B3E63AEECF1A1D16DCD26 /* [CP] Copy Pods Resources */,
+				756A36BF1FFC14C100C81E72 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				756A36B71FFC14C100C81E72 /* PBXTargetDependency */,
 			);
 			name = Parkerly;
 			productName = Parkerly;
@@ -182,6 +440,15 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Zmicier Zaleznicenka";
 				TargetAttributes = {
+					756A36A21FFC14C000C81E72 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					756A36AA1FFC14C100C81E72 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 75AB8CCF1FFBC57B0058297C;
+					};
 					75AB8CCF1FFBC57B0058297C = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -208,18 +475,33 @@
 			targets = (
 				75AB8CCF1FFBC57B0058297C /* Parkerly */,
 				75AB8CE31FFBC57B0058297C /* ParkerlyTests */,
+				756A36A21FFC14C000C81E72 /* ParkerlyCore */,
+				756A36AA1FFC14C100C81E72 /* ParkerlyCoreTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		756A36A11FFC14C000C81E72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		756A36A91FFC14C100C81E72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75AB8CCE1FFBC57B0058297C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75AB8CDE1FFBC57B0058297C /* LaunchScreen.storyboard in Resources */,
 				75AB8CDB1FFBC57B0058297C /* Assets.xcassets in Resources */,
-				75AB8CD91FFBC57B0058297C /* Main.storyboard in Resources */,
+				F5AEBCB42D94F4B390CD35FE /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,12 +608,40 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		756A369E1FFC14C000C81E72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5AEB91EBC2B871D210ABC44 /* ServiceLocator.swift in Sources */,
+				F5AEBA8C4F792FE20818D5BC /* CollectionExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		756A36A71FFC14C100C81E72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				756A36B31FFC14C100C81E72 /* ParkerlyCoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75AB8CCC1FFBC57B0058297C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75AB8CD61FFBC57B0058297C /* ViewController.swift in Sources */,
-				75AB8CD41FFBC57B0058297C /* AppDelegate.swift in Sources */,
+				F5AEBB59DE124E570852158F /* RootViewController.swift in Sources */,
+				F5AEBE80A4FC2EF72F87B492 /* ContainerViewController.swift in Sources */,
+				F5AEB8239D6D93B51D875B96 /* UIViewControllerExtensions.swift in Sources */,
+				F5AEBD2D4F9E05B7F9C1ACA5 /* UIViewExtensions.swift in Sources */,
+				F5AEBA15AE1B87B3D1F07339 /* AppDelegate.swift in Sources */,
+				F5AEBBD7B93D40A25091B7CC /* AppCoordinator.swift in Sources */,
+				F5AEBE14F2CD9695536F3F2D /* LoginCoordinator.swift in Sources */,
+				F5AEBB3BABE95803B17E7F64 /* FilledButton.swift in Sources */,
+				F5AEBA07E6CE60657699338F /* AbstractTableWithButtonViewController.swift in Sources */,
+				F5AEB99CFF46F750C7B604EA /* AbstractTableWithButtonView.swift in Sources */,
+				F5AEBF597B6ACDDC59AAB9B3 /* AbstractTableWithButtonViewModel.swift in Sources */,
+				F5AEB79B7EDFACF55B89B47A /* TableSectionDataSource.swift in Sources */,
+				F5AEB49D13A2BBE19BB17E3E /* FlowCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +656,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		756A36AE1FFC14C100C81E72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 756A36A21FFC14C000C81E72 /* ParkerlyCore */;
+			targetProxy = 756A36AD1FFC14C100C81E72 /* PBXContainerItemProxy */;
+		};
+		756A36B01FFC14C100C81E72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75AB8CCF1FFBC57B0058297C /* Parkerly */;
+			targetProxy = 756A36AF1FFC14C100C81E72 /* PBXContainerItemProxy */;
+		};
+		756A36B71FFC14C100C81E72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 756A36A21FFC14C000C81E72 /* ParkerlyCore */;
+			targetProxy = 756A36B61FFC14C100C81E72 /* PBXContainerItemProxy */;
+		};
 		75AB8CE61FFBC57B0058297C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 75AB8CCF1FFBC57B0058297C /* Parkerly */;
@@ -354,18 +679,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		75AB8CD71FFBC57B0058297C /* Main.storyboard */ = {
+		F5AEB537E1598673EDDF193C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				75AB8CD81FFBC57B0058297C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		75AB8CDC1FFBC57B0058297C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				75AB8CDD1FFBC57B0058297C /* Base */,
+				F5AEB788AE6F33938B93ADAB /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -373,6 +690,84 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		756A36BA1FFC14C100C81E72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ParkerlyCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.zmicier.ParkerlyCore;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		756A36BB1FFC14C100C81E72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ParkerlyCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.zmicier.ParkerlyCore;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		756A36BC1FFC14C100C81E72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ParkerlyCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.zmicier.ParkerlyCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Parkerly.app/Parkerly";
+			};
+			name = Debug;
+		};
+		756A36BD1FFC14C100C81E72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ParkerlyCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.zmicier.ParkerlyCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Parkerly.app/Parkerly";
+			};
+			name = Release;
+		};
 		75AB8CEB1FFBC57B0058297C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -486,12 +881,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Parkerly/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Parkerly/Launch/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.zmicier.Parkerly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -501,12 +897,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Parkerly/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Parkerly/Launch/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.zmicier.Parkerly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -547,6 +944,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		756A36BE1FFC14C100C81E72 /* Build configuration list for PBXNativeTarget "ParkerlyCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				756A36BA1FFC14C100C81E72 /* Debug */,
+				756A36BB1FFC14C100C81E72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		756A36C01FFC14C100C81E72 /* Build configuration list for PBXNativeTarget "ParkerlyCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				756A36BC1FFC14C100C81E72 /* Debug */,
+				756A36BD1FFC14C100C81E72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		75AB8CCB1FFBC57B0058297C /* Build configuration list for PBXProject "Parkerly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
