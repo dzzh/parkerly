@@ -12,6 +12,7 @@ target 'Parkerly' do
   #
   # RxSwift
   # Alamofire + Moya
+  # SnapKit
 
   target 'ParkerlyTests' do
     inherit! :search_paths

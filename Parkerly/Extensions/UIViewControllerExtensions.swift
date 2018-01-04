@@ -12,22 +12,27 @@ extension UIViewController {
     }
 
     func embed(_ viewController: UIViewController, replacing oldViewController: UIViewController?,
-              in containerView: UIView? = nil, animated: Bool = false, completion: (() -> Void)? = nil) {
+               in containerView: UIView? = nil, constraintToSafeAreaLayoutGuide: Bool = false,
+               animated: Bool = false, completion: (() -> Void)? = nil) {
         if let oldViewController = oldViewController {
             removeChild(oldViewController, animated: animated)
         }
-        embed(viewController, in: containerView ?? view, animated: animated, completion: completion)
+        embed(viewController, in: containerView ?? view,
+              constraintToSafeAreaLayoutGuide: constraintToSafeAreaLayoutGuide,
+              animated: animated, completion: completion)
     }
 
     func embed(_ viewController: UIViewController, in containerView: UIView,
-               animated: Bool = false, completion: (() -> Void)? = nil) {
+               constraintToSafeAreaLayoutGuide: Bool = false, animated: Bool = false,
+               completion: (() -> Void)? = nil) {
         addChildViewController(viewController)
-        containerView.addSubview(viewController.view)
-        viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        containerView.constraintSubview(view)
-        viewController.view.alpha = 0.0
+        let subview: UIView = viewController.view
+        containerView.addSubview(subview)
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        containerView.constraintEdges(subview, constraintToSafeAreaLayoutGuide: constraintToSafeAreaLayoutGuide)
+        subview.alpha = 0.0
         UIView.update(with: { () -> Void in
-            viewController.view.alpha = 1.0
+            subview.alpha = 1.0
         }, animated: animated, duration: defaultAnimationDuration, delay: 0.0, options: [], completion: { _ in
             completion?()
         })

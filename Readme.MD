@@ -9,8 +9,9 @@ The main goal of this exercise was to design and implement the architecture for 
 
 The project doesn't use any third-party libraries; this is intentional. However, it is still managed by Cocoapods and you have to open `.xcworkspace` file instead of `.xcodeproj` to run it.
 
-This project was implemented in Xcode 9 using Swift 4 and targets iOS 11. Here, I didn't try to implement nice and polished custom layouts because this was not required, everything you'll see inside is standard UIKit controls.
+This project was implemented in Xcode 9 using Swift 4 and targets iOS 11. Here, I didn't try to implement nice and polished custom layouts because this was not required, everything you'll see inside is standard UIKit controls. The views are laid out programmatically using layout guides and anchors.
 
 Things that will most likely be de-scoped because of lack of time:
 - method-level documentation
-- unit / UI / snapshot tests   
+- unit / UI / snapshot tests
+- better strings handling (e.g. with `Localizable.strings`)   

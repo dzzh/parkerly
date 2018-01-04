@@ -3,9 +3,21 @@
 // Copyright (c) 2018 Zmicier Zaleznicenka. All rights reserved.
 //
 
+import os.log
 import UIKit
 
 extension UIView {
+
+    func constraintEdges(_ subview: UIView, constraintToSafeAreaLayoutGuide: Bool = false) {
+        assert(subview.superview != nil, "subview is not attached")
+
+        let parent: LayoutAnchorsProvider = constraintToSafeAreaLayoutGuide ? safeAreaLayoutGuide : self
+
+        parent.topAnchor.constraint(equalTo: subview.topAnchor).isActive = true
+        parent.bottomAnchor.constraint(equalTo: subview.bottomAnchor).isActive = true
+        parent.leadingAnchor.constraint(equalTo: subview.leadingAnchor).isActive = true
+        parent.trailingAnchor.constraint(equalTo: subview.trailingAnchor).isActive = true
+    }
 
     class func update(with updates: @escaping () -> Void, animated: Bool, duration: TimeInterval, delay: TimeInterval,
                       options: UIViewAnimationOptions, completion: ((Bool) -> Void)?) {
@@ -17,15 +29,26 @@ extension UIView {
         }
     }
 
-    func constraintSubview(_ view: UIView, horizontalInset: CGFloat = 0, verticalInset: CGFloat = 0) {
-        assert(view.superview != nil, "subview is not attached")
-        view.translatesAutoresizingMaskIntoConstraints = false
+    func add(_ subview: UIView) {
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(subview)
+    }
+}
 
-        addConstraints([
-            NSLayoutConstraint(item: view, attribute: .topMargin, relatedBy: .equal, toItem: self, attribute: .topMargin, multiplier: 1, constant: verticalInset),
-            NSLayoutConstraint(item: view, attribute: .bottomMargin, relatedBy: .equal, toItem: self, attribute: .bottomMargin, multiplier: 1, constant: -verticalInset),
-            NSLayoutConstraint(item: view, attribute: .leadingMargin, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1, constant: horizontalInset),
-            NSLayoutConstraint(item: view, attribute: .trailingMargin, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1, constant: -horizontalInset)
-        ])
+extension NSLayoutAttribute {
+
+    // When defining relations between views, it is needed to manage the sign of a constraint value
+    // to guarantee that the constrained view will be properly inset from its related view.
+    var paddingMultiplier: CGFloat {
+        switch self {
+        case .left, .leftMargin, .top, .topMargin, .leading, .leadingMargin, .centerX, .centerXWithinMargins,
+             .centerY, .centerYWithinMargins, .firstBaseline, .lastBaseline:
+            return 1
+        case .right, .rightMargin, .bottom, .bottomMargin, .trailing, .trailingMargin, .width, .height:
+            return -1
+        case .notAnAttribute:
+            os_log("Multiplier should only be called for real attributes")
+            return 0
+        }
     }
 }

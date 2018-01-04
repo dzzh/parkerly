@@ -3,11 +3,14 @@
 // Copyright (c) 2018 Zmicier Zaleznicenka. All rights reserved.
 //
 
+import os.log
 import UIKit
 
 protocol FlowCoordinatorType {
 
     var presentationContext: UIViewController? { get }
+
+    func start()
 }
 
 class FlowCoordinator: FlowCoordinatorType {
@@ -16,5 +19,9 @@ class FlowCoordinator: FlowCoordinatorType {
 
     init(presentationContext: UIViewController) {
         self.presentationContext = presentationContext
+    }
+
+    func start() {
+        os_log("not implemented")
     }
 }

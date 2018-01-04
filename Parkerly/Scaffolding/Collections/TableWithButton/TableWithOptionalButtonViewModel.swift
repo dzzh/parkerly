@@ -7,7 +7,21 @@ import os.log
 import ParkerlyCore
 import UIKit
 
-class AbstractTableWithButtonViewModel: NSObject {
+protocol TableWithOptionalButtonViewModelType: UITableViewDataSource {
+
+    var actionButtonTitle: String? { get }
+
+    func handleActionButtonTap()
+}
+
+extension TableWithOptionalButtonViewModelType {
+
+    var actionButtonTitle: String? {
+        return nil
+    }
+}
+
+class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewModelType {
 
     private let defaultCellReuseIdentifier = "DefaultCellReuseIdentifier"
     private let value2CellReuseIdentifier = "Value2CellReuseIdentifier"
@@ -23,13 +37,18 @@ class AbstractTableWithButtonViewModel: NSObject {
         self.sections = sections
         self.actionButtonTitle = actionButtonTitle
     }
-}
 
-extension AbstractTableWithButtonViewModel: UITableViewDataSource {
+    // MARK: - TableWithOptionalButtonViewModelType
+
+    func handleActionButtonTap() {
+        os_log("Button tap handler is not implemented")
+    }
+
+    // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let sectionDataSource = sections[safe: indexPath.section],
-            let cellData = sectionDataSource.cellData(for: indexPath.row) else {
+              let cellData = sectionDataSource.cellData(for: indexPath.row) else {
             os_log("Couldn't get cell data for index path (%d, %d)", indexPath.section, indexPath.row)
             return UITableViewCell()
         }

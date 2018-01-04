@@ -5,9 +5,17 @@
 
 import Foundation
 
-struct TableCellData {
-    let title: String
-    let subtitle: String?
+protocol TableCellDataType {
+
+    var title: String { get }
+    var subtitle: String? { get }
+}
+
+extension TableCellDataType {
+
+    var subtitle: String? {
+        return nil
+    }
 }
 
 protocol TableSectionDataSource {
@@ -16,7 +24,7 @@ protocol TableSectionDataSource {
 
     var header: String? { get }
 
-    func cellData(for row: Int) -> TableCellData?
+    func cellData(for row: Int) -> TableCellDataType?
 }
 
 extension TableSectionDataSource {

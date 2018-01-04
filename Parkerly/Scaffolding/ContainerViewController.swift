@@ -29,6 +29,8 @@ private extension ContainerViewController {
     private func replace(viewController oldViewController: UIViewController?,
                          with newViewController: UIViewController) {
         oldViewController?.dismissPresentedViewController()
-        embed(newViewController, replacing: oldViewController, in: containerView)
+        let constraintToSafeAreaLayoutGuide = containerView == view
+        embed(newViewController, replacing: oldViewController, in: containerView,
+            constraintToSafeAreaLayoutGuide: constraintToSafeAreaLayoutGuide)
     }
 }

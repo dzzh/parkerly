@@ -25,5 +25,6 @@ private extension FilledButton {
     func setup() {
         backgroundColor = tintColor
         setTitleColor(UIColor.white, for: .normal)
+        layer.cornerRadius = 4
     }
 }
