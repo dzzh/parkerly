@@ -23,7 +23,10 @@ class RegistrationViewModel {
 
     weak var delegate: RegistrationViewModelDelegate?
 
-    init(delegate: RegistrationViewModelDelegate? = nil) {
+    private let userService: UserServiceType
+
+    init(userService: UserServiceType, delegate: RegistrationViewModelDelegate? = nil) {
+        self.userService = userService
         self.delegate = delegate
     }
 }
@@ -31,10 +34,18 @@ class RegistrationViewModel {
 extension RegistrationViewModel: RegistrationViewModelType {
 
     var newUser: User {
-        return User(firstName: "firstRegister", lastName: "lastRegister", username: "userRegister")
+        return User(id: "userRegister", firstName: "firstRegister", lastName: "lastRegister", username: "userRegister")
     }
 
     func registerNewUser() {
-        delegate?.didRegisterNewUser()
+        userService.register(newUser, completion: { [weak self] operation in
+            switch operation {
+            case .completed(_):
+                self?.delegate?.didRegisterNewUser()
+            case .failed(let error):
+                // TODO proper error handling
+                break
+            }
+        })
     }
 }

@@ -45,7 +45,7 @@ private extension RegistrationView {
 
         // Subviews configuration
 
-        backgroundColor = UIColor.white
+        backgroundColor = .white
 
         firstNameDescription.text = "First name:"
         firstNameDescription.styleAsDescription()

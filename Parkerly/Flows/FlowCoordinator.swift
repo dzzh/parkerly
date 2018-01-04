@@ -11,6 +11,8 @@ protocol FlowCoordinatorType {
     var presentationContext: UIViewController? { get }
 
     func start()
+
+    func cleanup(completion: () -> Void)
 }
 
 class FlowCoordinator: FlowCoordinatorType {
@@ -23,5 +25,9 @@ class FlowCoordinator: FlowCoordinatorType {
 
     func start() {
         os_log("not implemented")
+    }
+
+    func cleanup(completion: () -> Void) {
+        completion()
     }
 }

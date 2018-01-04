@@ -6,24 +6,28 @@
 import os.log
 import ParkerlyCore
 
-protocol AuthenticationCoordinatorDelegate: class {
-
-    func didLogin(with user: User)
-}
-
 class AuthenticationCoordinator: FlowCoordinator {
 
-    let navigationController = UINavigationController()
-    weak var delegate: AuthenticationCoordinatorDelegate?
+    private let navigationController = UINavigationController()
+
+    private let userService: UserServiceType
+
+    // MARK: Initialization
+
+    init(userService: UserServiceType, presentationContext: UIViewController) {
+        self.userService = userService
+        super.init(presentationContext: presentationContext)
+    }
 
     // MARK: - FlowCoordinator
 
     override func start() {
-        let loginDataSection = DumbLoginDataSection()
-        let loginViewModel = LoginViewModel(sections: [loginDataSection], actionButtonTitle: "Add new user")
+        let loginDataSection = DumbLoginSectionDataSource()
+        let loginViewModel = LoginViewModel(userService: userService, dataSource: loginDataSection, actionButtonTitle: "Add new user")
         loginViewModel.delegate = self
         let loginViewController = TableWithOptionalButtonViewController(viewModel: loginViewModel)
         navigationController.setNavigationBarHidden(true, animated: false)
+        navigationController.navigationBar.barTintColor = .white
         navigationController.pushViewController(loginViewController, animated: false)
 
         guard let container = presentationContext as? ContainerViewController else {
@@ -37,12 +41,8 @@ class AuthenticationCoordinator: FlowCoordinator {
 
 extension AuthenticationCoordinator: LoginViewModelDelegate {
 
-    func didLogin(with user: User) {
-        delegate?.didLogin(with: user)
-    }
-
     func wantsToRegister() {
-        let registrationViewModel = RegistrationViewModel(delegate: self)
+        let registrationViewModel = RegistrationViewModel(userService: userService, delegate: self)
         let registrationViewController = RegistrationViewController(viewModel: registrationViewModel)
         navigationController.pushViewController(registrationViewController, animated: true)
     }
@@ -51,6 +51,10 @@ extension AuthenticationCoordinator: LoginViewModelDelegate {
 extension AuthenticationCoordinator: RegistrationViewModelDelegate {
 
     func didRegisterNewUser() {
+        guard navigationController.topViewController is RegistrationViewController else {
+            os_log("Registration screen is already removed")
+            return
+        }
         navigationController.popViewController(animated: true)
     }
 }

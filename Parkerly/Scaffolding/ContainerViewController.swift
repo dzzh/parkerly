@@ -31,6 +31,7 @@ private extension ContainerViewController {
         oldViewController?.dismissPresentedViewController()
         let constraintToSafeAreaLayoutGuide = containerView == view
         embed(newViewController, replacing: oldViewController, in: containerView,
-            constraintToSafeAreaLayoutGuide: constraintToSafeAreaLayoutGuide)
+            constraintToSafeAreaLayoutGuide: constraintToSafeAreaLayoutGuide, animated: true)
+        title = newViewController.title
     }
 }

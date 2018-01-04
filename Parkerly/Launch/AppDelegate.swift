@@ -6,6 +6,7 @@
 //  Copyright © 2018 Zmicier Zaleznicenka. All rights reserved.
 //
 
+import ParkerlyCore
 import UIKit
 
 @UIApplicationMain
@@ -16,14 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var appCoordinator: AppCoordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
+        let serviceLocator = ServiceLocator()
         let rootViewController = RootViewController()
-        window?.rootViewController = rootViewController
-        appCoordinator = AppCoordinator(rootViewController: rootViewController)
+        appCoordinator = AppCoordinator(serviceLocator: serviceLocator, rootViewController: rootViewController)
         appCoordinator?.start()
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         return true
     }
-
 }
-

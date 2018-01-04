@@ -16,28 +16,44 @@
 		75AB8CE91FFBC57B0058297C /* ParkerlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AB8CE81FFBC57B0058297C /* ParkerlyTests.swift */; };
 		A1357DEBE7AC1631CB1E4485 /* Pods_Parkerly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 636BD3AC833D5E7BA187EDFF /* Pods_Parkerly.framework */; };
 		D01BF051730C1CFC4224C334 /* Pods_ParkerlyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC8BE4C687BDA9712BD6D57 /* Pods_ParkerlyTests.framework */; };
+		F5AEB0A838C066B0BAE8136D /* StartParkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB624A46C53F0DB94F5E7 /* StartParkingViewController.swift */; };
 		F5AEB0EE35DAF9ABB74F6E52 /* LayoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3E97C73E396EB93D9B7 /* LayoutExtensions.swift */; };
 		F5AEB143EC764455C51B4D28 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBB1F86F93F46DF556DF0 /* LoginViewModel.swift */; };
 		F5AEB19691CB4D7B523667FF /* ParkingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB46A15AF0B45E57C1B9D /* ParkingCoordinator.swift */; };
+		F5AEB281DD634F6837CD7F4C /* StartParkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB2466B92BEE71CACC7B2 /* StartParkingView.swift */; };
 		F5AEB49D13A2BBE19BB17E3E /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBA639EF42D10AEDA0BD3 /* FlowCoordinator.swift */; };
+		F5AEB4B3FB7C6BCE3994E951 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBF90954490928DAF86E3 /* UserService.swift */; };
 		F5AEB4FAF3223DD450F7A34F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB0D92537A1A9BE0C38EF /* RegistrationViewController.swift */; };
 		F5AEB51FC59E8E860AB83DB9 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB8B4C3D4EB533D1DED28 /* RegistrationView.swift */; };
+		F5AEB582B79FA5247E6D4EC0 /* ParkingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBD1707746724D90F1996 /* ParkingContainerView.swift */; };
+		F5AEB6019C466C3D40B44384 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBE96A19677F46A345324 /* Vehicle.swift */; };
+		F5AEB6EBE6008B5B47E9E35F /* ParkingActionSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB0361CDABA927AA4D80A /* ParkingActionSectionDataSource.swift */; };
 		F5AEB79B7EDFACF55B89B47A /* TableSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBE07B6062AEAE4EF81FF /* TableSectionDataSource.swift */; };
+		F5AEB8224EB51A35481E00AF /* ParkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBC36152596EF71458A4D /* ParkingViewModel.swift */; };
 		F5AEB8239D6D93B51D875B96 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBCFD85398E49E65ABE48 /* UIViewControllerExtensions.swift */; };
+		F5AEB83FFE4ECB9C3999762B /* ParkingZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB16FF00FE2C54B51008D /* ParkingZone.swift */; };
+		F5AEB87EA3154620214EB0E8 /* ParkingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB40A0627B7EC1821A6DE /* ParkingAction.swift */; };
+		F5AEB8C2FAA8E2277814AB2C /* ParkerlyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBEDEEC398AA1E9BC4D05 /* ParkerlyError.swift */; };
 		F5AEB91EBC2B871D210ABC44 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBDEFC2F57CD337251401 /* ServiceLocator.swift */; };
 		F5AEB95AC6220AC82231ED89 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBA7094C8B169C6553A11 /* User.swift */; };
 		F5AEB99CFF46F750C7B604EA /* TableWithOptionalButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB8AA934AA24B78BD8F8F /* TableWithOptionalButtonView.swift */; };
 		F5AEBA07E6CE60657699338F /* TableWithOptionalButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBB46903F0823A9999017 /* TableWithOptionalButtonViewController.swift */; };
+		F5AEBA08C992814234AF5F08 /* ParkerlyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB794ECA08F0DCF6BF6E5 /* ParkerlyService.swift */; };
 		F5AEBA15AE1B87B3D1F07339 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBF42A8597A29347C8F19 /* AppDelegate.swift */; };
+		F5AEBA2F06AFE7C7C178AD7D /* ParkingActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB6714B1C748F40726673 /* ParkingActionViewModel.swift */; };
 		F5AEBA8C4F792FE20818D5BC /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB4091EEF6553E24442FC /* CollectionExtensions.swift */; };
 		F5AEBB3BABE95803B17E7F64 /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBEF8A9CB9B1A38078483 /* FilledButton.swift */; };
 		F5AEBB59DE124E570852158F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB6D2E3A96A59AFAF887D /* RootViewController.swift */; };
+		F5AEBBA7F35A437FFC36731D /* ParkingHistorySectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBC544111ABF98F3587A5 /* ParkingHistorySectionDataSource.swift */; };
+		F5AEBBC8612C875382FF1F5B /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB9C48F6EC7BEB999B98B /* NotificationExtensions.swift */; };
 		F5AEBBD7B93D40A25091B7CC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3672B82683C63BAF406 /* AppCoordinator.swift */; };
 		F5AEBCB42D94F4B390CD35FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5AEB537E1598673EDDF193C /* LaunchScreen.storyboard */; };
+		F5AEBCC0EC6A0364B7B9302E /* ParkingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB25343DABE911B129F00 /* ParkingContainerViewController.swift */; };
 		F5AEBD2D4F9E05B7F9C1ACA5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBDEA79836E259785AF1A /* UIViewExtensions.swift */; };
+		F5AEBDAE28ED685C2B5A2638 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBD011EB32D5862C0A64B /* SettingsCoordinator.swift */; };
 		F5AEBE14F2CD9695536F3F2D /* AuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB1F37CBE8C34F3C574BB /* AuthenticationCoordinator.swift */; };
 		F5AEBE80A4FC2EF72F87B492 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3AF447792C7E4C70F0F /* ContainerViewController.swift */; };
-		F5AEBE952D7E38C0E1B6EDEB /* DumbLoginDataSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB0C2456F7E5208E08B21 /* DumbLoginDataSection.swift */; };
+		F5AEBE952D7E38C0E1B6EDEB /* DumbLoginSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB0C2456F7E5208E08B21 /* DumbLoginSectionDataSource.swift */; };
 		F5AEBF597B6ACDDC59AAB9B3 /* TableWithOptionalButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB7520B0EACE9C4EF7092 /* TableWithOptionalButtonViewModel.swift */; };
 		F5AEBF6061E34827DF181952 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB328FFBF41B284ED54D6 /* RegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -104,31 +120,47 @@
 		75AB8CEA1FFBC57B0058297C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83A6C6FE0FD2BC1D420D2878 /* Pods-Parkerly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkerly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Parkerly/Pods-Parkerly.debug.xcconfig"; sourceTree = "<group>"; };
 		DFC8BE4C687BDA9712BD6D57 /* Pods_ParkerlyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParkerlyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5AEB0C2456F7E5208E08B21 /* DumbLoginDataSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DumbLoginDataSection.swift; sourceTree = "<group>"; };
+		F5AEB0361CDABA927AA4D80A /* ParkingActionSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingActionSectionDataSource.swift; sourceTree = "<group>"; };
+		F5AEB0C2456F7E5208E08B21 /* DumbLoginSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DumbLoginSectionDataSource.swift; sourceTree = "<group>"; };
 		F5AEB0D92537A1A9BE0C38EF /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		F5AEB16FF00FE2C54B51008D /* ParkingZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingZone.swift; sourceTree = "<group>"; };
 		F5AEB1F37CBE8C34F3C574BB /* AuthenticationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCoordinator.swift; sourceTree = "<group>"; };
+		F5AEB2466B92BEE71CACC7B2 /* StartParkingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartParkingView.swift; sourceTree = "<group>"; };
+		F5AEB25343DABE911B129F00 /* ParkingContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingContainerViewController.swift; sourceTree = "<group>"; };
 		F5AEB328FFBF41B284ED54D6 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		F5AEB3672B82683C63BAF406 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F5AEB3AF447792C7E4C70F0F /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		F5AEB3E97C73E396EB93D9B7 /* LayoutExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutExtensions.swift; sourceTree = "<group>"; };
 		F5AEB4091EEF6553E24442FC /* CollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
+		F5AEB40A0627B7EC1821A6DE /* ParkingAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingAction.swift; sourceTree = "<group>"; };
 		F5AEB46A15AF0B45E57C1B9D /* ParkingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingCoordinator.swift; sourceTree = "<group>"; };
+		F5AEB624A46C53F0DB94F5E7 /* StartParkingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartParkingViewController.swift; sourceTree = "<group>"; };
+		F5AEB6714B1C748F40726673 /* ParkingActionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingActionViewModel.swift; sourceTree = "<group>"; };
 		F5AEB6D2E3A96A59AFAF887D /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		F5AEB7520B0EACE9C4EF7092 /* TableWithOptionalButtonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableWithOptionalButtonViewModel.swift; sourceTree = "<group>"; };
 		F5AEB788AE6F33938B93ADAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Parkerly/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		F5AEB794ECA08F0DCF6BF6E5 /* ParkerlyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkerlyService.swift; sourceTree = "<group>"; };
 		F5AEB85B880B011A54729E87 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		F5AEB8AA934AA24B78BD8F8F /* TableWithOptionalButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableWithOptionalButtonView.swift; sourceTree = "<group>"; };
 		F5AEB8B4C3D4EB533D1DED28 /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		F5AEB9C48F6EC7BEB999B98B /* NotificationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
 		F5AEBA639EF42D10AEDA0BD3 /* FlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		F5AEBA7094C8B169C6553A11 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F5AEBB1F86F93F46DF556DF0 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F5AEBB46903F0823A9999017 /* TableWithOptionalButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableWithOptionalButtonViewController.swift; sourceTree = "<group>"; };
+		F5AEBC36152596EF71458A4D /* ParkingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingViewModel.swift; sourceTree = "<group>"; };
+		F5AEBC544111ABF98F3587A5 /* ParkingHistorySectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingHistorySectionDataSource.swift; sourceTree = "<group>"; };
 		F5AEBCFD85398E49E65ABE48 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		F5AEBD011EB32D5862C0A64B /* SettingsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		F5AEBD1707746724D90F1996 /* ParkingContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingContainerView.swift; sourceTree = "<group>"; };
 		F5AEBDEA79836E259785AF1A /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		F5AEBDEFC2F57CD337251401 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		F5AEBE07B6062AEAE4EF81FF /* TableSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSectionDataSource.swift; sourceTree = "<group>"; };
+		F5AEBE96A19677F46A345324 /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		F5AEBEDEEC398AA1E9BC4D05 /* ParkerlyError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkerlyError.swift; sourceTree = "<group>"; };
 		F5AEBEF8A9CB9B1A38078483 /* FilledButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		F5AEBF42A8597A29347C8F19 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F5AEBF90954490928DAF86E3 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FC63E1BB0F8BB7FDEDBB2467 /* Pods-Parkerly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkerly.release.xcconfig"; path = "Pods/Target Support Files/Pods-Parkerly/Pods-Parkerly.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +219,7 @@
 				F5AEB19E2DDE0B8CB77C3E3E /* Services */,
 				F5AEB70DE2CBC58797C2118B /* Models */,
 				F5AEBF7F73A17E7028A4EBC5 /* Extensions */,
+				F5AEBAC174965146C635EA65 /* Helpers */,
 			);
 			path = ParkerlyCore;
 			sourceTree = "<group>";
@@ -258,8 +291,36 @@
 			isa = PBXGroup;
 			children = (
 				F5AEBDEFC2F57CD337251401 /* ServiceLocator.swift */,
+				F5AEBF90954490928DAF86E3 /* UserService.swift */,
+				F5AEB794ECA08F0DCF6BF6E5 /* ParkerlyService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F5AEB24EAC89B058B11B6BAA /* Parking Action */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEB0361CDABA927AA4D80A /* ParkingActionSectionDataSource.swift */,
+				F5AEB6714B1C748F40726673 /* ParkingActionViewModel.swift */,
+			);
+			path = "Parking Action";
+			sourceTree = "<group>";
+		};
+		F5AEB290310AFC3E3F8D9ECA /* Start Parking */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEB624A46C53F0DB94F5E7 /* StartParkingViewController.swift */,
+				F5AEB2466B92BEE71CACC7B2 /* StartParkingView.swift */,
+			);
+			path = "Start Parking";
+			sourceTree = "<group>";
+		};
+		F5AEB2F894AFC1084D85E978 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBC544111ABF98F3587A5 /* ParkingHistorySectionDataSource.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		F5AEB3A48E9AAC17A5F719F9 /* Extensions */ = {
@@ -290,6 +351,13 @@
 			path = Registration;
 			sourceTree = "<group>";
 		};
+		F5AEB5F83D207B7BEB93B76D /* Vehicles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Vehicles;
+			sourceTree = "<group>";
+		};
 		F5AEB600C915F2B669D15C05 /* TableWithButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +372,9 @@
 			isa = PBXGroup;
 			children = (
 				F5AEBA7094C8B169C6553A11 /* User.swift */,
+				F5AEB40A0627B7EC1821A6DE /* ParkingAction.swift */,
+				F5AEBE96A19677F46A345324 /* Vehicle.swift */,
+				F5AEB16FF00FE2C54B51008D /* ParkingZone.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -328,12 +399,21 @@
 			path = Collections;
 			sourceTree = "<group>";
 		};
+		F5AEBAC174965146C635EA65 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBEDEEC398AA1E9BC4D05 /* ParkerlyError.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		F5AEBAEAA9810CB9185E9DF9 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
 				F5AEBBF988AF744759DC4526 /* Authentication */,
 				F5AEBA639EF42D10AEDA0BD3 /* FlowCoordinator.swift */,
 				F5AEBF38410C5D8122450CED /* Parking */,
+				F5AEBE0E9CD93204EE77A79C /* Settings */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -352,15 +432,37 @@
 			isa = PBXGroup;
 			children = (
 				F5AEBB1F86F93F46DF556DF0 /* LoginViewModel.swift */,
-				F5AEB0C2456F7E5208E08B21 /* DumbLoginDataSection.swift */,
+				F5AEB0C2456F7E5208E08B21 /* DumbLoginSectionDataSource.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		F5AEBE0E9CD93204EE77A79C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBD011EB32D5862C0A64B /* SettingsCoordinator.swift */,
+				F5AEB2F894AFC1084D85E978 /* History */,
+				F5AEB5F83D207B7BEB93B76D /* Vehicles */,
+				F5AEBEB428B1217DB384775B /* Profile */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		F5AEBEB428B1217DB384775B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		F5AEBF38410C5D8122450CED /* Parking */ = {
 			isa = PBXGroup;
 			children = (
 				F5AEB46A15AF0B45E57C1B9D /* ParkingCoordinator.swift */,
+				F5AEBC36152596EF71458A4D /* ParkingViewModel.swift */,
+				F5AEBFE46C27CE1D4AA2AD78 /* Parking Container */,
+				F5AEB290310AFC3E3F8D9ECA /* Start Parking */,
+				F5AEB24EAC89B058B11B6BAA /* Parking Action */,
 			);
 			path = Parking;
 			sourceTree = "<group>";
@@ -369,8 +471,18 @@
 			isa = PBXGroup;
 			children = (
 				F5AEB4091EEF6553E24442FC /* CollectionExtensions.swift */,
+				F5AEB9C48F6EC7BEB999B98B /* NotificationExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F5AEBFE46C27CE1D4AA2AD78 /* Parking Container */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEB25343DABE911B129F00 /* ParkingContainerViewController.swift */,
+				F5AEBD1707746724D90F1996 /* ParkingContainerView.swift */,
+			);
+			path = "Parking Container";
 			sourceTree = "<group>";
 		};
 		F5AEBFEA0C0EB5BF14B2ECDF /* Scaffolding */ = {
@@ -663,6 +775,13 @@
 				F5AEB91EBC2B871D210ABC44 /* ServiceLocator.swift in Sources */,
 				F5AEBA8C4F792FE20818D5BC /* CollectionExtensions.swift in Sources */,
 				F5AEB95AC6220AC82231ED89 /* User.swift in Sources */,
+				F5AEB87EA3154620214EB0E8 /* ParkingAction.swift in Sources */,
+				F5AEB6019C466C3D40B44384 /* Vehicle.swift in Sources */,
+				F5AEB83FFE4ECB9C3999762B /* ParkingZone.swift in Sources */,
+				F5AEB4B3FB7C6BCE3994E951 /* UserService.swift in Sources */,
+				F5AEBA08C992814234AF5F08 /* ParkerlyService.swift in Sources */,
+				F5AEB8C2FAA8E2277814AB2C /* ParkerlyError.swift in Sources */,
+				F5AEBBC8612C875382FF1F5B /* NotificationExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,11 +812,20 @@
 				F5AEB49D13A2BBE19BB17E3E /* FlowCoordinator.swift in Sources */,
 				F5AEB19691CB4D7B523667FF /* ParkingCoordinator.swift in Sources */,
 				F5AEB143EC764455C51B4D28 /* LoginViewModel.swift in Sources */,
-				F5AEBE952D7E38C0E1B6EDEB /* DumbLoginDataSection.swift in Sources */,
+				F5AEBE952D7E38C0E1B6EDEB /* DumbLoginSectionDataSource.swift in Sources */,
 				F5AEB4FAF3223DD450F7A34F /* RegistrationViewController.swift in Sources */,
 				F5AEB51FC59E8E860AB83DB9 /* RegistrationView.swift in Sources */,
 				F5AEBF6061E34827DF181952 /* RegistrationViewModel.swift in Sources */,
 				F5AEB0EE35DAF9ABB74F6E52 /* LayoutExtensions.swift in Sources */,
+				F5AEB8224EB51A35481E00AF /* ParkingViewModel.swift in Sources */,
+				F5AEBCC0EC6A0364B7B9302E /* ParkingContainerViewController.swift in Sources */,
+				F5AEB582B79FA5247E6D4EC0 /* ParkingContainerView.swift in Sources */,
+				F5AEB0A838C066B0BAE8136D /* StartParkingViewController.swift in Sources */,
+				F5AEB281DD634F6837CD7F4C /* StartParkingView.swift in Sources */,
+				F5AEB6EBE6008B5B47E9E35F /* ParkingActionSectionDataSource.swift in Sources */,
+				F5AEBDAE28ED685C2B5A2638 /* SettingsCoordinator.swift in Sources */,
+				F5AEBBA7F35A437FFC36731D /* ParkingHistorySectionDataSource.swift in Sources */,
+				F5AEBA2F06AFE7C7C178AD7D /* ParkingActionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,27 +4,37 @@
 //
 
 import ParkerlyCore
+import os.log
 
 protocol LoginViewModelDelegate: class {
-
-    func didLogin(with user: User)
 
     func wantsToRegister()
 }
 
 class LoginViewModel: TableWithOptionalButtonViewModel {
 
+    private let userService: UserServiceType
+    private let dataSource: TableSectionDataSource
+
     weak var delegate: LoginViewModelDelegate?
 
-    // MARK: - Interface
-
-    func didSelect(_ user: User) {
-        delegate?.didLogin(with: user)
+    init(userService: UserServiceType, dataSource: TableSectionDataSource, actionButtonTitle: String?) {
+        self.userService = userService
+        self.dataSource = dataSource
+        super.init(sections: [dataSource], actionButtonTitle: actionButtonTitle)
     }
 
     // MARK: - TableWithOptionalButtonViewModel
 
-    override func handleActionButtonTap() {
+    override func didSelectRow(at indexPath: IndexPath) {
+        guard let user = dataSource.object(for: indexPath.row) as? User, let userId = user.id else {
+            os_log("Invalid user or missing user id at path %s", String(describing: indexPath))
+            return
+        }
+        userService.login(userId, completion: nil)
+    }
+
+    override func didTapActionButton() {
         delegate?.wantsToRegister()
     }
 }

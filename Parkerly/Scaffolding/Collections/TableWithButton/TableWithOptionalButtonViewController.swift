@@ -35,6 +35,7 @@ class TableWithOptionalButtonViewController: UIViewController {
 
         castedView.tableView.delegate = self
         castedView.tableView.dataSource = viewModel
+        castedView.tableView.allowsSelection = viewModel.isTableSelectable
 
         castedView.actionButton.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
     }
@@ -42,10 +43,13 @@ class TableWithOptionalButtonViewController: UIViewController {
     // MARK: - Target-actions
 
     @objc func didTapActionButton() {
-        viewModel.handleActionButtonTap()
+        viewModel.didTapActionButton()
     }
 }
 
 extension TableWithOptionalButtonViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.didSelectRow(at: indexPath)
+    }
 }

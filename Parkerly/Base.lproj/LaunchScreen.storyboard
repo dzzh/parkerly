@@ -25,25 +25,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-= Parkerly =-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zI1-Gv-9Iv">
-                                <rect key="frame" x="93.5" y="325.5" width="189.5" height="36"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="park lyke a boss" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ir3-EF-khl">
-                                <rect key="frame" x="118.5" y="361.5" width="140.5" height="24"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1Y-Oa-pcP">
+                                <rect key="frame" x="0.0" y="313.5" width="375" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-= Parkerly =-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zI1-Gv-9Iv">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="park lyke a boss" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ir3-EF-khl">
+                                        <rect key="frame" x="0.0" y="36" width="375" height="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zI1-Gv-9Iv" firstAttribute="leading" secondItem="H1Y-Oa-pcP" secondAttribute="leading" id="589-s3-OqD"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ir3-EF-khl" secondAttribute="trailing" id="MOE-uH-KgE"/>
+                                    <constraint firstAttribute="trailing" secondItem="zI1-Gv-9Iv" secondAttribute="trailing" id="Tm2-gJ-5y0"/>
+                                    <constraint firstItem="Ir3-EF-khl" firstAttribute="top" secondItem="zI1-Gv-9Iv" secondAttribute="bottom" id="doo-ya-yDk"/>
+                                    <constraint firstItem="Ir3-EF-khl" firstAttribute="leading" secondItem="H1Y-Oa-pcP" secondAttribute="leading" id="hcm-3n-K4P"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ir3-EF-khl" secondAttribute="bottom" id="k40-hJ-csH"/>
+                                    <constraint firstItem="zI1-Gv-9Iv" firstAttribute="top" secondItem="H1Y-Oa-pcP" secondAttribute="top" id="tip-f4-dFT"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Ir3-EF-khl" firstAttribute="centerX" secondItem="zI1-Gv-9Iv" secondAttribute="centerX" id="GSL-gb-Gbr"/>
-                            <constraint firstItem="Ir3-EF-khl" firstAttribute="top" secondItem="zI1-Gv-9Iv" secondAttribute="bottom" id="I9N-6p-1jV"/>
-                            <constraint firstItem="zI1-Gv-9Iv" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="PnE-br-CJ8"/>
-                            <constraint firstItem="zI1-Gv-9Iv" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="YOF-zd-DiW"/>
+                            <constraint firstItem="H1Y-Oa-pcP" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="Jut-Or-GAH"/>
+                            <constraint firstItem="H1Y-Oa-pcP" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="eeo-iO-uq5"/>
+                            <constraint firstItem="H1Y-Oa-pcP" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jzr-UO-Qdx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

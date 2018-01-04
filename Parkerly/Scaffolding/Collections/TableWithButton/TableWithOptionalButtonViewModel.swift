@@ -9,22 +9,19 @@ import UIKit
 
 protocol TableWithOptionalButtonViewModelType: UITableViewDataSource {
 
+    var isTableSelectable: Bool { get }
+
     var actionButtonTitle: String? { get }
 
-    func handleActionButtonTap()
-}
+    func didSelectRow(at indexPath: IndexPath)
 
-extension TableWithOptionalButtonViewModelType {
-
-    var actionButtonTitle: String? {
-        return nil
-    }
+    func didTapActionButton()
 }
 
 class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewModelType {
 
     private let defaultCellReuseIdentifier = "DefaultCellReuseIdentifier"
-    private let value2CellReuseIdentifier = "Value2CellReuseIdentifier"
+    private let subtitleCellReuseIdentifier = "SubtitleCellReuseIdentifier"
 
     // MARK: - State
 
@@ -40,7 +37,15 @@ class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewMod
 
     // MARK: - TableWithOptionalButtonViewModelType
 
-    func handleActionButtonTap() {
+    var isTableSelectable: Bool {
+        return true
+    }
+
+    func didSelectRow(at indexPath: IndexPath) {
+        os_log("Row selection handler is not implemented")
+    }
+
+    func didTapActionButton() {
         os_log("Button tap handler is not implemented")
     }
 
@@ -53,12 +58,12 @@ class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewMod
             return UITableViewCell()
         }
 
-        let identifier = cellData.subtitle != nil ? value2CellReuseIdentifier : defaultCellReuseIdentifier
+        let identifier = cellData.subtitle != nil ? subtitleCellReuseIdentifier : defaultCellReuseIdentifier
         let cell: UITableViewCell
         if let _cell = tableView.dequeueReusableCell(withIdentifier: identifier) {
             cell = _cell
         } else {
-            let style = cellData.subtitle != nil ? UITableViewCellStyle.value2 : UITableViewCellStyle.default
+            let style = cellData.subtitle != nil ? UITableViewCellStyle.subtitle : UITableViewCellStyle.default
             cell = UITableViewCell(style: style, reuseIdentifier: identifier)
         }
         cell.textLabel?.text = cellData.title
