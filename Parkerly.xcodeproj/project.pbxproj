@@ -48,10 +48,12 @@
 		F5AEBBC8612C875382FF1F5B /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB9C48F6EC7BEB999B98B /* NotificationExtensions.swift */; };
 		F5AEBBD7B93D40A25091B7CC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3672B82683C63BAF406 /* AppCoordinator.swift */; };
 		F5AEBCB42D94F4B390CD35FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5AEB537E1598673EDDF193C /* LaunchScreen.storyboard */; };
+		F5AEBCB9B751C830EAE621C1 /* MenuSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB30D4D1B3B2318DE2831 /* MenuSectionDataSource.swift */; };
 		F5AEBCC0EC6A0364B7B9302E /* ParkingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB25343DABE911B129F00 /* ParkingContainerViewController.swift */; };
 		F5AEBD2D4F9E05B7F9C1ACA5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBDEA79836E259785AF1A /* UIViewExtensions.swift */; };
 		F5AEBDAE28ED685C2B5A2638 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBD011EB32D5862C0A64B /* SettingsCoordinator.swift */; };
 		F5AEBE14F2CD9695536F3F2D /* AuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB1F37CBE8C34F3C574BB /* AuthenticationCoordinator.swift */; };
+		F5AEBE1AD0CB83BC7B2AC25D /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB06C82328EEC93A40512 /* MenuViewModel.swift */; };
 		F5AEBE80A4FC2EF72F87B492 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3AF447792C7E4C70F0F /* ContainerViewController.swift */; };
 		F5AEBE952D7E38C0E1B6EDEB /* DumbLoginSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB0C2456F7E5208E08B21 /* DumbLoginSectionDataSource.swift */; };
 		F5AEBF597B6ACDDC59AAB9B3 /* TableWithOptionalButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB7520B0EACE9C4EF7092 /* TableWithOptionalButtonViewModel.swift */; };
@@ -121,12 +123,14 @@
 		83A6C6FE0FD2BC1D420D2878 /* Pods-Parkerly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkerly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Parkerly/Pods-Parkerly.debug.xcconfig"; sourceTree = "<group>"; };
 		DFC8BE4C687BDA9712BD6D57 /* Pods_ParkerlyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParkerlyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5AEB0361CDABA927AA4D80A /* ParkingActionSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingActionSectionDataSource.swift; sourceTree = "<group>"; };
+		F5AEB06C82328EEC93A40512 /* MenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		F5AEB0C2456F7E5208E08B21 /* DumbLoginSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DumbLoginSectionDataSource.swift; sourceTree = "<group>"; };
 		F5AEB0D92537A1A9BE0C38EF /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		F5AEB16FF00FE2C54B51008D /* ParkingZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingZone.swift; sourceTree = "<group>"; };
 		F5AEB1F37CBE8C34F3C574BB /* AuthenticationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCoordinator.swift; sourceTree = "<group>"; };
 		F5AEB2466B92BEE71CACC7B2 /* StartParkingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartParkingView.swift; sourceTree = "<group>"; };
 		F5AEB25343DABE911B129F00 /* ParkingContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingContainerViewController.swift; sourceTree = "<group>"; };
+		F5AEB30D4D1B3B2318DE2831 /* MenuSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSectionDataSource.swift; sourceTree = "<group>"; };
 		F5AEB328FFBF41B284ED54D6 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		F5AEB3672B82683C63BAF406 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F5AEB3AF447792C7E4C70F0F /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -437,6 +441,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		F5AEBD0D248F9F0D5030EC0B /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEB30D4D1B3B2318DE2831 /* MenuSectionDataSource.swift */,
+				F5AEB06C82328EEC93A40512 /* MenuViewModel.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		F5AEBE0E9CD93204EE77A79C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +457,7 @@
 				F5AEB2F894AFC1084D85E978 /* History */,
 				F5AEB5F83D207B7BEB93B76D /* Vehicles */,
 				F5AEBEB428B1217DB384775B /* Profile */,
+				F5AEBD0D248F9F0D5030EC0B /* Menu */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -826,6 +840,8 @@
 				F5AEBDAE28ED685C2B5A2638 /* SettingsCoordinator.swift in Sources */,
 				F5AEBBA7F35A437FFC36731D /* ParkingHistorySectionDataSource.swift in Sources */,
 				F5AEBA2F06AFE7C7C178AD7D /* ParkingActionViewModel.swift in Sources */,
+				F5AEBCB9B751C830EAE621C1 /* MenuSectionDataSource.swift in Sources */,
+				F5AEBE1AD0CB83BC7B2AC25D /* MenuViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

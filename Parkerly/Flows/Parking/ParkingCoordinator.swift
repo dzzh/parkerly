@@ -52,7 +52,11 @@ extension ParkingCoordinator: ParkingViewModelDelegate {
     }
 
     func wantsMenu() {
-        print("wants menu... but there's no menu....")
+        let settingsCoordinator = SettingsCoordinator(userService: userService, initialScreen: .menu,
+                presentationMode: .modal, presentationContext: parkingContainerViewController, delegate: self)
+        settingsCoordinator.delegate = self
+        childCoordinators.append(settingsCoordinator)
+        settingsCoordinator.start()
     }
 }
 

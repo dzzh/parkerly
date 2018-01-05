@@ -32,6 +32,6 @@ class StartParkingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Registration"
+        title = "Start parking"
     }
 }

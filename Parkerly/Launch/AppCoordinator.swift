@@ -55,7 +55,9 @@ private extension AppCoordinator {
         while !childCoordinators.isEmpty, !(childCoordinators.last is AuthenticationCoordinator) {
             childCoordinators.removeLast()
         }
-        childCoordinators.removeLast()
+        if childCoordinators.last is AuthenticationCoordinator {
+            childCoordinators.removeLast()
+        }
         showAuthentication()
     }
 }
