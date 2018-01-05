@@ -40,15 +40,19 @@ extension MenuOption: TableCellDataType {
 
 class MenuSectionDataSource: TableSectionDataSource {
 
-    var numberOfRows: Int { return 4 }
+    override var numberOfRows: Int {
+        return 4
+    }
 
-    var header: String? { return nil }
+    override var header: String? {
+        return nil
+    }
 
-    func object(for row: Int) -> Any? {
+    override func object(for row: Int) -> Any? {
         return MenuOption.option(for: row)
     }
 
-    func cellData(for row: Int) -> TableCellDataType? {
+    override func cellData(for row: Int) -> TableCellDataType? {
         return object(for: row) as? MenuOption
     }
 }

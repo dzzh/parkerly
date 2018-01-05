@@ -14,11 +14,11 @@ protocol LoginViewModelDelegate: class {
 class LoginViewModel: TableWithOptionalButtonViewModel {
 
     private let userService: UserServiceType
-    private let dataSource: TableSectionDataSource
+    private let dataSource: TableSectionDataSourceType
 
     weak var delegate: LoginViewModelDelegate?
 
-    init(userService: UserServiceType, dataSource: TableSectionDataSource, actionButtonTitle: String?) {
+    init(userService: UserServiceType, dataSource: TableSectionDataSourceType, actionButtonTitle: String?) {
         self.userService = userService
         self.dataSource = dataSource
         super.init(sections: [dataSource], actionButtonTitle: actionButtonTitle)

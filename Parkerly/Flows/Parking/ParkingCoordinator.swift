@@ -73,7 +73,8 @@ private extension ParkingCoordinator {
             return
         }
         let parkingActionData = ParkingActionSectionDataSource(parkingAction: parkingAction, user: user)
-        let parkingActionViewModel = ParkingActionViewModel(sections: [parkingActionData], actionButtonTitle: nil)
+        let parkingActionViewModel = TableWithOptionalButtonViewModel(sections: [parkingActionData], actionButtonTitle: nil)
+        parkingActionViewModel.isTableSelectable = false
         let parkingActionViewController = TableWithOptionalButtonViewController(viewModel: parkingActionViewModel)
         parkingActionViewController.title = "Parking action"
         parkingContainerViewController.update(child: parkingActionViewController, parkingAction: parkingAction)

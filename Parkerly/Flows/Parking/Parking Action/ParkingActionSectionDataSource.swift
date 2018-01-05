@@ -20,13 +20,17 @@ class ParkingActionSectionDataSource: TableSectionDataSource {
         self.user = user
     }
 
-    // MARK: - TableSectionDataSource
+    // MARK: - TableSectionDataSourceTypeType
 
-    private(set) var numberOfRows: Int = 4
+    override var numberOfRows: Int {
+        return 4
+    }
 
-    var header: String? = "Parking action"
+    override var header: String? {
+        return "Parking action"
+    }
 
-    func cellData(for row: Int) -> TableCellDataType? {
+    override func cellData(for row: Int) -> TableCellDataType? {
         switch row {
         case 0: return SimpleCellDataType(title: user.username, subtitle: "Username")
         case 1: return SimpleCellDataType(title: parkingAction.zoneId, subtitle: "Zone id")

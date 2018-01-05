@@ -53,6 +53,7 @@ class ParkingViewModel: ParkingViewModelType {
             self.parkingAction = nil
         // No parking action, will start parking
         } else {
+            // TODO: implement after wiring the network service
 //            guard let userId = userService.currentUser?.id, let vehicleId = selectedVehicle?.id, let zoneId = selectedZone?.id else {
 //                os_log("Can't start parking, some data is missing. User: %s, vehicle: %s, zone: %s",
 //                        String(describing: userService.currentUser), String(describing: selectedVehicle),

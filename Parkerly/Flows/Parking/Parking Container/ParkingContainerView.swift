@@ -33,7 +33,7 @@ class ParkingContainerView: UIView {
             actionButton.backgroundColor = .red
         } else {
             actionButton.setTitle("Start parking", for: .normal)
-            actionButton.backgroundColor = .green
+            actionButton.backgroundColor = actionButton.tintColor
         }
     }
 }

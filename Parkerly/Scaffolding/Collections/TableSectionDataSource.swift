@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import ParkerlyCore
 
 protocol TableCellDataType {
 
@@ -23,7 +24,7 @@ struct SimpleCellDataType: TableCellDataType {
     let subtitle: String?
 }
 
-protocol TableSectionDataSource {
+protocol TableSectionDataSourceType {
 
     var numberOfRows: Int { get }
 
@@ -32,9 +33,15 @@ protocol TableSectionDataSource {
     func object(for row: Int) -> Any?
 
     func cellData(for row: Int) -> TableCellDataType?
+
+    func reload(completion: ((ParkerlyError?) -> Void)?)
 }
 
-extension TableSectionDataSource {
+class TableSectionDataSource: TableSectionDataSourceType {
+
+    var numberOfRows: Int {
+        return 0
+    }
 
     var header: String? {
         return nil
@@ -42,5 +49,13 @@ extension TableSectionDataSource {
 
     func object(for row: Int) -> Any? {
         return nil
+    }
+
+    func cellData(for row: Int) -> TableCellDataType? {
+        return nil
+    }
+
+    func reload(completion: ((ParkerlyError?) -> Void)? = nil) {
+        completion?(nil)
     }
 }

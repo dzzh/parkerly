@@ -11,32 +11,56 @@ class ParkingHistorySectionDataSource: TableSectionDataSource {
 
     // MARK: - State
 
-    private let parkingAction: ParkingAction
+    private var parkingActions = [ParkingAction]()
     private let user: User
+
+    private let parkingActionsService: ParkingActionsServiceType
 
     // MARK: - Initialization
 
-    init(parkingAction: ParkingAction, user: User) {
-        self.parkingAction = parkingAction
+    init(parkingActionsService: ParkingActionsServiceType, user: User) {
+        self.parkingActionsService = parkingActionsService
         self.user = user
     }
 
     // MARK: - TableSectionDataSource
 
-    private(set) var numberOfRows: Int = 4
-
-    var header: String? = "Parking action"
-
-    func cellData(for row: Int) -> TableCellDataType? {
-        switch row {
-        case 0: return SimpleCellDataType(title: user.username, subtitle: "Username")
-        case 1: return SimpleCellDataType(title: parkingAction.zoneId, subtitle: "Zone id")
-        case 2: return SimpleCellDataType(title: parkingAction.vehicleId, subtitle: "Vehicle id")
-        case 3: return SimpleCellDataType(title: parkingAction.startDateString, subtitle: "Start time")
-        default:
-            os_log("Unexpected row %d", row)
-            return nil
-        }
+    override var numberOfRows: Int {
+        return parkingActions.count
     }
 
+    override var header: String? {
+        return "Parking action"
+    }
+
+    override func object(for row: Int) -> Any? {
+        return parkingActions[safe: row]
+    }
+
+    override func cellData(for row: Int) -> TableCellDataType? {
+        return object(for: row) as? TableCellDataType
+    }
+
+    override func reload(completion: ((ParkerlyError?) -> Void)? = nil) {
+        parkingActionsService.get(for: user) { operation in
+            switch operation {
+            case .completed(let parkingActions):
+                self.parkingActions = parkingActions
+                completion?(nil)
+            case .failed(let error):
+                completion?(error)
+            }
+        }
+    }
+}
+
+extension ParkingAction: TableCellDataType {
+
+    var title: String {
+        return startDateString
+    }
+
+    var subtitle: String? {
+        return "\(zoneId) - \(vehicleId)"
+    }
 }

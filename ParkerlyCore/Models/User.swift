@@ -4,8 +4,9 @@
 //
 
 import Foundation
+import os.log
 
-public struct User {
+public struct User: ParkerlyModel {
 
     public let id: String?
     public let firstName: String

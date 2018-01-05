@@ -25,21 +25,19 @@ class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewMod
 
     // MARK: - State
 
-    let sections: [TableSectionDataSource]
+    let sections: [TableSectionDataSourceType]
     let actionButtonTitle: String?
 
     // MARK: - Initialization
 
-    init(sections: [TableSectionDataSource], actionButtonTitle: String?) {
+    init(sections: [TableSectionDataSourceType], actionButtonTitle: String?) {
         self.sections = sections
         self.actionButtonTitle = actionButtonTitle
     }
 
     // MARK: - TableWithOptionalButtonViewModelType
 
-    var isTableSelectable: Bool {
-        return true
-    }
+    var isTableSelectable = true
 
     func didSelectRow(at indexPath: IndexPath) {
         os_log("Row selection handler is not implemented")

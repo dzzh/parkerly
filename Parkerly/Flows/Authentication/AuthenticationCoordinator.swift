@@ -21,8 +21,9 @@ class AuthenticationCoordinator: FlowCoordinator {
 
     // MARK: - FlowCoordinator
 
+    // TODO: introduce proper loading state when fetching the data
     override func start() {
-        let loginDataSection = DumbLoginSectionDataSource()
+        let loginDataSection = LoginSectionDataSource(userService: userService)
         let loginViewModel = LoginViewModel(userService: userService, dataSource: loginDataSection, actionButtonTitle: "Add new user")
         loginViewModel.delegate = self
         let loginViewController = TableWithOptionalButtonViewController(viewModel: loginViewModel)
@@ -31,11 +32,22 @@ class AuthenticationCoordinator: FlowCoordinator {
         navigationController.pushViewController(loginViewController, animated: false)
 
         guard let container = presentationContext as? ContainerViewController else {
-            os_log("Authentication flow can only be presented in container context") //TODO proper error handling
+            os_log("Authentication flow can only be presented in container context") //TODO: proper error handling
             return
         }
 
-        container.containedViewController = navigationController
+        loginDataSection.reload { [weak self] error in
+            guard let `self` = self else {
+                os_log("already deallocated")
+                return
+            }
+
+            if error == nil {
+                container.containedViewController = self.navigationController
+            } else {
+                // TODO: error handling
+            }
+        }
     }
 }
 

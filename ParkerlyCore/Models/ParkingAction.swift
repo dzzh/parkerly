@@ -8,14 +8,18 @@ import os.log
 
 public struct ParkingAction {
 
+    // MARK: - State
+
     public let id: String?
-    public let startDate: Date
+    public let startDate: Date?
     public let endDate: Date?
     public let userId: String
     public let vehicleId: String
     public let zoneId: String
 
-    public init(id: String?, startDate: Date, endDate: Date?, userId: String, vehicleId: String, zoneId: String) {
+    // MARK: - Initialization
+
+    public init(id: String?, startDate: Date?, endDate: Date?, userId: String, vehicleId: String, zoneId: String) {
         self.id = id
         self.startDate = startDate
         self.endDate = endDate
@@ -25,17 +29,46 @@ public struct ParkingAction {
     }
 
     public init(userId: String, vehicleId: String, zoneId: String) {
-        self.init(id: nil, startDate: Date(), endDate: nil, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
+        self.init(id: nil, startDate: nil, endDate: nil, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
     }
+
+    public init?(user: User, vehicle: Vehicle, zone: ParkingZone) {
+        guard let userId = user.id, let vehicleId = vehicle.id else {
+            os_log("invalid parameters")
+            return nil
+        }
+        self.id = nil
+        self.startDate = nil
+        self.endDate = nil
+        self.userId = userId
+        self.vehicleId = vehicleId
+        self.zoneId = zone.id
+    }
+
+    // MARK: - Copying
+
+    func copyWithStartDate(_ date: Date) -> ParkingAction {
+        return ParkingAction(id: self.id, startDate: date, endDate: self.endDate, userId: self.userId,
+            vehicleId: self.vehicleId, zoneId: self.zoneId)
+    }
+
+    func copyWithEndDate(_ date: Date) -> ParkingAction {
+        return ParkingAction(id: self.id, startDate: self.startDate, endDate: date, userId: self.userId,
+            vehicleId: self.vehicleId, zoneId: self.zoneId)
+    }
+
+    // MARK: - Interface
 
     // TODO: abstract formatting out to a separate service
     public var startDateString: String {
+        guard let startDate = startDate else {
+            return "n/a"
+        }
         return dateFormatter.string(from: startDate)
     }
 
     public var endDateString: String {
         guard let endDate = endDate else {
-            os_log("Tried to format date for missing endDate")
             return "n/a"
         }
         return dateFormatter.string(from: endDate)
