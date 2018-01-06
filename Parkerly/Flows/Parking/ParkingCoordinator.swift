@@ -26,8 +26,9 @@ class ParkingCoordinator: FlowCoordinator {
     override func start() {
         navigationController.navigationBar.barTintColor = .white
         navigationController.pushViewController(parkingContainerViewController, animated: false)
-        guard let presentationContext = presentationContext as? ContainerViewController else {
-            os_log("Parking flow can only be presented in container context") //TODO proper error handling
+        guard let container = presentationContext as? ContainerViewController else {
+            os_log("Parking flow can only be presented in container context")
+            presentationContext?.presentError(.internalError(description: nil))
             return
         }
 
@@ -37,7 +38,7 @@ class ParkingCoordinator: FlowCoordinator {
             showStartParking()
         }
 
-        presentationContext.containedViewController = navigationController
+        container.containedViewController = navigationController
     }
 }
 

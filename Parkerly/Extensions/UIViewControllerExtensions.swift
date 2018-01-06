@@ -3,6 +3,7 @@
 // Copyright (c) 2018 Zmicier Zaleznicenka. All rights reserved.
 //
 
+import ParkerlyCore
 import UIKit
 
 extension UIViewController {
@@ -58,5 +59,11 @@ extension UIViewController {
         }
 
         presentedViewController.dismiss(animated: animated, completion: completion)
+    }
+
+    func presentError(_ error: ParkerlyError) {
+        let alert = UIAlertController(title: "Error", message: description, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Agree and proceed", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

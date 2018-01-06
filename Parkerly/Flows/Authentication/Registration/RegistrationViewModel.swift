@@ -16,7 +16,7 @@ protocol RegistrationViewModelType {
 
     var delegate: RegistrationViewModelDelegate? { get set }
 
-    func registerNewUser()
+    func registerNewUser(completion: @escaping (ParkerlyError?) -> Void)
 }
 
 class RegistrationViewModel {
@@ -38,14 +38,14 @@ extension RegistrationViewModel: RegistrationViewModelType {
         return User(id: "newUser", firstName: "newFirstName", lastName: "newLastName", username: "newUsername")
     }
 
-    func registerNewUser() {
+    func registerNewUser(completion: @escaping (ParkerlyError?) -> Void) {
         userService.register(newUser, completion: { [weak self] operation in
             switch operation {
             case .completed(_):
+                completion(nil)
                 self?.delegate?.didRegisterNewUser()
             case .failed(let error):
-                // TODO proper error handling
-                break
+                completion(error)
             }
         })
     }

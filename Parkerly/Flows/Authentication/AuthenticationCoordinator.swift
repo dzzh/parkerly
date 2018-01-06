@@ -33,6 +33,7 @@ class AuthenticationCoordinator: FlowCoordinator {
 
         guard let container = presentationContext as? ContainerViewController else {
             os_log("Authentication flow can only be presented in container context") //TODO: proper error handling
+            presentationContext?.presentError(.internalError(description: nil))
             return
         }
 
@@ -42,10 +43,10 @@ class AuthenticationCoordinator: FlowCoordinator {
                 return
             }
 
-            if error == nil {
-                container.containedViewController = self.navigationController
+            if let error = error {
+                container.presentError(error)
             } else {
-                // TODO: error handling
+                container.containedViewController = self.navigationController
             }
         }
     }

@@ -84,7 +84,7 @@ extension SettingsCoordinator: MenuViewModelDelegate {
                 case .completed:
                     self.delegate?.flowCoordinatorDidComplete(self)
                 case .failed:
-                    break // TODO: error handling
+                    self.presentationContext?.presentError(.userError(userMessage: "Couldn't logout"))
                 }
             }
         }

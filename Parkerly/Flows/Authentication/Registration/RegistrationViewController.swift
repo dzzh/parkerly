@@ -59,7 +59,11 @@ class RegistrationViewController: UIViewController {
     // MARK: - Target-actions
 
     @objc func didTapActionButton() {
-        viewModel.registerNewUser()
+        viewModel.registerNewUser { [weak self] error in
+            if let error = error {
+                self?.presentError(error)
+            }
+        }
     }
 }
 
