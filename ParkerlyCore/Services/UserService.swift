@@ -53,7 +53,7 @@ extension UserServiceRequest: NetworkRequestType {
         let body: Data?
         switch self {
         case .createUser(let user), .editUser(let user):
-            guard let _body = user.encoded else {
+            guard let _body = user.copyWithoutId.encoded else {
                 os_log("Couldn't encode user %@", user.debugDescription)
                 return nil
             }
@@ -105,35 +105,41 @@ public class UserService {
 extension UserService: UserServiceType {
 
     public func get(completion: ((ParkerlyServiceOperation<[User]>) -> Void)?) {
-        networkService.requestArray(UserServiceRequest.getUsers, completion: { operation in
+        networkService.requestArray(UserServiceRequest.getUsers) { operation in
             DispatchQueue.main.async {
                 completion?(operation)
             }
-        });
+        };
     }
 
     public func get(_ id: NetworkId, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
-        networkService.requestModel(UserServiceRequest.getUser(id: id), completion: { operation in
+        networkService.requestModel(UserServiceRequest.getUser(id: id)) { operation in
             DispatchQueue.main.async {
                 completion?(operation)
             }
-        });
+        };
     }
 
-    public func edit(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
-        networkService.requestModel(UserServiceRequest.editUser(user: user.copyWithoutId), completion: { operation in
+    public func edit(_ user: User, completion externalCompletion: ((ParkerlyServiceOperation<User>) -> Void)?) {
+
+        let internalCompletion: (ParkerlyServiceOperation<User>) -> Void = { [weak self] operation in
             DispatchQueue.main.async {
-                completion?(operation)
+                if case let .completed(updatedUser) = operation, updatedUser.id == self?.currentUser?.id {
+                    self?.currentUser = updatedUser
+                }
+                externalCompletion?(operation)
             }
-        });
+        }
+
+        networkService.requestModel(UserServiceRequest.editUser(user: user.copyWithoutId), completion: internalCompletion)
     }
 
     public func delete(_ id: NetworkId, completion: ((ParkerlyServiceOperation<Void>) -> Void)?) {
-        networkService.requestOperation(UserServiceRequest.deleteUser(id: id), completion: { operation in
+        networkService.requestOperation(UserServiceRequest.deleteUser(id: id)) { operation in
             DispatchQueue.main.async {
                 completion?(operation)
             }
-        });
+        };
     }
 
     public func login(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
@@ -172,11 +178,11 @@ extension UserService: UserServiceType {
 private extension UserService {
 
     func create(_ user: User, completion: ((ParkerlyServiceOperation<NetworkId>) -> Void)?) {
-        networkService.requestId(UserServiceRequest.createUser(user: user.copyWithoutId), completion: { operation in
+        networkService.requestId(UserServiceRequest.createUser(user: user.copyWithoutId)) { operation in
             DispatchQueue.main.async {
                 completion?(operation)
             }
-        });
+        };
     }
 
     func saveCurrentUserToStorage() {

@@ -39,7 +39,7 @@ extension RegistrationViewModel: RegistrationViewModelType {
     }
 
     func registerNewUser(completion: @escaping (ParkerlyError?) -> Void) {
-        userService.register(newUser, completion: { [weak self] operation in
+        userService.register(newUser) { [weak self] operation in
             switch operation {
             case .completed(_):
                 completion(nil)
@@ -47,6 +47,6 @@ extension RegistrationViewModel: RegistrationViewModelType {
             case .failed(let error):
                 completion(error)
             }
-        })
+        }
     }
 }

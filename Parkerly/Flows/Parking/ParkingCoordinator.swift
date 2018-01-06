@@ -10,13 +10,16 @@ import UIKit
 class ParkingCoordinator: FlowCoordinator {
 
     private let userService: UserServiceType
+    private let parkingActionsService: ParkingActionsServiceType
 
     private let navigationController = UINavigationController()
     private var viewModel: ParkingViewModelType
     private let parkingContainerViewController: ParkingContainerViewController
 
-    init(userService: UserServiceType, presentationContext: UIViewController) {
+    init(userService: UserServiceType, parkingActionsService: ParkingActionsServiceType,
+         presentationContext: UIViewController) {
         self.userService = userService
+        self.parkingActionsService = parkingActionsService
         viewModel = ParkingViewModel(userService: userService)
         parkingContainerViewController = ParkingContainerViewController(viewModel: viewModel)
         super.init(presentationContext: presentationContext)
@@ -53,8 +56,8 @@ extension ParkingCoordinator: ParkingViewModelDelegate {
     }
 
     func wantsMenu() {
-        let settingsCoordinator = SettingsCoordinator(userService: userService, initialScreen: .menu,
-                presentationMode: .modal, presentationContext: parkingContainerViewController, delegate: self)
+        let settingsCoordinator = SettingsCoordinator(userService: userService, parkingActionsService: parkingActionsService,
+            initialScreen: .menu, presentationMode: .modal, presentationContext: parkingContainerViewController, delegate: self)
         settingsCoordinator.delegate = self
         childCoordinators.append(settingsCoordinator)
         settingsCoordinator.start()

@@ -8,6 +8,10 @@ import os.log
 
 public struct ParkingAction: ParkerlyModel {
 
+    // MARK: - Codable
+
+    // TODO: properly encode/decode parking action
+
     // MARK: - State
 
     public let id: NetworkId?

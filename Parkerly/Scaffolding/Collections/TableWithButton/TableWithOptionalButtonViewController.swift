@@ -43,7 +43,11 @@ class TableWithOptionalButtonViewController: UIViewController {
     // MARK: - Target-actions
 
     @objc func didTapActionButton() {
-        viewModel.didTapActionButton()
+        viewModel.didTapActionButton { [weak self] error in
+            if let error = error {
+                self?.presentError(error)
+            }
+        }
     }
 
     // MARK: - Interface
@@ -59,5 +63,6 @@ extension TableWithOptionalButtonViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

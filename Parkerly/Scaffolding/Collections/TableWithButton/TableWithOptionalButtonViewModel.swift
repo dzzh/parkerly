@@ -15,7 +15,7 @@ protocol TableWithOptionalButtonViewModelType: UITableViewDataSource {
 
     func didSelectRow(at indexPath: IndexPath)
 
-    func didTapActionButton()
+    func didTapActionButton(completion: ((ParkerlyError?) -> Void)?)
 
     func reload(completion: @escaping (ParkerlyError?) -> Void)
 }
@@ -45,7 +45,7 @@ class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewMod
         os_log("Row selection handler is not implemented")
     }
 
-    func didTapActionButton() {
+    func didTapActionButton(completion: ((ParkerlyError?) -> Void)?) {
         os_log("Button tap handler is not implemented")
     }
 
@@ -65,9 +65,9 @@ class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewMod
             return
         }
 
-        firstSection.reload(completion: { error in
+        firstSection.reload { error in
             completion(error)
-        })
+        }
     }
 
     // MARK: - UITableViewDataSource

@@ -15,11 +15,13 @@ enum SettingsCoordinatorScreen {
     case vehicles
 }
 
+// TODO: better screen management, ensure coordinator disposes after popping initial vc
 class SettingsCoordinator: FlowCoordinator {
 
     // MARK: - State
 
     private let userService: UserServiceType
+    private let parkingActionsService: ParkingActionsServiceType
 
     private let initialScreen: SettingsCoordinatorScreen
     private let presentationMode: CoordinatorPresentationMode
@@ -27,10 +29,11 @@ class SettingsCoordinator: FlowCoordinator {
 
     // MARK: - Initialization
 
-    init(userService: UserServiceType, initialScreen: SettingsCoordinatorScreen,
-         presentationMode: CoordinatorPresentationMode, presentationContext: UIViewController,
-         delegate: FlowCoordinatorDelegate? = nil) {
+    init(userService: UserServiceType, parkingActionsService: ParkingActionsServiceType,
+         initialScreen: SettingsCoordinatorScreen, presentationMode: CoordinatorPresentationMode,
+         presentationContext: UIViewController, delegate: FlowCoordinatorDelegate? = nil) {
         self.userService = userService
+        self.parkingActionsService = parkingActionsService
         self.initialScreen = initialScreen
         self.presentationMode = presentationMode
         super.init(presentationContext: presentationContext, delegate: delegate)
@@ -61,11 +64,11 @@ class SettingsCoordinator: FlowCoordinator {
 extension SettingsCoordinator: MenuViewModelDelegate {
 
     func wantsProfile() {
-        print("wants profile")
+        present(profileScreen)
     }
 
     func wantsHistory() {
-        print("wants history")
+        present(historyScreen)
     }
 
     func logout() {
@@ -101,6 +104,13 @@ extension SettingsCoordinator: MenuViewModelDelegate {
     }
 }
 
+extension SettingsCoordinator: UserProfileViewModelDelegate {
+
+    func didSaveUser() {
+        dismissPresented()
+    }
+}
+
 private extension SettingsCoordinator {
 
     var menuScreen: UIViewController {
@@ -111,11 +121,26 @@ private extension SettingsCoordinator {
     }
 
     var profileScreen: UIViewController {
-        return UIViewController()
+        guard userService.currentUser != nil,
+            let viewModel = UserProfileViewModel(userService: userService, delegate: self) else {
+            os_log("not logged in")
+            return UIViewController()
+        }
+
+        let viewController = TableWithOptionalButtonViewController(viewModel: viewModel)
+        return viewController
     }
 
     var historyScreen: UIViewController {
-        return UIViewController()
+        guard let user = userService.currentUser else {
+            os_log("not logged in")
+            return UIViewController()
+        }
+
+        let historySection = ParkingHistorySectionDataSource(parkingActionsService: parkingActionsService, user: user)
+        let viewModel = TableWithOptionalButtonViewModel(sections: [historySection], actionButtonTitle: nil)
+        let viewController = TableWithOptionalButtonViewController(viewModel: viewModel)
+        return viewController
     }
 
     var vehiclesScreen: UIViewController {
@@ -150,6 +175,32 @@ private extension SettingsCoordinator {
                 return
             }
             providedNavigationController.pushViewController(viewController, animated: true)
+        }
+    }
+
+    // TODO: better implementation, track screen types
+    func dismissPresented() {
+        switch presentationMode {
+        case .container:
+            if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
+                navigationController.popViewController(animated: true)
+            } else {
+                // TODO: dismiss coordinator
+            }
+        case .modal:
+            if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
+                navigationController.popViewController(animated: true)
+            } else {
+                // TODO: dismiss coordinator
+            }
+        case .navigation:
+            guard let providedNavigationController = presentationContext as? UINavigationController else {
+                os_log("presentation context is not a navigation controller")
+                return
+            }
+
+            // TODO: don't dismiss what you don't own, count your stack
+            providedNavigationController.popViewController(animated: true)
         }
     }
 }

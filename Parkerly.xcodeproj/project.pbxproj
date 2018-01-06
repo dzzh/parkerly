@@ -17,6 +17,7 @@
 		A1357DEBE7AC1631CB1E4485 /* Pods_Parkerly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 636BD3AC833D5E7BA187EDFF /* Pods_Parkerly.framework */; };
 		D01BF051730C1CFC4224C334 /* Pods_ParkerlyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC8BE4C687BDA9712BD6D57 /* Pods_ParkerlyTests.framework */; };
 		F5AEB0A838C066B0BAE8136D /* StartParkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB624A46C53F0DB94F5E7 /* StartParkingViewController.swift */; };
+		F5AEB0A9394AAE5BA8F3A868 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB83D4CA1E78CC9634D41 /* UserProfileViewModel.swift */; };
 		F5AEB0EE35DAF9ABB74F6E52 /* LayoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3E97C73E396EB93D9B7 /* LayoutExtensions.swift */; };
 		F5AEB143EC764455C51B4D28 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBB1F86F93F46DF556DF0 /* LoginViewModel.swift */; };
 		F5AEB19691CB4D7B523667FF /* ParkingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB46A15AF0B45E57C1B9D /* ParkingCoordinator.swift */; };
@@ -52,6 +53,7 @@
 		F5AEBBA7F35A437FFC36731D /* ParkingHistorySectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBC544111ABF98F3587A5 /* ParkingHistorySectionDataSource.swift */; };
 		F5AEBBC8612C875382FF1F5B /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB9C48F6EC7BEB999B98B /* NotificationExtensions.swift */; };
 		F5AEBBD7B93D40A25091B7CC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3672B82683C63BAF406 /* AppCoordinator.swift */; };
+		F5AEBC3FEF8D6AF5C036D10D /* UserProfileSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBE456C10EAB08B0E47A3 /* UserProfileSectionDataSource.swift */; };
 		F5AEBCB42D94F4B390CD35FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5AEB537E1598673EDDF193C /* LaunchScreen.storyboard */; };
 		F5AEBCB9B751C830EAE621C1 /* MenuSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB30D4D1B3B2318DE2831 /* MenuSectionDataSource.swift */; };
 		F5AEBCC0EC6A0364B7B9302E /* ParkingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB25343DABE911B129F00 /* ParkingContainerViewController.swift */; };
@@ -154,6 +156,7 @@
 		F5AEB788AE6F33938B93ADAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Parkerly/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		F5AEB794ECA08F0DCF6BF6E5 /* ParkerlyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkerlyService.swift; sourceTree = "<group>"; };
 		F5AEB835C85A136BF5977460 /* ParkingActionsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingActionsService.swift; sourceTree = "<group>"; };
+		F5AEB83D4CA1E78CC9634D41 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		F5AEB85B880B011A54729E87 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		F5AEB8AA934AA24B78BD8F8F /* TableWithOptionalButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableWithOptionalButtonView.swift; sourceTree = "<group>"; };
 		F5AEB8B4C3D4EB533D1DED28 /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -174,6 +177,7 @@
 		F5AEBDEA79836E259785AF1A /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		F5AEBDEFC2F57CD337251401 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		F5AEBE07B6062AEAE4EF81FF /* TableSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSectionDataSource.swift; sourceTree = "<group>"; };
+		F5AEBE456C10EAB08B0E47A3 /* UserProfileSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileSectionDataSource.swift; sourceTree = "<group>"; };
 		F5AEBE96A19677F46A345324 /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		F5AEBEDEEC398AA1E9BC4D05 /* ParkerlyError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkerlyError.swift; sourceTree = "<group>"; };
 		F5AEBEF8A9CB9B1A38078483 /* FilledButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
@@ -483,6 +487,8 @@
 		F5AEBEB428B1217DB384775B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F5AEBE456C10EAB08B0E47A3 /* UserProfileSectionDataSource.swift */,
+				F5AEB83D4CA1E78CC9634D41 /* UserProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -878,6 +884,8 @@
 				F5AEBBA7F35A437FFC36731D /* ParkingHistorySectionDataSource.swift in Sources */,
 				F5AEBCB9B751C830EAE621C1 /* MenuSectionDataSource.swift in Sources */,
 				F5AEBE1AD0CB83BC7B2AC25D /* MenuViewModel.swift in Sources */,
+				F5AEBC3FEF8D6AF5C036D10D /* UserProfileSectionDataSource.swift in Sources */,
+				F5AEB0A9394AAE5BA8F3A868 /* UserProfileViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

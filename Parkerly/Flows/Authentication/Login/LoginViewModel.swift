@@ -34,7 +34,8 @@ class LoginViewModel: TableWithOptionalButtonViewModel {
         userService.login(user, completion: nil)
     }
 
-    override func didTapActionButton() {
+    override func didTapActionButton(completion: ((ParkerlyError?) -> Void)? = nil) {
         delegate?.wantsToRegister()
+        completion?(nil)
     }
 }

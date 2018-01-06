@@ -14,8 +14,8 @@ enum MenuOption {
 
     var title: String {
         switch self {
-        case .profile: return "Profile N/A"
-        case .history: return "History N/A"
+        case .profile: return "Profile"
+        case .history: return "History"
         case .logout: return "Logout"
         case .closeMenu: return "Close menu"
         }

@@ -17,6 +17,12 @@ public protocol VehiclesServiceType: ParkerlyServiceType {
 
 public class VehiclesService {
     // TODO: caching
+
+    private let networkService: NetworkServiceType
+
+    init(networkService: NetworkServiceType) {
+        self.networkService = networkService
+    }
 }
 
 // TODO: implement, connect to network service

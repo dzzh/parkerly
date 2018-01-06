@@ -63,9 +63,9 @@ extension FlowCoordinator: FlowCoordinatorDelegate {
         }
 
         while let child = childrenToRemove.first {
-            child.cleanup(completion: {
+            child.cleanup {
                 childrenToRemove.removeFirst()
-            })
+            }
         }
     }
 }

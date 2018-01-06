@@ -15,6 +15,12 @@ public protocol ParkingZonesServiceType: ParkerlyServiceType {
 class ParkingZonesService {
 
     // TODO: caching
+
+    private let networkService: NetworkServiceType
+
+    init(networkService: NetworkServiceType) {
+        self.networkService = networkService
+    }
 }
 
 // TODO: connect to network service

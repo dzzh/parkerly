@@ -46,10 +46,10 @@ private extension ServiceLocator {
         let decoder = JSONDecoder()
         let networkService = NetworkService(requestFactory: RequestFactory(), decoder: decoder)
 
-        add(ParkingActionsService() as ParkingActionsServiceType)
-        add(ParkingZonesService() as ParkingZonesServiceType)
+        add(ParkingActionsService(networkService: networkService) as ParkingActionsServiceType)
+        add(ParkingZonesService(networkService: networkService) as ParkingZonesServiceType)
         add(UserService(networkService: networkService) as UserServiceType)
-        add(VehiclesService() as VehiclesServiceType)
+        add(VehiclesService(networkService: networkService) as VehiclesServiceType)
     }
 
     private func name(of some: Any) -> String {

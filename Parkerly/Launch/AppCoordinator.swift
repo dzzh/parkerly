@@ -73,7 +73,9 @@ private extension AppCoordinator {
     }
 
     func showParking() {
-        let parkingCoordinator = ParkingCoordinator(userService: userService, presentationContext: rootViewController)
+        let parkingActionsService: ParkingActionsServiceType = serviceLocator.getUnwrapped()
+        let parkingCoordinator = ParkingCoordinator(userService: userService, parkingActionsService: parkingActionsService,
+            presentationContext: rootViewController)
         parkingCoordinator.start()
         childCoordinators.append(parkingCoordinator)
     }

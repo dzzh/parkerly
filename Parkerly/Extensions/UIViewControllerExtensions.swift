@@ -45,11 +45,11 @@ extension UIViewController {
 
         UIView.update(with: { () -> Void in
             viewController.view.alpha = 0.0
-        }, animated: animated, duration: defaultAnimationDuration, delay: 0.0, options: [], completion: { _ in
+        }, animated: animated, duration: defaultAnimationDuration, delay: 0.0, options: []) { _ in
             viewController.view.removeFromSuperview()
             viewController.removeFromParentViewController()
             completion?()
-        })
+        }
     }
 
     func dismissPresentedViewController(_ animated: Bool = false, completion: (() -> Void)? = nil) {

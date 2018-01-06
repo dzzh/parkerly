@@ -6,7 +6,6 @@
 import ParkerlyCore
 import os.log
 
-// TODO implement
 class ParkingHistorySectionDataSource: TableSectionDataSource {
 
     // MARK: - State
@@ -30,7 +29,7 @@ class ParkingHistorySectionDataSource: TableSectionDataSource {
     }
 
     override var header: String? {
-        return "Parking action"
+        return "History"
     }
 
     override func object(for row: Int) -> Any? {
@@ -42,7 +41,7 @@ class ParkingHistorySectionDataSource: TableSectionDataSource {
     }
 
     override func reload(completion: ((ParkerlyError?) -> Void)? = nil) {
-        parkingActionsService.get(for: user) { operation in
+        parkingActionsService.getCompleted(for: user) { operation in
             switch operation {
             case .completed(let parkingActions):
                 self.parkingActions = parkingActions
