@@ -113,4 +113,26 @@ class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewMod
 
         return sectionDataSource.header
     }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        guard let sectionDataSource = sections[safe: indexPath.section] else {
+            os_log("Invalid section index %d", indexPath.section)
+            return false
+        }
+        return sectionDataSource.isEditable
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        guard let sectionDataSource = sections[safe: indexPath.section] else {
+            os_log("Invalid section index %d", indexPath.section)
+            return
+        }
+
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            sectionDataSource.removeObject(for: indexPath.row) { [weak tableView] _ in
+                tableView?.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            }
+        }
+    }
 }

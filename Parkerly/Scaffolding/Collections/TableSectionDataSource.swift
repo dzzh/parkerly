@@ -28,11 +28,15 @@ protocol TableSectionDataSourceType {
 
     var numberOfRows: Int { get }
 
+    var isEditable: Bool { get set }
+
     var header: String? { get }
 
     func object(for row: Int) -> Any?
 
     func cellData(for row: Int) -> TableCellDataType?
+
+    func removeObject(for row: Int, completion: @escaping (ParkerlyError?) -> Void)
 
     func reload(completion: ((ParkerlyError?) -> Void)?)
 }
@@ -42,6 +46,8 @@ class TableSectionDataSource: TableSectionDataSourceType {
     var numberOfRows: Int {
         return 0
     }
+
+    var isEditable: Bool = false
 
     var header: String? {
         return nil
@@ -57,5 +63,9 @@ class TableSectionDataSource: TableSectionDataSourceType {
 
     func reload(completion: ((ParkerlyError?) -> Void)? = nil) {
         completion?(nil)
+    }
+
+    func removeObject(for row: Int, completion: @escaping (ParkerlyError?) -> Void) {
+        completion(.notImplemented)
     }
 }

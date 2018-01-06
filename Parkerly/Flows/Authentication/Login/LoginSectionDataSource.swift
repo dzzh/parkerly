@@ -18,6 +18,8 @@ class LoginSectionDataSource: TableSectionDataSource {
 
     init(userService: UserServiceType) {
         self.userService = userService
+        super.init()
+        isEditable = true
     }
 
     // MARK: - TableSectionDataSource
@@ -48,6 +50,24 @@ class LoginSectionDataSource: TableSectionDataSource {
                 completion?(error)
             }
          }
+    }
+
+    override func removeObject(for row: Int, completion: @escaping (ParkerlyError?) -> Void) {
+        guard let user = users[safe: row], let userId = user.id else {
+            os_log("No user for row %d or id is not set", row)
+            completion(.internalError(description: nil))
+            return
+        }
+
+        userService.delete(userId) { [weak self] operation in
+            switch operation {
+            case .completed:
+                self?.users.remove(at: row)
+                completion(nil)
+            case .failed(let error):
+                completion(error)
+            }
+        }
     }
 }
 

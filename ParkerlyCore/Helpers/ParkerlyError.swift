@@ -10,12 +10,13 @@ public enum ParkerlyError: Error {
     case internalError(description: String?)
     case malformedData
     case malformedRequest
+    case notImplemented
     case unknown
     case userError(userMessage: String)
 
     public var userDescription: String {
         switch self {
-        case .internalError(_): return "Internal error; we're on it"
+        case .internalError(_), .notImplemented: return "Internal error; we're on it"
         case .malformedData: return "Web service has returned malformed data"
         case .malformedRequest: return "Web service had troubles parsing an incoming request"
         case .unknown: return "It's not exactly clear what happened, that's all we know"
