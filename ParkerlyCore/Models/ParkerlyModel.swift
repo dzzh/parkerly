@@ -6,20 +6,37 @@
 import Foundation
 import os.log
 
-public protocol ParkerlyModel: Codable {
+public typealias NetworkId = String
+
+public protocol ParkerlyModel: Codable, CustomDebugStringConvertible {
+
+    // MARK: - State
+
+    var id: NetworkId? { get }
+
+    var copyWithoutId: Self { get }
+    func copy(withId id: NetworkId?) -> Self
+
+    // MARK: - Encoding
 
     var encoder: JSONEncoder { get }
+    var encoded: Data? { get }
+    var encodedString: String? { get }
+
+    // MARK: - Decoding
 
     static var decoder: JSONDecoder { get }
 
-    var asJsonData: Data? { get }
+    static func decode<T: ParkerlyModel>(from json: String) -> T?
+    static func decode<T: ParkerlyModel>(from data: Data) -> T?
 
-    var encoded: String? { get }
-
-    static func decode<T: Decodable>(from json: String) -> T?
+    static func decodeArray<T: ParkerlyModel>(from data: Data) -> [T]?
+    static func decodeArray<T: ParkerlyModel>(from json: String) -> [T]?
 }
 
 extension ParkerlyModel {
+
+    // MARK: - Encoding
 
     public var encoder: JSONEncoder {
         let result = JSONEncoder()
@@ -27,27 +44,62 @@ extension ParkerlyModel {
         return result
     }
 
-    public static var decoder: JSONDecoder {
-        return JSONDecoder()
-    }
-
-    public var asJsonData: Data? {
+    public var encoded: Data? {
         return try? encoder.encode(self)
     }
 
-    public var encoded: String? {
-        guard let data = asJsonData, let string = String(data: data, encoding: .utf8) else {
-            os_log("Couldn't encode %s", String(describing: self))
+    public var encodedString: String? {
+        guard let data = encoded, let string = String(data: data, encoding: .utf8) else {
+            os_log("Couldn't encode %@", String(describing: self))
             return nil
         }
         return string
     }
 
-    public static func decode<T: Decodable>(from json: String) -> T? {
-        guard let data = json.data(using: .utf8) else {
-            os_log("Couldn't convert json string \"%s\" to data", json)
+    // MARK: - Decoding
+
+    public static var decoder: JSONDecoder {
+        return JSONDecoder()
+    }
+
+    public static func decode<T: ParkerlyModel>(from data: Data) -> T? {
+        do {
+            return try decoder.decode(T.self, from: data)
+        } catch {
+            os_log("Caught an error when decoding %@: %@", String(describing: T.self), error.localizedDescription)
             return nil
         }
-        return try? decoder.decode(T.self, from: data)
+    }
+
+    public static func decode<T: ParkerlyModel>(from json: String) -> T? {
+        guard let data = json.data(using: .utf8) else {
+            os_log("Couldn't convert json string \"%@\" to data", json)
+            return nil
+        }
+        return T.decode(from: data)
+    }
+
+    public static func decodeArray<T: ParkerlyModel>(from data: Data) -> [T]? {
+        do {
+            let dict = try decoder.decode([String: T].self, from: data)
+            return dict.map { (key, value) -> T in return value.copy(withId: key) }
+        } catch {
+            os_log("Caught an error when decoding [%@]: %@", String(describing: T.self), error.localizedDescription)
+            return nil
+        }
+    }
+
+    public static func decodeArray<T: ParkerlyModel>(from json: String) -> [T]? {
+        guard let data = json.data(using: .utf8) else {
+            os_log("Couldn't convert json string \"%@\" to data", json)
+            return nil
+        }
+        return T.decodeArray(from: data)
+    }
+
+    // MARK: - CustomDebugStringConvertible
+
+    public var debugDescription: String {
+        return "\(type(of: self))(\(id ?? "nil"))"
     }
 }

@@ -27,11 +27,11 @@ class LoginViewModel: TableWithOptionalButtonViewModel {
     // MARK: - TableWithOptionalButtonViewModel
 
     override func didSelectRow(at indexPath: IndexPath) {
-        guard let user = dataSource.object(for: indexPath.row) as? User, let userId = user.id else {
-            os_log("Invalid user or missing user id at path %s", String(describing: indexPath))
+        guard let user = dataSource.object(for: indexPath.row) as? User, user.id != nil else {
+            os_log("Invalid user or missing user id at path %@", String(describing: indexPath))
             return
         }
-        userService.login(userId, completion: nil)
+        userService.login(user, completion: nil)
     }
 
     override func didTapActionButton() {

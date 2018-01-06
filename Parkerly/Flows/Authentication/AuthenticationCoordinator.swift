@@ -68,5 +68,10 @@ extension AuthenticationCoordinator: RegistrationViewModelDelegate {
             return
         }
         navigationController.popViewController(animated: true)
+        guard let loginViewController = navigationController.topViewController as? TableWithOptionalButtonViewController else {
+            os_log("unexpected state")
+            return
+        }
+        loginViewController.reload()
     }
 }

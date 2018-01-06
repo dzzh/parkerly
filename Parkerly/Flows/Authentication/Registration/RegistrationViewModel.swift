@@ -33,8 +33,9 @@ class RegistrationViewModel {
 
 extension RegistrationViewModel: RegistrationViewModelType {
 
+    // TODO: Editing UI
     var newUser: User {
-        return User(id: "userRegister", firstName: "firstRegister", lastName: "lastRegister", username: "userRegister")
+        return User(id: "newUser", firstName: "newFirstName", lastName: "newLastName", username: "newUsername")
     }
 
     func registerNewUser() {

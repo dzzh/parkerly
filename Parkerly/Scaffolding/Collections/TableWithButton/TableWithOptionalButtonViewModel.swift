@@ -16,6 +16,8 @@ protocol TableWithOptionalButtonViewModelType: UITableViewDataSource {
     func didSelectRow(at indexPath: IndexPath)
 
     func didTapActionButton()
+
+    func reload(completion: @escaping (ParkerlyError?) -> Void)
 }
 
 class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewModelType {
@@ -45,6 +47,27 @@ class TableWithOptionalButtonViewModel: NSObject, TableWithOptionalButtonViewMod
 
     func didTapActionButton() {
         os_log("Button tap handler is not implemented")
+    }
+
+    // TODO: reload all sections
+    func reload(completion: @escaping (ParkerlyError?) -> Void) {
+        guard sections.count > 0 else {
+            completion(nil)
+            return
+        }
+
+        if sections.count > 1 {
+            os_log("Only the first section of %d will be reloaded", sections.count)
+        }
+
+        guard let firstSection = sections.first else {
+            completion(.internalError(description: "can't reload an empty data source"))
+            return
+        }
+
+        firstSection.reload(completion: { error in
+            completion(error)
+        })
     }
 
     // MARK: - UITableViewDataSource

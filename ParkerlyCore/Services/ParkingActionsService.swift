@@ -48,12 +48,12 @@ extension ParkingActionsService: ParkingActionsServiceType {
 
     // TODO: implement
     public func start(_ parkingAction: ParkingAction, completion: ((ParkerlyServiceOperation<ParkingAction>) -> Void)?) {
-        let startedAction = parkingAction.copyWithStartDate(Date())
+        let startedAction = parkingAction.copy(withStartDate: Date())
         completion?(ParkerlyServiceOperation.completed(startedAction))
     }
 
     public func stop(_ parkingAction: ParkingAction, completion: ((ParkerlyServiceOperation<ParkingAction>) -> Void)?) {
-        let stoppedAction = parkingAction.copyWithEndDate(Date())
+        let stoppedAction = parkingAction.copy(withEndDate: Date())
         completion?(ParkerlyServiceOperation.completed(stoppedAction))
     }
 

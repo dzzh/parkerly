@@ -45,6 +45,14 @@ class TableWithOptionalButtonViewController: UIViewController {
     @objc func didTapActionButton() {
         viewModel.didTapActionButton()
     }
+
+    // MARK: - Interface
+
+    func reload() {
+        viewModel.reload { [weak self] _ in
+            self?.castedView.tableView.reloadData()
+        }
+    }
 }
 
 extension TableWithOptionalButtonViewController: UITableViewDelegate {

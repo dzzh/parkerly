@@ -6,11 +6,11 @@
 import Foundation
 import os.log
 
-public struct ParkingAction {
+public struct ParkingAction: ParkerlyModel {
 
     // MARK: - State
 
-    public let id: String?
+    public let id: NetworkId?
     public let startDate: Date?
     public let endDate: Date?
     public let userId: String
@@ -19,7 +19,7 @@ public struct ParkingAction {
 
     // MARK: - Initialization
 
-    public init(id: String?, startDate: Date?, endDate: Date?, userId: String, vehicleId: String, zoneId: String) {
+    public init(id: NetworkId?, startDate: Date?, endDate: Date?, userId: NetworkId, vehicleId: NetworkId, zoneId: NetworkId) {
         self.id = id
         self.startDate = startDate
         self.endDate = endDate
@@ -28,12 +28,12 @@ public struct ParkingAction {
         self.zoneId = zoneId
     }
 
-    public init(userId: String, vehicleId: String, zoneId: String) {
+    public init(userId: NetworkId, vehicleId: NetworkId, zoneId: NetworkId) {
         self.init(id: nil, startDate: nil, endDate: nil, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
     }
 
     public init?(user: User, vehicle: Vehicle, zone: ParkingZone) {
-        guard let userId = user.id, let vehicleId = vehicle.id else {
+        guard let userId = user.id, let vehicleId = vehicle.id, let zoneId = zone.id else {
             os_log("invalid parameters")
             return nil
         }
@@ -42,17 +42,25 @@ public struct ParkingAction {
         self.endDate = nil
         self.userId = userId
         self.vehicleId = vehicleId
-        self.zoneId = zone.id
+        self.zoneId = zoneId
     }
 
     // MARK: - Copying
 
-    func copyWithStartDate(_ date: Date) -> ParkingAction {
+    public var copyWithoutId: ParkingAction {
+        return ParkingAction(id: nil, startDate: startDate, endDate: endDate, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
+    }
+
+    public func copy(withId id: NetworkId?) -> ParkingAction {
+        return ParkingAction(id: id, startDate: startDate, endDate: endDate, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
+    }
+
+    func copy(withStartDate date: Date) -> ParkingAction {
         return ParkingAction(id: self.id, startDate: date, endDate: self.endDate, userId: self.userId,
             vehicleId: self.vehicleId, zoneId: self.zoneId)
     }
 
-    func copyWithEndDate(_ date: Date) -> ParkingAction {
+    func copy(withEndDate date: Date) -> ParkingAction {
         return ParkingAction(id: self.id, startDate: self.startDate, endDate: date, userId: self.userId,
             vehicleId: self.vehicleId, zoneId: self.zoneId)
     }

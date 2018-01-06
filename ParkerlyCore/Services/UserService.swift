@@ -12,28 +12,86 @@ public enum UserServiceNotification: String, ParkerlyServiceNotification {
     case didLogout = "userServiceNotificationNameDidLogout"
 }
 
-// TODO: Clearly, this is not the API design the production app should aim for.
-// I deliberately don't address authentication and data integrity issues to simplify services implementations.
+enum UserServiceRequest {
+    case createUser(user: User)
+    case getUsers
+    case getUser(id: String)
+    case editUser(user: User)
+    case deleteUser(id: String)
+}
+
+extension UserServiceRequest: NetworkRequestType {
+
+    var servicePath: String? {
+        return "/users"
+    }
+
+    var requestPath: String? {
+        switch self {
+        case .createUser, .getUsers:
+            return nil
+        case .getUser(let id), .deleteUser(let id):
+            return id
+        case .editUser(let user):
+            guard let id = user.id else {
+                return nil
+            }
+            return id
+        }
+    }
+
+    var method: HttpMethod {
+        switch self {
+        case .createUser(_): return .post
+        case .getUsers, .getUser(_): return .get
+        case .editUser(_): return .patch
+        case .deleteUser(_): return .delete
+        }
+    }
+
+    func urlRequest(_ requestFactory: RequestFactoryType) -> URLRequest? {
+        let body: Data?
+        switch self {
+        case .createUser(let user), .editUser(let user):
+            guard let _body = user.encoded else {
+                os_log("Couldn't encode user %@", user.debugDescription)
+                return nil
+            }
+            body = _body
+        case .getUsers, .getUser(_), .deleteUser:
+            body = nil
+        }
+        return requestFactory.request(with: fullPath, method: method, body: body)
+    }
+}
+
 public protocol UserServiceType: ParkerlyServiceType {
 
     var currentUser: User? { get }
 
     func get(completion: ((ParkerlyServiceOperation<[User]>) -> Void)?)
 
-    func login(_ userId: String, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
+    func get(_ id: NetworkId, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
 
-    func register(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
+    func edit(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
 
-    func edit(_ user: User, completion: ((ParkerlyServiceOperation<Void>) -> Void)?)
+    func delete(_ id: NetworkId, completion: ((ParkerlyServiceOperation<Void>) -> Void)?)
+
+    func login(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
 
     func logout(completion: ((ParkerlyServiceOperation<Void>) -> Void)?)
+
+    func register(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
 }
 
 public class UserService {
 
     private static let userDefaultsCurrentUserKey = "currentUserKey"
 
-    init() {
+    private let networkService: NetworkServiceType
+
+    init(networkService: NetworkServiceType) {
+        self.networkService = networkService
         currentUser = fetchCurrentUserFromStorage()
     }
 
@@ -44,45 +102,85 @@ public class UserService {
     }
 }
 
-// TODO: implement edit, connect to network service
 extension UserService: UserServiceType {
 
     public func get(completion: ((ParkerlyServiceOperation<[User]>) -> Void)?) {
-        let users: [User] = [
-            User(id: "user1", firstName: "firstName1", lastName: "lastName1", username: "username1"),
-            User(id: "user2", firstName: "firstName2", lastName: "lastName2", username: "username2")
-        ]
-        completion?(ParkerlyServiceOperation.completed(users))
+        networkService.requestArray(UserServiceRequest.getUsers, completion: { operation in
+            DispatchQueue.main.async {
+                completion?(operation)
+            }
+        });
     }
 
-    public func login(_ userId: String, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
-        currentUser = User(id: "xxx", firstName: "xxx", lastName: "xxx", username: "xxx")
+    public func get(_ id: NetworkId, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
+        networkService.requestModel(UserServiceRequest.getUser(id: id), completion: { operation in
+            DispatchQueue.main.async {
+                completion?(operation)
+            }
+        });
+    }
+
+    public func edit(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
+        networkService.requestModel(UserServiceRequest.editUser(user: user.copyWithoutId), completion: { operation in
+            DispatchQueue.main.async {
+                completion?(operation)
+            }
+        });
+    }
+
+    public func delete(_ id: NetworkId, completion: ((ParkerlyServiceOperation<Void>) -> Void)?) {
+        networkService.requestOperation(UserServiceRequest.deleteUser(id: id), completion: { operation in
+            DispatchQueue.main.async {
+                completion?(operation)
+            }
+        });
+    }
+
+    public func login(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
+        currentUser = user
         completion?(.completed(currentUser!))
         notify(name: UserServiceNotification.didLogin.name, returnValue: currentUser)
     }
 
-    public func register(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
-        let registeredUser = User(id: "yyy", firstName: "yyy", lastName: "yyy", username: "yyy")
-        completion?(.completed(registeredUser))
-        notify(name: UserServiceNotification.didRegister.name, returnValue: registeredUser)
-    }
-
-    public func edit(_ user: User, completion: ((ParkerlyServiceOperation<Void>) -> Void)?) {
-        // TODO: implement
-        os_log("Not implemented")
-        completion?(.completed(()))
-    }
-
     public func logout(completion: ((ParkerlyServiceOperation<Void>) -> Void)?) {
         currentUser = nil
+        completion?(ParkerlyServiceOperation.completed(()))
         notify(name: UserServiceNotification.didLogout.name)
+    }
+
+    public func register(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
+        create(user) { [weak self] operation in
+            guard let `self` = self else {
+                completion?(ParkerlyServiceOperation.failed(.internalError(description: "memory leak")))
+                return
+            }
+            switch operation {
+            case .completed(let id):
+                self.get(id) { operation in
+                    completion?(operation)
+                    if case let .completed(user) = operation {
+                        self.notify(name: UserServiceNotification.didRegister.name, returnValue: user)
+                    }
+                }
+            case .failed(let error):
+                completion?(ParkerlyServiceOperation.failed(error))
+            }
+        }
     }
 }
 
 private extension UserService {
 
+    func create(_ user: User, completion: ((ParkerlyServiceOperation<NetworkId>) -> Void)?) {
+        networkService.requestId(UserServiceRequest.createUser(user: user.copyWithoutId), completion: { operation in
+            DispatchQueue.main.async {
+                completion?(operation)
+            }
+        });
+    }
+
     func saveCurrentUserToStorage() {
-        UserDefaults.standard.set(currentUser?.encoded, forKey: UserService.userDefaultsCurrentUserKey)
+        UserDefaults.standard.set(currentUser?.encodedString, forKey: UserService.userDefaultsCurrentUserKey)
     }
 
     func fetchCurrentUserFromStorage() -> User? {

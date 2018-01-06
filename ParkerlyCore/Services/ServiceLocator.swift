@@ -43,7 +43,13 @@ extension ServiceLocator: ServiceLocatorType {
 private extension ServiceLocator {
 
     private func registerServices() {
-        add(UserService() as UserServiceType)
+        let decoder = JSONDecoder()
+        let networkService = NetworkService(requestFactory: RequestFactory(), decoder: decoder)
+
+        add(ParkingActionsService() as ParkingActionsServiceType)
+        add(ParkingZonesService() as ParkingZonesServiceType)
+        add(UserService(networkService: networkService) as UserServiceType)
+        add(VehiclesService() as VehiclesServiceType)
     }
 
     private func name(of some: Any) -> String {
