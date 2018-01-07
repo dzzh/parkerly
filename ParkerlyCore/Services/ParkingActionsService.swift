@@ -19,13 +19,10 @@ extension ParkingActionsServiceRequest: NetworkRequestType {
         return "/parkingActions"
     }
 
-    // TODO: Because Firebase indices are not enabled, we cannot query by user, that's why the code is commented.
-    // Now, the application filters the results at the client side.
     var requestPath: String? {
         switch self {
-        case .getActiveActions(_), .getCompletedActions(_):
-//            return userId
-            return nil
+        case .getActiveActions(let userId), .getCompletedActions(let userId):
+            return userId
         case .startParkingAction:
             return nil
         case .stopParkingAction(let parkingAction):
@@ -37,17 +34,14 @@ extension ParkingActionsServiceRequest: NetworkRequestType {
         }
     }
 
-    // TODO: Because Firebase indices are not enabled, we cannot query by user, that's why the code is commented.
-    // Now, the application filters the results at the client side.
     var queryParameters: [String: String] {
         switch self {
-        case .getActiveActions(_), .getCompletedActions(_):
-//            return [
-//                "orderBy": "user",
-//                "startAt": userId,
-//                "endAt": userId
-//            ]
-            return [:]
+        case .getActiveActions(let userId), .getCompletedActions(let userId):
+            return [
+                "orderBy": "user",
+                "startAt": userId,
+                "endAt": userId
+            ]
         case .startParkingAction(_), .stopParkingAction(_):
             return [:]
         }

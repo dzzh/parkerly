@@ -1,0 +1,67 @@
+{
+  "parkingActions": {
+    "-KzQLcaOTSekGiv8_69j": {
+      "startDate": "START_DATE",
+      "stopDate": "END_DATE",
+      "userId": "USER_ID",
+      "vehicleId": "VEHICLE_ID",
+      "zoneId": "ZONE_ID"
+    }
+  },
+  "parkingZones": {
+    "-KzP-Zsvs5zvJBK4HKqH": {
+      "address": "Amsterdam, Wisselwerking 40",
+      "lat": 52.3268841,
+      "lon": 4.9499596,
+      "tariff": "5 eur/hr"
+    },
+    "-KzP-k67v8ANuLCPLPfI": {
+      "address": "Amsterdam, Diemen Zuid",
+      "lat": 52.3268841,
+      "lon": 4.9499596,
+      "tariff": "3 eur/hr"
+    },
+    "-KzP-xgbUYJiG_LD4d-R": {
+      "address": "Amsterdam-Zuidoost, Develstein 100",
+      "lat": 52.3268841,
+      "lon": 4.9499596,
+      "tariff": "4 eur/hr"
+    },
+    "-KzQM6R3iP3_n0z70ZBs": {
+      "address": "Amsterdam, Drieburgpad 6, 1097 HK",
+      "lat": 52.335485,
+      "lon": 4.941825,
+      "tariff": "2 eur/hr"
+    },
+    "-L1rAIJp6sqjz4hFo4-k": {
+      "address": "Amsterdam",
+      "lat": "test User 2 last name",
+      "lon": "user name 2",
+      "tariff": "5 eur/hr"
+    }
+  },
+  "users": {
+    "-KzOzbwH-5kePGdzp2S0": {
+      "firstName": "test User 2 first name",
+      "lastName": "test User 2 last name",
+      "userName": "user name 2"
+    },
+    "-KzOzddhzNtNyZDjSgdd": {
+      "firstName": "test User 1 first name",
+      "lastName": "test User 1 last name",
+      "userName": "user name 1"
+    },
+    "-KzOzfbEETbNiajZ0ewN": {
+      "firstName": "test User 3 first name",
+      "lastName": "test User 3 last name",
+      "userName": "user name 3"
+    }
+  },
+  "vehicles": {
+    "-KzP0Wz245Gdcj3R7g4Y": {
+      "title": "my car",
+      "userId": "USER_ID",
+      "vrn": "XXX-XXX"
+    }
+  }
+}

@@ -22,7 +22,7 @@ public protocol RequestFactoryType {
 class RequestFactory {
 
     // Not the best place to keep it, but will work for a sample app
-    private let baseUrl = "https://testapi-11cc3-657ec.firebaseio.com"
+    private let baseUrl = "https://parking-thing.firebaseio.com"
 }
 
 extension RequestFactory: RequestFactoryType {
