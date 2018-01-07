@@ -12,7 +12,7 @@ protocol NetworkServiceType {
     func requestArray<T: ParkerlyModel>(_ request: NetworkRequestType,
                                         completion: @escaping (ParkerlyServiceOperation<[T]>) -> Void)
 
-    func requestModel<T: ParkerlyModel>(_ request: NetworkRequestType,
+    func requestModel<T: ParkerlyModel>(_ request: NetworkRequestType, id: NetworkId,
                                         completion: @escaping (ParkerlyServiceOperation<T>) -> Void)
 
     func requestId(_ request: NetworkRequestType,
@@ -73,7 +73,7 @@ extension NetworkService: NetworkServiceType {
         }
     }
 
-    func requestModel<T: ParkerlyModel>(_ request: NetworkRequestType,
+    func requestModel<T: ParkerlyModel>(_ request: NetworkRequestType, id: NetworkId,
                                         completion: @escaping (ParkerlyServiceOperation<T>) -> Void) {
         performRawRequest(request) { data, response, error in
             let result: ParkerlyServiceOperation<T>
@@ -81,7 +81,8 @@ extension NetworkService: NetworkServiceType {
                 result = ParkerlyServiceOperation.failed(error)
             } else {
                 if let data = data, let model: T = T.decode(from: data) {
-                    result = ParkerlyServiceOperation.completed(model)
+                    let modelWithId = model.copy(withId: id)
+                    result = ParkerlyServiceOperation.completed(modelWithId)
                 } else {
                     result = ParkerlyServiceOperation.failed(.malformedData)
                 }

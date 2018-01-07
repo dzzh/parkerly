@@ -26,14 +26,14 @@ extension ParkingActionsService: ParkingActionsServiceType {
 
     public func getActive(for user: User, completion: ((ParkerlyServiceOperation<[ParkingAction]>) -> Void)?) {
         let predicate: (ParkingAction) -> Bool = {
-            return $0.userId == user.id && $0.startDate != nil && $0.endDate == nil
+            return $0.userId == user.id && $0.startDate != nil && $0.stopDate == nil
         }
         getActions(for: user, predicate: predicate, completion: completion)
     }
 
     public func getCompleted(for user: User, completion: ((ParkerlyServiceOperation<[ParkingAction]>) -> Void)?) {
         let predicate: (ParkingAction) -> Bool = {
-            return $0.userId == user.id && $0.startDate != nil && $0.endDate != nil
+            return $0.userId == user.id && $0.startDate != nil && $0.stopDate != nil
         }
         getActions(for: user, predicate: predicate, completion: completion)
     }
@@ -48,8 +48,12 @@ extension ParkingActionsService: ParkingActionsServiceType {
     }
 
     public func stop(_ parkingAction: ParkingAction, completion: ((ParkerlyServiceOperation<ParkingAction>) -> Void)?) {
+        guard let actionId = parkingAction.id else {
+            completion?(ParkerlyServiceOperation.failed(.malformedRequest))
+            return
+        }
         let editRequest = modelRequest.editModel(parkingAction.copy(withEndDate: Date()))
-        crudService.editModel(request: editRequest, completion: completion)
+        crudService.editModel(request: editRequest, id: actionId, completion: completion)
     }
 }
 

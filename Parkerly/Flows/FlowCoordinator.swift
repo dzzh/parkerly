@@ -49,11 +49,6 @@ class FlowCoordinator: FlowCoordinatorType {
 extension FlowCoordinator: FlowCoordinatorDelegate {
 
     func flowCoordinatorDidComplete(_ flowCoordinator: FlowCoordinatorType) {
-        guard let flowCoordinator = childCoordinator else {
-            os_log("received didComplete from an unexpected child")
-            return
-        }
-
         childCoordinator = nil
     }
 }

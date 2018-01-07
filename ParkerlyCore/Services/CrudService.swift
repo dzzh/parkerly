@@ -14,10 +14,10 @@ protocol CrudServiceType {
     func deleteModel(request: NetworkRequestType,
                      completion: ((ParkerlyServiceOperation<Void>) -> Void)?)
 
-    func editModel<T: ParkerlyModel>(request: NetworkRequestType,
+    func editModel<T: ParkerlyModel>(request: NetworkRequestType, id: NetworkId,
                                      completion: ((ParkerlyServiceOperation<T>) -> Void)?)
 
-    func getModel<T: ParkerlyModel>(request: NetworkRequestType,
+    func getModel<T: ParkerlyModel>(request: NetworkRequestType, id: NetworkId,
                                     completion: ((ParkerlyServiceOperation<T>) -> Void)?)
 
     func getModels<T: ParkerlyModel>(request: NetworkRequestType,
@@ -53,7 +53,7 @@ class CrudService: CrudServiceType {
                     }
                     return
                 }
-                self.getModel(request: nextRequest, completion: completion)
+                self.getModel(request: nextRequest, id: id, completion: completion)
             case .failed(let error):
                 DispatchQueue.main.async {
                     completion?(ParkerlyServiceOperation.failed(error))
@@ -71,18 +71,18 @@ class CrudService: CrudServiceType {
         };
     }
 
-    func editModel<T: ParkerlyModel>(request: NetworkRequestType,
+    func editModel<T: ParkerlyModel>(request: NetworkRequestType, id: NetworkId,
                                      completion: ((ParkerlyServiceOperation<T>) -> Void)?) {
-        networkService.requestModel(request) { operation in
+        networkService.requestModel(request, id: id) { operation in
             DispatchQueue.main.async {
                 completion?(operation)
             }
         }
     }
 
-    func getModel<T: ParkerlyModel>(request: NetworkRequestType,
+    func getModel<T: ParkerlyModel>(request: NetworkRequestType, id: NetworkId,
                                     completion: ((ParkerlyServiceOperation<T>) -> Void)?) {
-        networkService.requestModel(request) { operation in
+        networkService.requestModel(request, id: id) { operation in
             DispatchQueue.main.async {
                 completion?(operation)
             }

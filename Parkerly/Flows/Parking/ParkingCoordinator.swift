@@ -23,8 +23,8 @@ class ParkingCoordinator: FlowCoordinator {
         self.userService = userService
         self.parkingActionsService = parkingActionsService
         self.vehiclesService = vehiclesService
-        viewModel = ParkingViewModel(userService: userService, parkingZonesService: parkingZonesService,
-            vehiclesService: vehiclesService)
+        viewModel = ParkingViewModel(userService: userService, parkingActionsService: parkingActionsService,
+            parkingZonesService: parkingZonesService, vehiclesService: vehiclesService)
         parkingContainerViewController = ParkingContainerViewController(viewModel: viewModel)
         super.init(presentationContext: presentationContext)
         viewModel.delegate = self
@@ -39,13 +39,14 @@ class ParkingCoordinator: FlowCoordinator {
             return
         }
 
-        if let parkingAction = viewModel.parkingAction {
-            showParkingAction(parkingAction)
-        } else {
-            showStartParking()
+        viewModel.reloadCurrentAction { [weak self] _ in
+            if let parkingAction = self?.viewModel.parkingAction {
+                self?.showParkingAction(parkingAction)
+            } else {
+                self?.showStartParking()
+            }
+            container.containedViewController = self?.navigationController
         }
-
-        container.containedViewController = navigationController
     }
 
     override func cleanup(completion: () -> Void) {
@@ -73,13 +74,47 @@ extension ParkingCoordinator: ParkingViewModelDelegate {
         childCoordinator = settingsCoordinator
     }
 
-    func wantsVehicles() {
+    func wantsToSelectVehicle(inContext context: UIViewController) {
+        guard let currentUser = userService.currentUser else {
+            context.presentError(.notLoggedIn)
+            return
+        }
+
+        vehiclesService.getVehicles(for: currentUser) { [weak self] operation in
+            switch operation {
+                case .completed(let vehicles):
+                    if vehicles.isEmpty {
+                        self?.showVehiclesAddition()
+                    } else {
+                        self?.showVehiclesSelection(user: currentUser)
+                    }
+                case .failed(let error):
+                    context.presentError(error)
+            }
+        }
+    }
+
+    private func showVehiclesSelection(user: User) {
+        let vehiclesSelectionViewModel = SelectVehicleViewModel(vehiclesService: vehiclesService, user: user, delegate: self)
+        let viewController = TableWithOptionalButtonViewController(viewModel: vehiclesSelectionViewModel)
+        presentationContext?.present(viewController, animated: true)
+    }
+
+    private func showVehiclesAddition() {
         let settingsCoordinator = SettingsCoordinator(userService: userService, parkingActionsService: parkingActionsService,
             vehiclesService: vehiclesService, initialScreen: .vehicles, presentationContext: parkingContainerViewController,
             delegate: self)
         settingsCoordinator.delegate = self
         settingsCoordinator.start()
         childCoordinator = settingsCoordinator
+    }
+}
+
+extension ParkingCoordinator: SelectVehicleViewModelDelegate {
+
+    func didSelectVehicle(_ vehicle: Vehicle) {
+        viewModel.selectedVehicle = vehicle
+        presentationContext?.dismiss(animated: true)
     }
 }
 

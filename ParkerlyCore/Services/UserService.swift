@@ -76,14 +76,16 @@ extension UserService: UserServiceType {
     }
 
     public func edit(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
-        guard user.id != nil else {
+        guard let userId = user.id else {
             os_log("Cannot edit user without id")
             completion?(ParkerlyServiceOperation.failed(.malformedRequest))
             return
         }
 
         let editRequest = modelRequest.editModel(user)
-        crudService.editModel(request: editRequest) { [weak self] (operation: ParkerlyServiceOperation<User>) -> Void in
+        crudService.editModel(request: editRequest, id: userId) {
+            [weak self] (operation: ParkerlyServiceOperation<User>) -> Void in
+
             if case let .completed(updatedUser) = operation, updatedUser.id == self?.currentUser?.id {
                 self?.currentUser = updatedUser
             }
@@ -93,7 +95,7 @@ extension UserService: UserServiceType {
 
     public func getUser(_ id: NetworkId, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
         let getRequest = modelRequest.getModel(modelId: id, userId: id)
-        crudService.getModel(request: getRequest, completion: completion)
+        crudService.getModel(request: getRequest, id: id, completion: completion)
     }
 
     public func getUsers(completion: ((ParkerlyServiceOperation<[User]>) -> Void)?) {

@@ -54,7 +54,11 @@ class ParkingContainerViewController: ContainerViewController {
     // MARK: - Target-actions
 
     @objc func didTapActionButton() {
-        viewModel.handleParkingAction()
+        viewModel.handleParkingAction { [weak self] error in
+            if let error = error {
+                self?.presentError(error)
+            }
+        }
     }
 
     @objc func didTapMenu() {

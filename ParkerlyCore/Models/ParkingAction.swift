@@ -18,24 +18,24 @@ public struct ParkingAction: ParkerlyModel {
 
     public let id: NetworkId?
     public let startDate: Date?
-    public let endDate: Date?
+    public let stopDate: Date?
     public let userId: String
     public let vehicleId: String
     public let zoneId: String
 
     // MARK: - Initialization
 
-    public init(id: NetworkId?, startDate: Date?, endDate: Date?, userId: NetworkId, vehicleId: NetworkId, zoneId: NetworkId) {
+    public init(id: NetworkId?, startDate: Date?, stopDate: Date?, userId: NetworkId, vehicleId: NetworkId, zoneId: NetworkId) {
         self.id = id
         self.startDate = startDate
-        self.endDate = endDate
+        self.stopDate = stopDate
         self.userId = userId
         self.vehicleId = vehicleId
         self.zoneId = zoneId
     }
 
     public init(userId: NetworkId, vehicleId: NetworkId, zoneId: NetworkId) {
-        self.init(id: nil, startDate: nil, endDate: nil, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
+        self.init(id: nil, startDate: nil, stopDate: nil, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
     }
 
     public init?(user: User, vehicle: Vehicle, zone: ParkingZone) {
@@ -45,7 +45,7 @@ public struct ParkingAction: ParkerlyModel {
         }
         self.id = nil
         self.startDate = nil
-        self.endDate = nil
+        self.stopDate = nil
         self.userId = userId
         self.vehicleId = vehicleId
         self.zoneId = zoneId
@@ -54,20 +54,20 @@ public struct ParkingAction: ParkerlyModel {
     // MARK: - Copying
 
     public var copyWithoutId: ParkingAction {
-        return ParkingAction(id: nil, startDate: startDate, endDate: endDate, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
+        return ParkingAction(id: nil, startDate: startDate, stopDate: stopDate, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
     }
 
     public func copy(withId id: NetworkId?) -> ParkingAction {
-        return ParkingAction(id: id, startDate: startDate, endDate: endDate, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
+        return ParkingAction(id: id, startDate: startDate, stopDate: stopDate, userId: userId, vehicleId: vehicleId, zoneId: zoneId)
     }
 
     func copy(withStartDate date: Date) -> ParkingAction {
-        return ParkingAction(id: self.id, startDate: date, endDate: self.endDate, userId: self.userId,
+        return ParkingAction(id: self.id, startDate: date, stopDate: self.stopDate, userId: self.userId,
             vehicleId: self.vehicleId, zoneId: self.zoneId)
     }
 
     func copy(withEndDate date: Date) -> ParkingAction {
-        return ParkingAction(id: self.id, startDate: self.startDate, endDate: date, userId: self.userId,
+        return ParkingAction(id: self.id, startDate: self.startDate, stopDate: date, userId: self.userId,
             vehicleId: self.vehicleId, zoneId: self.zoneId)
     }
 
@@ -82,10 +82,10 @@ public struct ParkingAction: ParkerlyModel {
     }
 
     public var endDateString: String {
-        guard let endDate = endDate else {
+        guard let stopDate = stopDate else {
             return "n/a"
         }
-        return dateFormatter.string(from: endDate)
+        return dateFormatter.string(from: stopDate)
     }
 }
 

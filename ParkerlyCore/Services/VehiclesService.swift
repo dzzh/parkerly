@@ -53,20 +53,20 @@ extension VehiclesService: VehiclesServiceType {
     }
 
     public func edit(_ vehicle: Vehicle, completion: ((ParkerlyServiceOperation<Vehicle>) -> Void)?) {
-        guard vehicle.id != nil else {
+        guard let vehicleId = vehicle.id else {
             os_log("Cannot delete vehicle without id")
             completion?(ParkerlyServiceOperation.failed(.malformedRequest))
             return
         }
 
         let editRequest = modelRequest.editModel(vehicle)
-        crudService.editModel(request: editRequest, completion: completion)
+        crudService.editModel(request: editRequest, id: vehicleId, completion: completion)
     }
 
     public func getVehicle(_ id: NetworkId, userId: NetworkId,
                            completion: ((ParkerlyServiceOperation<Vehicle>) -> Void)?) {
         let getRequest = modelRequest.getModel(modelId: id, userId: userId)
-        crudService.getModel(request: getRequest, completion: completion)
+        crudService.getModel(request: getRequest, id: id, completion: completion)
     }
 
     public func getVehicles(for user: User, completion: ((ParkerlyServiceOperation<[Vehicle]>) -> Void)?) {

@@ -79,7 +79,7 @@ class StartParkingViewController: UIViewController {
     // MARK: - Target-actions
 
     @objc func wantsToSelectVehicle() {
-        viewModel.handleVehicleTap()
+        viewModel.handleVehicleTap(inContext: self)
     }
 }
 

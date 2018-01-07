@@ -200,7 +200,8 @@ private extension SettingsCoordinator {
         }
 
         let historySection = ParkingHistorySectionDataSource(parkingActionsService: parkingActionsService, user: user)
-        let viewModel = TableWithOptionalButtonViewModel(sections: [historySection], actionButtonTitle: nil)
+        var viewModel = TableWithOptionalButtonViewModel(sections: [historySection], actionButtonTitle: nil)
+        viewModel.isTableSelectable = false
         let viewController = TableWithOptionalButtonViewController(viewModel: viewModel)
         viewController.title = "History"
         if isInitial {
