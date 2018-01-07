@@ -13,6 +13,14 @@ class ParkingContainerViewController: ContainerViewController {
     private let viewModel: ParkingViewModelType
     private let castedView: ParkingContainerView
 
+    private var currentScreen: ParkingFlowScreen? {
+        didSet {
+            if let currentScreen = currentScreen {
+                castedView.update(for: currentScreen)
+            }
+        }
+    }
+
     // MARK: - Initialization
 
     init(viewModel: ParkingViewModelType) {
@@ -46,15 +54,20 @@ class ParkingContainerViewController: ContainerViewController {
 
     // MARK: - Interface
 
-    func update(child: UIViewController, parkingAction: ParkingAction?) {
+    func update(child: UIViewController, screen: ParkingFlowScreen) {
         containedViewController = child
-        castedView.update(for: parkingAction)
+        currentScreen = screen
     }
 
     // MARK: - Target-actions
 
     @objc func didTapActionButton() {
-        viewModel.handleParkingAction { [weak self] error in
+        guard let currentScreen = currentScreen else {
+            presentError(.internalError(description: nil))
+            return
+        }
+
+        viewModel.handleParkingAction(from: currentScreen) { [weak self] error in
             if let error = error {
                 self?.presentError(error)
             }

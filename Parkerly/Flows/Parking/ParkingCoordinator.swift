@@ -7,6 +7,12 @@ import ParkerlyCore
 import os.log
 import UIKit
 
+enum ParkingFlowScreen {
+    case parkingHistory
+    case startParking
+    case stopParking
+}
+
 class ParkingCoordinator: FlowCoordinator {
 
     private let userService: UserServiceType
@@ -62,6 +68,10 @@ extension ParkingCoordinator: ParkingViewModelDelegate {
     }
 
     func didStop(_ parkingAction: ParkingAction) {
+        showHistory()
+    }
+
+    func didSeeHistory() {
         showStartParking()
     }
 
@@ -122,19 +132,33 @@ private extension ParkingCoordinator {
 
     func showStartParking() {
         let startParkingViewController = StartParkingViewController(viewModel: viewModel)
-        parkingContainerViewController.update(child: startParkingViewController, parkingAction: nil)
+        parkingContainerViewController.update(child: startParkingViewController, screen: .startParking)
     }
 
     func showParkingAction(_ parkingAction: ParkingAction) {
         guard let user = userService.currentUser else {
-            os_log("Not logged in")
+            presentationContext?.presentError(.notLoggedIn)
             return
         }
+
         let parkingActionData = ParkingActionSectionDataSource(parkingAction: parkingAction, user: user)
         let parkingActionViewModel = TableWithOptionalButtonViewModel(sections: [parkingActionData], actionButtonTitle: nil)
         parkingActionViewModel.isTableSelectable = false
         let parkingActionViewController = TableWithOptionalButtonViewController(viewModel: parkingActionViewModel)
         parkingActionViewController.title = "Parking action"
-        parkingContainerViewController.update(child: parkingActionViewController, parkingAction: parkingAction)
+        parkingContainerViewController.update(child: parkingActionViewController, screen: .stopParking)
+    }
+
+    func showHistory() {
+        guard let user = userService.currentUser else {
+            presentationContext?.presentError(.notLoggedIn)
+            return
+        }
+
+        let dataSource = ParkingHistorySectionDataSource(parkingActionsService: parkingActionsService, user: user)
+        let viewModel = TableWithOptionalButtonViewModel(sections: [dataSource], actionButtonTitle: nil)
+        let viewController = TableWithOptionalButtonViewController(viewModel: viewModel)
+        viewController.title = "Parking history"
+        parkingContainerViewController.update(child: viewController, screen: .parkingHistory)
     }
 }

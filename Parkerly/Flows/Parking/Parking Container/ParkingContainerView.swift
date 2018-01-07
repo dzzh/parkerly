@@ -27,13 +27,17 @@ class ParkingContainerView: UIView {
 
     // MARK: - Interface
 
-    func update(for parkingAction: ParkingAction?) {
-        if parkingAction != nil {
-            actionButton.setTitle("Stop parking", for: .normal)
-            actionButton.backgroundColor = .red
-        } else {
+    func update(for screen: ParkingFlowScreen) {
+        switch screen {
+        case .parkingHistory:
+            actionButton.setTitle("Please park me again", for: .normal)
+            actionButton.backgroundColor = actionButton.tintColor
+        case .startParking:
             actionButton.setTitle("Start parking", for: .normal)
             actionButton.backgroundColor = actionButton.tintColor
+        case .stopParking:
+            actionButton.setTitle("Stop parking", for: .normal)
+            actionButton.backgroundColor = .red
         }
     }
 }
@@ -43,7 +47,7 @@ private extension ParkingContainerView {
     func setup() {
         backgroundColor = .white
 
-        update(for: nil)
+        update(for: .startParking)
 
         add(container)
         add(actionButton)

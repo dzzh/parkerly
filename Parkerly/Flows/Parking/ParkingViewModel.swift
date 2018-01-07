@@ -13,6 +13,8 @@ protocol ParkingViewModelDelegate: class {
 
     func didStop(_ parkingAction: ParkingAction)
 
+    func didSeeHistory()
+
     func wantsMenu()
 
     func wantsToSelectVehicle(inContext context: UIViewController)
@@ -42,7 +44,7 @@ protocol ParkingViewModelType {
 
     func handleMenuTap()
 
-    func handleParkingAction(completion: ((ParkerlyError?) -> Void)?)
+    func handleParkingAction(from screen: ParkingFlowScreen, completion: ((ParkerlyError?) -> Void)?)
 
     func handleVehicleTap(inContext context: UIViewController)
 
@@ -127,49 +129,14 @@ class ParkingViewModel: ParkingViewModelType {
         }
     }
 
-    func handleParkingAction(completion: ((ParkerlyError?) -> Void)? = nil) {
-
-        // Parking action already available, will stop parking
-        if let parkingAction = parkingAction {
-            parkingActionsService.stop(parkingAction) { [weak self] operation in
-                switch operation {
-                case .completed(let action):
-                    self?.parkingAction = nil
-                    completion?(nil)
-                    self?.delegate?.didStop(action)
-                case .failed(let error):
-                    completion?(error)
-                }
-            }
-
-        // No parking action, will start parking
-        } else {
-            guard let userId = userService.currentUser?.id else {
-                completion?(.notLoggedIn)
-                return
-            }
-
-            guard let vehicleId = selectedVehicle?.id else {
-                completion?(.noVehicleSelected)
-                return
-            }
-
-            guard let zoneId = selectedZone?.id else {
-                completion?(.noParkingZoneSelected)
-                return
-            }
-
-            let action = ParkingAction(userId: userId, vehicleId: vehicleId, zoneId: zoneId)
-            parkingActionsService.start(action) { [weak self] operation in
-                switch operation {
-                case .completed(let action):
-                    self?.parkingAction = action
-                    completion?(nil)
-                    self?.delegate?.didStart(action)
-                case .failed(let error):
-                    completion?(error)
-                }
-            }
+    func handleParkingAction(from screen: ParkingFlowScreen, completion: ((ParkerlyError?) -> Void)? = nil) {
+        switch screen {
+        case .parkingHistory:
+            closeParkingHistory(completion: completion)
+        case .startParking:
+            handleStartParking(completion: completion)
+        case .stopParking:
+            handleStopParking(completion: completion)
         }
     }
 
@@ -214,7 +181,59 @@ class ParkingViewModel: ParkingViewModelType {
 
 private extension ParkingViewModel {
 
-    // TODO: that's not nice, selected vehicle should be specific for device and stored e.g. in user defaults
+    private func closeParkingHistory(completion: ((ParkerlyError?) -> Void)?) {
+        delegate?.didSeeHistory()
+        completion?(nil)
+    }
+
+    private func handleStartParking(completion: ((ParkerlyError?) -> Void)?) {
+        guard let userId = userService.currentUser?.id else {
+            completion?(.notLoggedIn)
+            return
+        }
+
+        guard let vehicleId = selectedVehicle?.id else {
+            completion?(.noVehicleSelected)
+            return
+        }
+
+        guard let zoneId = selectedZone?.id else {
+            completion?(.noParkingZoneSelected)
+            return
+        }
+
+        let action = ParkingAction(userId: userId, vehicleId: vehicleId, zoneId: zoneId)
+        parkingActionsService.start(action) { [weak self] operation in
+            switch operation {
+            case .completed(let action):
+                self?.parkingAction = action
+                completion?(nil)
+                self?.delegate?.didStart(action)
+            case .failed(let error):
+                completion?(error)
+            }
+        }
+    }
+
+    private func handleStopParking(completion: ((ParkerlyError?) -> Void)?) {
+        guard let parkingAction = parkingAction else {
+            completion?(.internalError(description: nil))
+            return
+        }
+
+        parkingActionsService.stop(parkingAction) { [weak self] operation in
+            switch operation {
+            case .completed(let action):
+                self?.parkingAction = nil
+                completion?(nil)
+                self?.delegate?.didStop(action)
+            case .failed(let error):
+                completion?(error)
+            }
+        }
+    }
+
+    // TODO: this is not nice, selected vehicle should be specific for device and stored e.g. in user defaults
     // but I don't have time for this now
     func updateSelectedVehicle() {
         guard let currentUser = userService.currentUser else {
