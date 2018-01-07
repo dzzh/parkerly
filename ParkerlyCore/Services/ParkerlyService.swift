@@ -5,6 +5,13 @@
 
 import Foundation
 
+public enum ParkerlyServiceOperation<T> {
+    case completed(T)
+    case failed(ParkerlyError)
+}
+
+// MARK: - ParkerlyServiceNotification
+
 public protocol ParkerlyServiceNotification {
 
     var rawValue: String { get }
@@ -19,10 +26,7 @@ public extension ParkerlyServiceNotification {
     }
 }
 
-public enum ParkerlyServiceOperation<T> {
-    case completed(T)
-    case failed(ParkerlyError)
-}
+// MARK: - ParkerlyServiceType
 
 public protocol ParkerlyServiceType {
 
@@ -39,4 +43,17 @@ extension ParkerlyServiceType {
         }
     }
 }
+
+// MARK: - ParkerlyService
+
+public class ParkerlyService: ParkerlyServiceType {
+
+    let crudService: CrudServiceType
+
+    init(crudService: CrudServiceType) {
+        self.crudService = crudService
+    }
+}
+
+
 

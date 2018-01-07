@@ -12,70 +12,30 @@ public enum UserServiceNotification: String, ParkerlyServiceNotification {
     case didLogout = "userServiceNotificationNameDidLogout"
 }
 
-enum UserServiceRequest {
-    case createUser(user: User)
-    case getUsers
-    case getUser(id: String)
-    case editUser(user: User)
-    case deleteUser(id: String)
-}
+private struct GetUsersRequest: NetworkRequestType {
 
-extension UserServiceRequest: NetworkRequestType {
-
-    var servicePath: String? {
-        return "/users"
-    }
-
-    var requestPath: String? {
-        switch self {
-        case .createUser, .getUsers:
-            return nil
-        case .getUser(let id), .deleteUser(let id):
-            return id
-        case .editUser(let user):
-            guard let id = user.id else {
-                return nil
-            }
-            return id
-        }
-    }
-
-    var method: HttpMethod {
-        switch self {
-        case .createUser(_): return .post
-        case .getUsers, .getUser(_): return .get
-        case .editUser(_): return .patch
-        case .deleteUser(_): return .delete
-        }
-    }
+    let servicePath: String = User.servicePath
+    let requestPath: String? = nil
+    let method: HttpMethod = .get
 
     func urlRequest(_ requestFactory: RequestFactoryType) -> URLRequest? {
-        let body: Data?
-        switch self {
-        case .createUser(let user), .editUser(let user):
-            guard let _body = user.copyWithoutId.encoded else {
-                os_log("Couldn't encode user %@", user.debugDescription)
-                return nil
-            }
-            body = _body
-        case .getUsers, .getUser(_), .deleteUser:
-            body = nil
-        }
-        return requestFactory.request(with: fullPath, method: method, body: body)
+        return requestFactory.request(with: fullPath, method: method, body: nil)
     }
 }
+
+// MARK: - UserService
 
 public protocol UserServiceType: ParkerlyServiceType {
 
     var currentUser: User? { get }
 
-    func get(completion: ((ParkerlyServiceOperation<[User]>) -> Void)?)
-
-    func get(_ id: NetworkId, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
+    func delete(_ user: User, completion: ((ParkerlyServiceOperation<Void>) -> Void)?)
 
     func edit(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
 
-    func delete(_ id: NetworkId, completion: ((ParkerlyServiceOperation<Void>) -> Void)?)
+    func getUser(_ id: NetworkId, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
+
+    func getUsers(completion: ((ParkerlyServiceOperation<[User]>) -> Void)?)
 
     func login(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
 
@@ -84,14 +44,14 @@ public protocol UserServiceType: ParkerlyServiceType {
     func register(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?)
 }
 
-public class UserService {
+public class UserService: ParkerlyService {
 
     private static let userDefaultsCurrentUserKey = "currentUserKey"
 
-    private let networkService: NetworkServiceType
+    private let modelRequest = NetworkModelRequest<User>.self
 
-    init(networkService: NetworkServiceType) {
-        self.networkService = networkService
+    override init(crudService: CrudServiceType) {
+        super.init(crudService: crudService)
         currentUser = fetchCurrentUserFromStorage()
     }
 
@@ -104,42 +64,41 @@ public class UserService {
 
 extension UserService: UserServiceType {
 
-    public func get(completion: ((ParkerlyServiceOperation<[User]>) -> Void)?) {
-        networkService.requestArray(UserServiceRequest.getUsers) { operation in
-            DispatchQueue.main.async {
-                completion?(operation)
-            }
-        };
-    }
-
-    public func get(_ id: NetworkId, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
-        networkService.requestModel(UserServiceRequest.getUser(id: id)) { operation in
-            DispatchQueue.main.async {
-                completion?(operation)
-            }
-        };
-    }
-
-    public func edit(_ user: User, completion externalCompletion: ((ParkerlyServiceOperation<User>) -> Void)?) {
-
-        let internalCompletion: (ParkerlyServiceOperation<User>) -> Void = { [weak self] operation in
-            DispatchQueue.main.async {
-                if case let .completed(updatedUser) = operation, updatedUser.id == self?.currentUser?.id {
-                    self?.currentUser = updatedUser
-                }
-                externalCompletion?(operation)
-            }
+    public func delete(_ user: User, completion: ((ParkerlyServiceOperation<Void>) -> Void)?) {
+        guard user.id != nil else {
+            os_log("Cannot delete user without id")
+            completion?(ParkerlyServiceOperation.failed(.malformedRequest))
+            return
         }
 
-        networkService.requestModel(UserServiceRequest.editUser(user: user.copyWithoutId), completion: internalCompletion)
+        let deleteRequest = modelRequest.deleteModel(user)
+        crudService.deleteModel(request: deleteRequest, completion: completion)
     }
 
-    public func delete(_ id: NetworkId, completion: ((ParkerlyServiceOperation<Void>) -> Void)?) {
-        networkService.requestOperation(UserServiceRequest.deleteUser(id: id)) { operation in
-            DispatchQueue.main.async {
-                completion?(operation)
+    public func edit(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
+        guard user.id != nil else {
+            os_log("Cannot edit user without id")
+            completion?(ParkerlyServiceOperation.failed(.malformedRequest))
+            return
+        }
+
+        let editRequest = modelRequest.editModel(user)
+        crudService.editModel(request: editRequest) { [weak self] (operation: ParkerlyServiceOperation<User>) -> Void in
+            if case let .completed(updatedUser) = operation, updatedUser.id == self?.currentUser?.id {
+                self?.currentUser = updatedUser
             }
-        };
+            completion?(operation)
+        }
+    }
+
+    public func getUser(_ id: NetworkId, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
+        let getRequest = modelRequest.getModel(modelId: id, userId: id)
+        crudService.getModel(request: getRequest, completion: completion)
+    }
+
+    public func getUsers(completion: ((ParkerlyServiceOperation<[User]>) -> Void)?) {
+        let getRequest = GetUsersRequest()
+        crudService.getModels(request: getRequest, completion: completion)
     }
 
     public func login(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
@@ -155,19 +114,22 @@ extension UserService: UserServiceType {
     }
 
     public func register(_ user: User, completion: ((ParkerlyServiceOperation<User>) -> Void)?) {
-        create(user) { [weak self] operation in
+        let createRequest = modelRequest.createModel(user.copyWithoutId)
+        let getRequest: (NetworkId) -> NetworkRequestType? = { [weak self] id in
+            return self?.modelRequest.getModel(modelId: id, userId: id)
+        }
+        crudService.createModel(createRequest: createRequest, getRequest: getRequest) {
+            [weak self] (operation: ParkerlyServiceOperation<User>) -> Void in
+
             guard let `self` = self else {
                 completion?(ParkerlyServiceOperation.failed(.internalError(description: "memory leak")))
                 return
             }
+
             switch operation {
-            case .completed(let id):
-                self.get(id) { operation in
-                    completion?(operation)
-                    if case let .completed(user) = operation {
-                        self.notify(name: UserServiceNotification.didRegister.name, returnValue: user)
-                    }
-                }
+            case .completed(let user):
+                completion?(operation)
+                self.notify(name: UserServiceNotification.didRegister.name, returnValue: user)
             case .failed(let error):
                 completion?(ParkerlyServiceOperation.failed(error))
             }
@@ -176,14 +138,6 @@ extension UserService: UserServiceType {
 }
 
 private extension UserService {
-
-    func create(_ user: User, completion: ((ParkerlyServiceOperation<NetworkId>) -> Void)?) {
-        networkService.requestId(UserServiceRequest.createUser(user: user.copyWithoutId)) { operation in
-            DispatchQueue.main.async {
-                completion?(operation)
-            }
-        };
-    }
 
     func saveCurrentUserToStorage() {
         UserDefaults.standard.set(currentUser?.encodedString, forKey: UserService.userDefaultsCurrentUserKey)

@@ -14,6 +14,8 @@ public struct ParkingAction: ParkerlyModel {
 
     // MARK: - State
 
+    public static let servicePath: String = "/parkingActions"
+
     public let id: NetworkId?
     public let startDate: Date?
     public let endDate: Date?

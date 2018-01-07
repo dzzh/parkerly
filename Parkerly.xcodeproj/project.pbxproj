@@ -28,6 +28,7 @@
 		F5AEB4CBFF50B27DE23A0050 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBB407587DC2C4D76E60B /* RequestFactory.swift */; };
 		F5AEB4FAF3223DD450F7A34F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB0D92537A1A9BE0C38EF /* RegistrationViewController.swift */; };
 		F5AEB51FC59E8E860AB83DB9 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB8B4C3D4EB533D1DED28 /* RegistrationView.swift */; };
+		F5AEB57F58B743C4A74A418E /* VehiclesSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB628CCAC685B2F5D070D /* VehiclesSectionDataSource.swift */; };
 		F5AEB582B79FA5247E6D4EC0 /* ParkingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBD1707746724D90F1996 /* ParkingContainerView.swift */; };
 		F5AEB6019C466C3D40B44384 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBE96A19677F46A345324 /* Vehicle.swift */; };
 		F5AEB6EBE6008B5B47E9E35F /* ParkingActionSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB0361CDABA927AA4D80A /* ParkingActionSectionDataSource.swift */; };
@@ -38,6 +39,7 @@
 		F5AEB83FFE4ECB9C3999762B /* ParkingZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB16FF00FE2C54B51008D /* ParkingZone.swift */; };
 		F5AEB87EA3154620214EB0E8 /* ParkingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB40A0627B7EC1821A6DE /* ParkingAction.swift */; };
 		F5AEB8C2FAA8E2277814AB2C /* ParkerlyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBEDEEC398AA1E9BC4D05 /* ParkerlyError.swift */; };
+		F5AEB909B4B24C957DE1EEE9 /* CrudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB75F42A8C75610CE8C12 /* CrudService.swift */; };
 		F5AEB91EBC2B871D210ABC44 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBDEFC2F57CD337251401 /* ServiceLocator.swift */; };
 		F5AEB9247055FCEC50FF5CDB /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB4E4751A7C11039AD95F /* NetworkRequest.swift */; };
 		F5AEB950DF11622C00E58052 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBB2DB45FE80BAC4E2CEA /* NetworkOperation.swift */; };
@@ -150,9 +152,11 @@
 		F5AEB46A15AF0B45E57C1B9D /* ParkingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingCoordinator.swift; sourceTree = "<group>"; };
 		F5AEB4E4751A7C11039AD95F /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		F5AEB624A46C53F0DB94F5E7 /* StartParkingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartParkingViewController.swift; sourceTree = "<group>"; };
+		F5AEB628CCAC685B2F5D070D /* VehiclesSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesSectionDataSource.swift; sourceTree = "<group>"; };
 		F5AEB6D2E3A96A59AFAF887D /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		F5AEB6DDCA1BE28AA7E95E38 /* VehiclesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesService.swift; sourceTree = "<group>"; };
 		F5AEB7520B0EACE9C4EF7092 /* TableWithOptionalButtonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableWithOptionalButtonViewModel.swift; sourceTree = "<group>"; };
+		F5AEB75F42A8C75610CE8C12 /* CrudService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrudService.swift; sourceTree = "<group>"; };
 		F5AEB788AE6F33938B93ADAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Parkerly/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		F5AEB794ECA08F0DCF6BF6E5 /* ParkerlyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkerlyService.swift; sourceTree = "<group>"; };
 		F5AEB835C85A136BF5977460 /* ParkingActionsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingActionsService.swift; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 				F5AEB6DDCA1BE28AA7E95E38 /* VehiclesService.swift */,
 				F5AEB835C85A136BF5977460 /* ParkingActionsService.swift */,
 				F5AEB965D873CA5CFA26E41B /* ParkingZonesService.swift */,
+				F5AEB75F42A8C75610CE8C12 /* CrudService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -379,6 +384,7 @@
 		F5AEB5F83D207B7BEB93B76D /* Vehicles */ = {
 			isa = PBXGroup;
 			children = (
+				F5AEB628CCAC685B2F5D070D /* VehiclesSectionDataSource.swift */,
 			);
 			path = Vehicles;
 			sourceTree = "<group>";
@@ -839,6 +845,7 @@
 				F5AEB4CBFF50B27DE23A0050 /* RequestFactory.swift in Sources */,
 				F5AEB950DF11622C00E58052 /* NetworkOperation.swift in Sources */,
 				F5AEB9247055FCEC50FF5CDB /* NetworkRequest.swift in Sources */,
+				F5AEB909B4B24C957DE1EEE9 /* CrudService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,6 +893,7 @@
 				F5AEBE1AD0CB83BC7B2AC25D /* MenuViewModel.swift in Sources */,
 				F5AEBC3FEF8D6AF5C036D10D /* UserProfileSectionDataSource.swift in Sources */,
 				F5AEB0A9394AAE5BA8F3A868 /* UserProfileViewModel.swift in Sources */,
+				F5AEB57F58B743C4A74A418E /* VehiclesSectionDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

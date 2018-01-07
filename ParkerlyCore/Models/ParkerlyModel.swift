@@ -12,6 +12,8 @@ public protocol ParkerlyModel: Codable, CustomDebugStringConvertible {
 
     // MARK: - State
 
+    static var servicePath: String { get }
+
     var id: NetworkId? { get }
 
     var copyWithoutId: Self { get }

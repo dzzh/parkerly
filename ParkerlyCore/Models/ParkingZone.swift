@@ -7,6 +7,8 @@ import Foundation
 
 public struct ParkingZone: ParkerlyModel {
 
+    public static let servicePath: String = "/parkingZones"
+
     public var id: NetworkId?
     public let address: String
     public let lat: Double

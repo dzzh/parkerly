@@ -9,12 +9,18 @@ import ParkerlyCore
 
 class UserProfileSectionDataSource: TableSectionDataSource {
 
+    // MARK: - State
+
     // TODO: add actual editing, change to var
     let editedUser: User
+
+    // MARK: - Initialization
 
     init(user: User) {
         self.editedUser = user.copy(withId: user.id)
     }
+
+    // MARK: - TableSectionDataSource
 
     override var numberOfRows: Int {
         return 3

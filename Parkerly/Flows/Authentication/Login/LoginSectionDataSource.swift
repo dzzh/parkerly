@@ -41,7 +41,7 @@ class LoginSectionDataSource: TableSectionDataSource {
     }
 
     override func reload(completion: ((ParkerlyError?) -> Void)? = nil) {
-        userService.get { operation in
+        userService.getUsers { operation in
             switch operation {
             case .completed(let users):
                 self.users = users
@@ -53,13 +53,13 @@ class LoginSectionDataSource: TableSectionDataSource {
     }
 
     override func removeObject(for row: Int, completion: @escaping (ParkerlyError?) -> Void) {
-        guard let user = users[safe: row], let userId = user.id else {
-            os_log("No user for row %d or id is not set", row)
+        guard let user = users[safe: row] else {
+            os_log("No user for row %d", row)
             completion(.internalError(description: nil))
             return
         }
 
-        userService.delete(userId) { [weak self] operation in
+        userService.delete(user) { [weak self] operation in
             switch operation {
             case .completed:
                 self?.users.remove(at: row)

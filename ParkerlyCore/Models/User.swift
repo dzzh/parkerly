@@ -19,6 +19,8 @@ public struct User: ParkerlyModel {
 
     // MARK: - State
 
+    public static let servicePath: String = "/users"
+
     public let id: NetworkId?
     public let firstName: String
     public let lastName: String

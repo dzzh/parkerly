@@ -6,71 +6,6 @@
 import Foundation
 import os.log
 
-enum ParkingActionsServiceRequest {
-    case getActiveActions(userId: NetworkId)
-    case getCompletedActions(userId: NetworkId)
-    case startParkingAction(parkingAction: ParkingAction)
-    case stopParkingAction(parkingAction: ParkingAction)
-}
-
-extension ParkingActionsServiceRequest: NetworkRequestType {
-
-    var servicePath: String? {
-        return "/parkingActions"
-    }
-
-    var requestPath: String? {
-        switch self {
-        case .getActiveActions(let userId), .getCompletedActions(let userId):
-            return userId
-        case .startParkingAction:
-            return nil
-        case .stopParkingAction(let parkingAction):
-            guard let id = parkingAction.id else {
-                os_log("Can't stop a parking action without an id")
-                return nil
-            }
-            return id
-        }
-    }
-
-    var queryParameters: [String: String] {
-        switch self {
-        case .getActiveActions(let userId), .getCompletedActions(let userId):
-            return [
-                "orderBy": "user",
-                "startAt": userId,
-                "endAt": userId
-            ]
-        case .startParkingAction(_), .stopParkingAction(_):
-            return [:]
-        }
-    }
-
-    var method: HttpMethod {
-        switch self {
-        case .startParkingAction(_): return .post
-        case .getActiveActions(_), .getCompletedActions(_): return .get
-        case .stopParkingAction(_): return .patch
-        }
-    }
-
-    func urlRequest(_ requestFactory: RequestFactoryType) -> URLRequest? {
-        let body: Data?
-        switch self {
-        case .getActiveActions(_), .getCompletedActions(_):
-            return nil
-        case .startParkingAction(let action), .stopParkingAction(let action):
-            guard let _body = action.copyWithoutId.encoded else {
-                os_log("Couldn't encode action %@", action.debugDescription)
-                return nil
-            }
-            body = _body
-        }
-        return requestFactory.request(with: fullPath, method: method, body: body)
-    }
-}
-
 public protocol ParkingActionsServiceType: ParkerlyServiceType {
 
     func getActive(for user: User, completion: ((ParkerlyServiceOperation<[ParkingAction]>) -> Void)?)
@@ -82,15 +17,9 @@ public protocol ParkingActionsServiceType: ParkerlyServiceType {
     func stop(_ parkingAction: ParkingAction, completion: ((ParkerlyServiceOperation<ParkingAction>) -> Void)?)
 }
 
-public class ParkingActionsService {
+public class ParkingActionsService: ParkerlyService {
 
-    // TODO: Caching
-
-    private let networkService: NetworkServiceType
-
-    init(networkService: NetworkServiceType) {
-        self.networkService = networkService
-    }
+    private let modelRequest = NetworkModelRequest<ParkingAction>.self
 }
 
 extension ParkingActionsService: ParkingActionsServiceType {
@@ -111,50 +40,41 @@ extension ParkingActionsService: ParkingActionsServiceType {
 
     public func start(_ parkingAction: ParkingAction, completion: ((ParkerlyServiceOperation<ParkingAction>) -> Void)?) {
         let startedAction = parkingAction.copy(withStartDate: Date()).copyWithoutId
-        networkService.requestId(ParkingActionsServiceRequest.startParkingAction(parkingAction: startedAction)) {
-            operation in
-            switch operation {
-            case .completed(let actionId):
-                completion?(ParkerlyServiceOperation.completed(startedAction.copy(withId: actionId)))
-            case .failed(let error):
-                completion?(ParkerlyServiceOperation.failed(error))
-            }
+        let createRequest = modelRequest.createModel(startedAction)
+        let getRequest: (NetworkId) -> NetworkRequestType? = { [weak self] id in
+            return self?.modelRequest.getModel(modelId: id, userId: parkingAction.userId)
         }
+        crudService.createModel(createRequest: createRequest, getRequest: getRequest, completion: completion)
     }
 
     public func stop(_ parkingAction: ParkingAction, completion: ((ParkerlyServiceOperation<ParkingAction>) -> Void)?) {
-        let stoppedAction = parkingAction.copy(withEndDate: Date())
-        networkService.requestModel(ParkingActionsServiceRequest.stopParkingAction(parkingAction: stoppedAction)) {
-            completion?($0)
-        }
+        let editRequest = modelRequest.editModel(parkingAction.copy(withEndDate: Date()))
+        crudService.editModel(request: editRequest, completion: completion)
     }
 }
 
 private extension ParkingActionsService {
 
     private func getActions(for user: User, predicate: @escaping (ParkingAction) -> Bool,
-                            completion externalCompletion: ((ParkerlyServiceOperation<[ParkingAction]>) -> Void)?) {
+                            completion: ((ParkerlyServiceOperation<[ParkingAction]>) -> Void)?) {
         guard let userId = user.id else {
             os_log("Cannot fetch actions without user id")
-            externalCompletion?(ParkerlyServiceOperation.failed(.malformedRequest))
+            completion?(ParkerlyServiceOperation.failed(.malformedRequest))
             return
         }
 
-        let internalCompletion: (ParkerlyServiceOperation<[ParkingAction]>) -> Void = { operation in
-            switch operation {
-            case .completed(let actions):
-                let filteredActions = actions.filter(predicate)
-                DispatchQueue.main.async {
-                    externalCompletion?(ParkerlyServiceOperation.completed(filteredActions))
-                }
-            case .failed(_):
-                DispatchQueue.main.async {
-                    externalCompletion?(operation)
+        crudService.getModels(request: modelRequest.getModels(userId: userId)) {
+            (operation: ParkerlyServiceOperation<[ParkingAction]>) -> Void in
+
+            DispatchQueue.main.async {
+                switch operation {
+                case .completed(let actions):
+                    let filteredActions = actions.filter(predicate)
+                    completion?(ParkerlyServiceOperation.completed(filteredActions))
+                case .failed(_):
+                    completion?(operation)
                 }
             }
         }
-
-        networkService.requestArray(ParkingActionsServiceRequest.getActiveActions(userId: userId),
-            completion: internalCompletion);
     }
 }

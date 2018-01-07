@@ -10,6 +10,7 @@ public enum ParkerlyError: Error {
     case internalError(description: String?)
     case malformedData
     case malformedRequest
+    case noData
     case notImplemented
     case unknown
     case userError(userMessage: String)
@@ -19,6 +20,7 @@ public enum ParkerlyError: Error {
         case .internalError(_), .notImplemented: return "Internal error; we're on it"
         case .malformedData: return "Web service has returned malformed data"
         case .malformedRequest: return "Web service had troubles parsing an incoming request"
+        case .noData: return "There's no data in the database"
         case .unknown: return "It's not exactly clear what happened, that's all we know"
         case .userError(let userMessage): return userMessage
         }
