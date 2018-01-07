@@ -3,16 +3,22 @@
 // Copyright (c) 2018 Zmicier Zaleznicenka. All rights reserved.
 //
 
+import CoreLocation
+import MapKit
 import ParkerlyCore
 import UIKit
 
 class StartParkingView: UIView {
 
+    // MARK: - Constants
+
+    private let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+
     // MARK: - UI Elements
 
-    let mapContainer = UIView()
+    let mapView = MKMapView()
 
-    let informationGuide = UILayoutGuide()
+    let labelsContainer = UIView()
     let selectedZoneDescription = UILabel()
     let selectedZoneValue = UILabel()
     let selectedVehicleDescription = UILabel()
@@ -30,6 +36,10 @@ class StartParkingView: UIView {
         setup()
     }
 
+    deinit {
+        mapView.delegate = nil
+    }
+
     // MARK: - Interface
 
     func update(forZone zone: ParkingZone?, vehicle: Vehicle?) {
@@ -40,6 +50,15 @@ class StartParkingView: UIView {
 
         selectedVehicleValue.setTitle(vehicle?.vrn ?? "not selected", for: .normal)
     }
+
+    func centerMap(at coordinate: CLLocationCoordinate2D, resetSpan: Bool) {
+        if resetSpan {
+            let region = MKCoordinateRegion(center: coordinate, span: defaultSpan)
+            mapView.setRegion(region, animated: true)
+        } else {
+            mapView.setCenter(coordinate, animated: true)
+        }
+    }
 }
 
 private extension StartParkingView {
@@ -49,46 +68,46 @@ private extension StartParkingView {
 
         // MARK: - Subviews configuration
 
-        mapContainer.backgroundColor = .yellow
-        selectedZoneDescription.text = "Selected zone: "
+        mapView.showsUserLocation = true
+        selectedZoneDescription.text = "Zone: "
         selectedVehicleDescription.text = "Vehicle: "
         update(forZone: nil, vehicle: nil)
 
         // MARK: - Subviews layout
 
-        add(mapContainer)
-        addLayoutGuide(informationGuide)
+        add(mapView)
+        add(labelsContainer)
         add(selectedZoneDescription)
         add(selectedZoneValue)
         add(selectedVehicleDescription)
         add(selectedVehicleValue)
 
-        mapContainer.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        mapContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-        mapContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-        mapContainer.bottomAnchor.constraintEqualToSystemSpacingAbove(informationGuide.topAnchor, multiplier: 2).isActive = true
+        mapView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        mapView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+        mapView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
+        mapView.bottomAnchor.constraintEqualToSystemSpacingAbove(labelsContainer.topAnchor, multiplier: 2).isActive = true
 
-        informationGuide.leadingAnchor.constraintEqualToSystemSpacingAfter(safeAreaLayoutGuide.leadingAnchor, multiplier: 2).isActive = true
-        informationGuide.trailingAnchor.constraintEqualToSystemSpacingBefore(safeAreaLayoutGuide.trailingAnchor, multiplier: 2).isActive = true
-        informationGuide.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        labelsContainer.leadingAnchor.constraintEqualToSystemSpacingAfter(safeAreaLayoutGuide.leadingAnchor, multiplier: 2).isActive = true
+        labelsContainer.trailingAnchor.constraintEqualToSystemSpacingBefore(safeAreaLayoutGuide.trailingAnchor, multiplier: 2).isActive = true
+        labelsContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
 
-        selectedZoneDescription.topAnchor.constraint(equalTo: informationGuide.topAnchor).isActive = true
-        selectedZoneDescription.leadingAnchor.constraint(equalTo: informationGuide.leadingAnchor).isActive = true
+        selectedZoneDescription.topAnchor.constraint(equalTo: labelsContainer.topAnchor).isActive = true
+        selectedZoneDescription.leadingAnchor.constraint(equalTo: labelsContainer.leadingAnchor).isActive = true
         selectedZoneDescription.trailingAnchor.constraint(equalTo: selectedZoneValue.leadingAnchor).isActive = true
         selectedZoneDescription.bottomAnchor.constraintEqualToSystemSpacingAbove(selectedVehicleDescription.topAnchor, multiplier: 1).isActive = true
         selectedZoneDescription.setContentCompressionResistancePriority(.required, for: .horizontal)
         selectedZoneDescription.setContentHuggingPriority(.required, for: .horizontal)
 
         selectedZoneValue.firstBaselineAnchor.constraint(equalTo: selectedZoneDescription.firstBaselineAnchor).isActive = true
-        selectedZoneValue.trailingAnchor.constraint(equalTo: informationGuide.trailingAnchor).isActive = true
+        selectedZoneValue.trailingAnchor.constraint(equalTo: labelsContainer.trailingAnchor).isActive = true
 
-        selectedVehicleDescription.leadingAnchor.constraint(equalTo: informationGuide.leadingAnchor).isActive = true
+        selectedVehicleDescription.leadingAnchor.constraint(equalTo: labelsContainer.leadingAnchor).isActive = true
         selectedVehicleDescription.trailingAnchor.constraint(equalTo: selectedVehicleValue.leadingAnchor).isActive = true
-        selectedVehicleDescription.bottomAnchor.constraint(equalTo: informationGuide.bottomAnchor).isActive = true
+        selectedVehicleDescription.bottomAnchor.constraint(equalTo: labelsContainer.bottomAnchor).isActive = true
         selectedVehicleDescription.setContentCompressionResistancePriority(.required, for: .horizontal)
         selectedVehicleDescription.setContentHuggingPriority(.required, for: .horizontal)
 
         selectedVehicleValue.firstBaselineAnchor.constraint(equalTo: selectedVehicleDescription.firstBaselineAnchor).isActive = true
-        selectedVehicleValue.trailingAnchor.constraint(equalTo: informationGuide.trailingAnchor).isActive = true
+        selectedVehicleValue.trailingAnchor.constraint(equalTo: labelsContainer.trailingAnchor).isActive = true
     }
 }

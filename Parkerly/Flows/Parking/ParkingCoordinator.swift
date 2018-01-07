@@ -11,16 +11,18 @@ class ParkingCoordinator: FlowCoordinator {
 
     private let userService: UserServiceType
     private let parkingActionsService: ParkingActionsServiceType
+    private let parkingZonesService: ParkingZonesServiceType
 
     private let navigationController = UINavigationController()
     private var viewModel: ParkingViewModelType
     private let parkingContainerViewController: ParkingContainerViewController
 
     init(userService: UserServiceType, parkingActionsService: ParkingActionsServiceType,
-         presentationContext: UIViewController) {
+         parkingZonesService: ParkingZonesServiceType, presentationContext: UIViewController) {
         self.userService = userService
         self.parkingActionsService = parkingActionsService
-        viewModel = ParkingViewModel(userService: userService)
+        self.parkingZonesService = parkingZonesService
+        viewModel = ParkingViewModel(userService: userService, parkingZonesService: parkingZonesService)
         parkingContainerViewController = ParkingContainerViewController(viewModel: viewModel)
         super.init(presentationContext: presentationContext)
         viewModel.delegate = self

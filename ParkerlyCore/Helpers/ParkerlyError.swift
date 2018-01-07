@@ -8,6 +8,7 @@ import os.log
 
 public enum ParkerlyError: Error {
     case internalError(description: String?)
+    case locationServicesDisabled
     case malformedData
     case malformedRequest
     case noData
@@ -18,6 +19,7 @@ public enum ParkerlyError: Error {
     public var userDescription: String {
         switch self {
         case .internalError(_), .notImplemented: return "Internal error; we're on it"
+        case .locationServicesDisabled: return "Please enable location services"
         case .malformedData: return "Web service has returned malformed data"
         case .malformedRequest: return "Web service had troubles parsing an incoming request"
         case .noData: return "There's no data in the database"

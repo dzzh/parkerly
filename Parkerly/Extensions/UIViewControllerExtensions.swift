@@ -62,7 +62,7 @@ extension UIViewController {
     }
 
     func presentError(_ error: ParkerlyError) {
-        let alert = UIAlertController(title: "Error", message: description, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: error.userDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Agree and proceed", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
