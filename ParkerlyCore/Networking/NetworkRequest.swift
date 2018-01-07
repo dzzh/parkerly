@@ -35,16 +35,20 @@ extension NetworkRequestType {
         if queryParameters.isEmpty {
             params = ""
         } else {
-            params = "?" + queryParameters.map { "\($0)=\($1)" }.joined(separator: "&")
+            params = "?" + queryParameters.map { "\($0)=\"\($1)\"" }.joined(separator: "&")
         }
 
-        return "\(servicePath)\(request)\(suffix)\(params)"
+        guard let encodedPath = "\(servicePath)\(request)\(suffix)".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+            let encodedParams = params.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return nil
+        }
+        return "\(encodedPath)\(encodedParams)"
     }
 
     // MARK: - CustomDebugStringConvertible
 
     var debugDescription: String {
-        return "\(method) \(fullPath ?? "nil")"
+        return "/\(method.rawValue) \(fullPath ?? "nil")"
     }
 }
 
@@ -121,7 +125,7 @@ extension NetworkModelRequest: NetworkRequestType {
             }
             body = _body
         case .deleteModel(_), .getModel(_, _), .getModels(_):
-            return nil
+            body = nil
         }
         return requestFactory.request(with: fullPath, method: method, body: body)
     }

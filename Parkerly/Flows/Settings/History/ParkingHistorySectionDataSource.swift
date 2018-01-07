@@ -28,10 +28,6 @@ class ParkingHistorySectionDataSource: TableSectionDataSource {
         return parkingActions.count
     }
 
-    override var header: String? {
-        return "History"
-    }
-
     override func object(for row: Int) -> Any? {
         return parkingActions[safe: row]
     }

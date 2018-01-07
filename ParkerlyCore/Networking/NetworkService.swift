@@ -126,7 +126,7 @@ private extension NetworkService {
     func performRawRequest(_ request: NetworkRequestType,
                            completion externalCompletion: @escaping (Data?, URLResponse?, ParkerlyError?) -> Void) {
         guard let urlRequest = request.urlRequest(requestFactory) else {
-            os_log("Couldn't create URLRequest from %@", request.debugDescription)
+            os_log("Couldn't create URLRequest from string \"%@\"", request.debugDescription)
             externalCompletion(nil, nil, .malformedRequest)
             return
         }

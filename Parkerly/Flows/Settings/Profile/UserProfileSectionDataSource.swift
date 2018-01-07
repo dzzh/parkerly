@@ -26,10 +26,6 @@ class UserProfileSectionDataSource: TableSectionDataSource {
         return 3
     }
 
-    override var header: String? {
-        return "Profile"
-    }
-
     override func object(for row: Int) -> Any? {
         return nil
     }

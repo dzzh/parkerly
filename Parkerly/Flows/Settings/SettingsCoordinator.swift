@@ -15,27 +15,26 @@ enum SettingsCoordinatorScreen {
     case vehicles
 }
 
-// TODO: better screen management, ensure coordinator disposes after popping initial vc
 class SettingsCoordinator: FlowCoordinator {
 
     // MARK: - State
 
     private let userService: UserServiceType
     private let parkingActionsService: ParkingActionsServiceType
+    private let vehiclesService: VehiclesServiceType
 
     private let initialScreen: SettingsCoordinatorScreen
-    private let presentationMode: CoordinatorPresentationMode
     private var navigationController: UINavigationController?
 
     // MARK: - Initialization
 
     init(userService: UserServiceType, parkingActionsService: ParkingActionsServiceType,
-         initialScreen: SettingsCoordinatorScreen, presentationMode: CoordinatorPresentationMode,
+         vehiclesService: VehiclesServiceType, initialScreen: SettingsCoordinatorScreen,
          presentationContext: UIViewController, delegate: FlowCoordinatorDelegate? = nil) {
         self.userService = userService
         self.parkingActionsService = parkingActionsService
+        self.vehiclesService = vehiclesService
         self.initialScreen = initialScreen
-        self.presentationMode = presentationMode
         super.init(presentationContext: presentationContext, delegate: delegate)
     }
 
@@ -45,19 +44,20 @@ class SettingsCoordinator: FlowCoordinator {
         let viewController: UIViewController
         switch initialScreen {
         case .history:
-            viewController = historyScreen
+            viewController = historyScreen(isInitial: true)
         case .menu:
             viewController = menuScreen
         case .profile:
             viewController = profileScreen
         case .vehicles:
-            viewController = vehiclesScreen
+            viewController = vehiclesScreen(isInitial: true)
         }
         present(viewController)
     }
 
     override func cleanup(completion: () -> Void) {
-        completion()
+        presentationContext?.dismiss(animated: true)
+        super.cleanup(completion: completion)
     }
 }
 
@@ -68,7 +68,11 @@ extension SettingsCoordinator: MenuViewModelDelegate {
     }
 
     func wantsHistory() {
-        present(historyScreen)
+        present(historyScreen(isInitial: false))
+    }
+
+    func wantsVehicles() {
+        present(vehiclesScreen(isInitial: false))
     }
 
     func logout() {
@@ -107,7 +111,63 @@ extension SettingsCoordinator: MenuViewModelDelegate {
 extension SettingsCoordinator: UserProfileViewModelDelegate {
 
     func didSaveUser() {
-        dismissPresented()
+        dismissPresentedViewController()
+    }
+}
+
+extension SettingsCoordinator: VehiclesViewModelDelegate {
+
+    func wantsVehicleDetails(_ vehicle: Vehicle) {
+        guard let vehicleDetailsViewModel = VehicleDetailsViewModel(
+            vehiclesService: vehiclesService, vehicle: vehicle, delegate: self) else {
+            os_log("Couldn't create a view model")
+            return
+        }
+        let viewController = TableWithOptionalButtonViewController(viewModel: vehicleDetailsViewModel)
+        guard let navigationController = navigationController else {
+            os_log("Expected navigation controller")
+            return
+        }
+        navigationController.pushViewController(viewController, animated: true)
+    }
+
+    func wantsNewVehicle(for user: User) {
+        guard let userId = user.id else {
+            os_log("No user id")
+            return
+        }
+
+        vehiclesService.getVehicles(for: user) { [weak self] operation in
+            let hasVehicles: Bool
+            switch operation {
+            case .completed(let vehicles):
+                hasVehicles = !vehicles.isEmpty
+            case .failed(_):
+                hasVehicles = true
+            }
+            let newVehicle = Vehicle(id: nil, userId: userId, title: "New vehicle", vrn: "XX-YY-ZZ", isDefault: !hasVehicles)
+            self?.wantsVehicleDetails(newVehicle)
+        }
+    }
+}
+
+extension SettingsCoordinator: VehicleDetailsViewModelDelegate {
+
+    func didSaveVehicle() {
+        guard let navigationController = navigationController,
+            navigationController.viewControllers.count > 1 else {
+            os_log("Expected navigation controller")
+            return
+        }
+
+        navigationController.popViewController(animated: true)
+    }
+}
+
+extension SettingsCoordinator: CloseableViewControllerDelegate {
+
+    func close() {
+        dismissPresentedViewController()
     }
 }
 
@@ -115,9 +175,10 @@ private extension SettingsCoordinator {
 
     var menuScreen: UIViewController {
         let viewModel = MenuViewModel(delegate: self)
-        let viewController = TableWithOptionalButtonViewController(viewModel: viewModel)
-        viewController.title = "Menu"
-        return viewController
+        let menuViewController = TableWithOptionalButtonViewController(viewModel: viewModel)
+        menuViewController.title = "Menu"
+        let closeable = CloseableViewController(contents: menuViewController, delegate: self)
+        return closeable
     }
 
     var profileScreen: UIViewController {
@@ -128,10 +189,11 @@ private extension SettingsCoordinator {
         }
 
         let viewController = TableWithOptionalButtonViewController(viewModel: viewModel)
+        viewController.title = "Profile"
         return viewController
     }
 
-    var historyScreen: UIViewController {
+    func historyScreen(isInitial: Bool) -> UIViewController {
         guard let user = userService.currentUser else {
             os_log("not logged in")
             return UIViewController()
@@ -140,67 +202,50 @@ private extension SettingsCoordinator {
         let historySection = ParkingHistorySectionDataSource(parkingActionsService: parkingActionsService, user: user)
         let viewModel = TableWithOptionalButtonViewModel(sections: [historySection], actionButtonTitle: nil)
         let viewController = TableWithOptionalButtonViewController(viewModel: viewModel)
-        return viewController
-    }
-
-    var vehiclesScreen: UIViewController {
-        return UIViewController()
-    }
-
-    func present(_ viewController: UIViewController) {
-        switch presentationMode {
-        case .container:
-            if let navigationController = navigationController {
-                navigationController.pushViewController(viewController, animated: true)
-            } else {
-                guard let container = presentationContext as? ContainerViewController else {
-                    os_log("presentation context is not a container")
-                    return
-                }
-                navigationController = UINavigationController()
-                navigationController?.pushViewController(viewController, animated: false)
-                container.containedViewController = navigationController!
-            }
-        case .modal:
-            if let navigationController = navigationController {
-                navigationController.pushViewController(viewController, animated: true)
-            } else {
-                navigationController = UINavigationController()
-                navigationController?.pushViewController(viewController, animated: false)
-                presentationContext?.present(navigationController!, animated: true)
-            }
-        case .navigation:
-            guard let providedNavigationController = presentationContext as? UINavigationController else {
-                os_log("presentation context is not a navigation controller")
-                return
-            }
-            providedNavigationController.pushViewController(viewController, animated: true)
+        viewController.title = "History"
+        if isInitial {
+            return CloseableViewController(contents: viewController, delegate: self)
+        } else {
+            return viewController
         }
     }
 
-    // TODO: better implementation, track screen types
-    func dismissPresented() {
-        switch presentationMode {
-        case .container:
-            if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
-                navigationController.popViewController(animated: true)
-            } else {
-                // TODO: dismiss coordinator
-            }
-        case .modal:
-            if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
-                navigationController.popViewController(animated: true)
-            } else {
-                // TODO: dismiss coordinator
-            }
-        case .navigation:
-            guard let providedNavigationController = presentationContext as? UINavigationController else {
-                os_log("presentation context is not a navigation controller")
-                return
-            }
+    func vehiclesScreen(isInitial: Bool) -> UIViewController {
+        guard let viewModel = VehiclesViewModel(userService: userService,
+            vehiclesService: vehiclesService, delegate: self) else {
+            os_log("Couldn't create a view model")
+            return UIViewController()
+        }
+        let viewController = TableWithOptionalButtonViewController(viewModel: viewModel)
+        viewController.title = "Vehicles"
+        if isInitial {
+            return CloseableViewController(contents: viewController, delegate: self)
+        } else {
+            return viewController
+        }
+    }
 
-            // TODO: don't dismiss what you don't own, count your stack
-            providedNavigationController.popViewController(animated: true)
+    func present(_ viewController: UIViewController) {
+        if let navigationController = navigationController {
+            navigationController.pushViewController(viewController, animated: true)
+        } else {
+            navigationController = UINavigationController()
+            navigationController?.pushViewController(viewController, animated: false)
+            presentationContext?.present(navigationController!, animated: true)
+        }
+    }
+
+    func dismissPresentedViewController() {
+        if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
+            navigationController.popViewController(animated: true)
+        } else {
+            cleanup(completion: { [weak self] in
+                guard let `self` = self else {
+                    os_log("memory leak")
+                    return
+                }
+                delegate?.flowCoordinatorDidComplete(self)
+            })
         }
     }
 }

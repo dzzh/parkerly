@@ -31,6 +31,7 @@ class UserProfileViewModel: TableWithOptionalButtonViewModel {
         }
         profileSectionDataSource = UserProfileSectionDataSource(user: currentUser)
         super.init(sections: [profileSectionDataSource], actionButtonTitle: "Save")
+        isTableSelectable = false
     }
 
     // MARK: - TableWithOptionalButtonViewModel

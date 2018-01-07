@@ -6,18 +6,10 @@
 import os.log
 import UIKit
 
-// TODO: abstract routing into a separate layer and move it away from coordinators
-enum CoordinatorPresentationMode {
-    // Coordinator should present its root VC inside a provided ContainerViewController
-    case container
-    // Coordinator should present its root VC modally
-    case modal
-    // Coordinator should present its root VC inside a provided UINavigationController
-    case navigation
-}
-
 protocol FlowCoordinatorDelegate: class {
 
+    /// Notifies the delegate that the coordinator has completed its work and can be safely removed from the stack.
+    /// - parameter flowCoordinator: completed coordinator
     func flowCoordinatorDidComplete(_ flowCoordinator: FlowCoordinatorType)
 }
 
@@ -25,14 +17,18 @@ protocol FlowCoordinatorType: class {
 
     var presentationContext: UIViewController? { get }
 
+    /// Receives control over the presentation.
     func start()
 
+    /// Dismisses and deallocates all presented controllers, and performs other cleanup tasks that are necessary.
+    /// After this method completes, the coordinator is ready to be removed from the stack.
+    /// - parameter completion: completion block
     func cleanup(completion: () -> Void)
 }
 
 class FlowCoordinator: FlowCoordinatorType {
 
-    var childCoordinators: [FlowCoordinatorType] = []
+    var childCoordinator: FlowCoordinatorType?
     weak var delegate: FlowCoordinatorDelegate?
 
     private(set) weak var presentationContext: UIViewController?
@@ -53,19 +49,11 @@ class FlowCoordinator: FlowCoordinatorType {
 extension FlowCoordinator: FlowCoordinatorDelegate {
 
     func flowCoordinatorDidComplete(_ flowCoordinator: FlowCoordinatorType) {
-        var childrenToRemove = [FlowCoordinatorType]()
-        while let nextChild = childCoordinators.last {
-            childrenToRemove.append(nextChild)
-            childCoordinators.removeLast()
-            if nextChild === flowCoordinator {
-                break
-            }
+        guard let flowCoordinator = childCoordinator else {
+            os_log("received didComplete from an unexpected child")
+            return
         }
 
-        while let child = childrenToRemove.first {
-            child.cleanup {
-                childrenToRemove.removeFirst()
-            }
-        }
+        childCoordinator = nil
     }
 }

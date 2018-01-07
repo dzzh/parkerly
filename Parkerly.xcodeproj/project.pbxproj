@@ -16,6 +16,7 @@
 		75AB8CE91FFBC57B0058297C /* ParkerlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AB8CE81FFBC57B0058297C /* ParkerlyTests.swift */; };
 		A1357DEBE7AC1631CB1E4485 /* Pods_Parkerly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 636BD3AC833D5E7BA187EDFF /* Pods_Parkerly.framework */; };
 		D01BF051730C1CFC4224C334 /* Pods_ParkerlyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC8BE4C687BDA9712BD6D57 /* Pods_ParkerlyTests.framework */; };
+		F5AEB0038D8FFBF59BE6FD95 /* VehicleDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB03A28D792322C4A0043 /* VehicleDetailsViewModel.swift */; };
 		F5AEB0A838C066B0BAE8136D /* StartParkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB624A46C53F0DB94F5E7 /* StartParkingViewController.swift */; };
 		F5AEB0A9394AAE5BA8F3A868 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB83D4CA1E78CC9634D41 /* UserProfileViewModel.swift */; };
 		F5AEB0EE35DAF9ABB74F6E52 /* LayoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB3E97C73E396EB93D9B7 /* LayoutExtensions.swift */; };
@@ -24,7 +25,9 @@
 		F5AEB1EA1F27F5751FBF795D /* VehiclesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB6DDCA1BE28AA7E95E38 /* VehiclesService.swift */; };
 		F5AEB24F5ACD0E6BE571C636 /* StartParkingLocationAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBD9985A87C813A26298B /* StartParkingLocationAssistant.swift */; };
 		F5AEB281DD634F6837CD7F4C /* StartParkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB2466B92BEE71CACC7B2 /* StartParkingView.swift */; };
+		F5AEB36896DB52179A02682D /* CloseableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBA9814410AA3EDD1A420 /* CloseableViewController.swift */; };
 		F5AEB3BC47D82326D6802728 /* ParkingZoneAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB53352C11C0C0403A3D9 /* ParkingZoneAnnotation.swift */; };
+		F5AEB4658CA7867877C8354C /* VehicleDetailsSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB94919A07DCA5A02120A /* VehicleDetailsSectionDataSource.swift */; };
 		F5AEB49D13A2BBE19BB17E3E /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBA639EF42D10AEDA0BD3 /* FlowCoordinator.swift */; };
 		F5AEB4B3FB7C6BCE3994E951 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBF90954490928DAF86E3 /* UserService.swift */; };
 		F5AEB4CBFF50B27DE23A0050 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBB407587DC2C4D76E60B /* RequestFactory.swift */; };
@@ -34,6 +37,7 @@
 		F5AEB582B79FA5247E6D4EC0 /* ParkingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBD1707746724D90F1996 /* ParkingContainerView.swift */; };
 		F5AEB6019C466C3D40B44384 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBE96A19677F46A345324 /* Vehicle.swift */; };
 		F5AEB6EBE6008B5B47E9E35F /* ParkingActionSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB0361CDABA927AA4D80A /* ParkingActionSectionDataSource.swift */; };
+		F5AEB7990FDDBEDA4E36FF81 /* CloseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB65EC2BD0306F102222A /* CloseableView.swift */; };
 		F5AEB79B7EDFACF55B89B47A /* TableSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBE07B6062AEAE4EF81FF /* TableSectionDataSource.swift */; };
 		F5AEB7F1682C3A0BB4665365 /* ParkingZonesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB965D873CA5CFA26E41B /* ParkingZonesService.swift */; };
 		F5AEB8224EB51A35481E00AF /* ParkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBC36152596EF71458A4D /* ParkingViewModel.swift */; };
@@ -61,6 +65,7 @@
 		F5AEBCB42D94F4B390CD35FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5AEB537E1598673EDDF193C /* LaunchScreen.storyboard */; };
 		F5AEBCB9B751C830EAE621C1 /* MenuSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB30D4D1B3B2318DE2831 /* MenuSectionDataSource.swift */; };
 		F5AEBCC0EC6A0364B7B9302E /* ParkingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB25343DABE911B129F00 /* ParkingContainerViewController.swift */; };
+		F5AEBD17EFCC0AA147F474CD /* VehiclesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB935EF554EE4E26F8FBA /* VehiclesViewModel.swift */; };
 		F5AEBD2D4F9E05B7F9C1ACA5 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBDEA79836E259785AF1A /* UIViewExtensions.swift */; };
 		F5AEBD8E04FEF11EA9CE14A0 /* ParkingActionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEB835C85A136BF5977460 /* ParkingActionsService.swift */; };
 		F5AEBDAE28ED685C2B5A2638 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AEBD011EB32D5862C0A64B /* SettingsCoordinator.swift */; };
@@ -136,6 +141,7 @@
 		83A6C6FE0FD2BC1D420D2878 /* Pods-Parkerly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkerly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Parkerly/Pods-Parkerly.debug.xcconfig"; sourceTree = "<group>"; };
 		DFC8BE4C687BDA9712BD6D57 /* Pods_ParkerlyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParkerlyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5AEB0361CDABA927AA4D80A /* ParkingActionSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingActionSectionDataSource.swift; sourceTree = "<group>"; };
+		F5AEB03A28D792322C4A0043 /* VehicleDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDetailsViewModel.swift; sourceTree = "<group>"; };
 		F5AEB06C82328EEC93A40512 /* MenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		F5AEB0C2456F7E5208E08B21 /* LoginSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSectionDataSource.swift; sourceTree = "<group>"; };
 		F5AEB0D92537A1A9BE0C38EF /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 		F5AEB53352C11C0C0403A3D9 /* ParkingZoneAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingZoneAnnotation.swift; sourceTree = "<group>"; };
 		F5AEB624A46C53F0DB94F5E7 /* StartParkingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartParkingViewController.swift; sourceTree = "<group>"; };
 		F5AEB628CCAC685B2F5D070D /* VehiclesSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesSectionDataSource.swift; sourceTree = "<group>"; };
+		F5AEB65EC2BD0306F102222A /* CloseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseableView.swift; sourceTree = "<group>"; };
 		F5AEB6D2E3A96A59AFAF887D /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		F5AEB6DDCA1BE28AA7E95E38 /* VehiclesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesService.swift; sourceTree = "<group>"; };
 		F5AEB7520B0EACE9C4EF7092 /* TableWithOptionalButtonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableWithOptionalButtonViewModel.swift; sourceTree = "<group>"; };
@@ -167,11 +174,14 @@
 		F5AEB85B880B011A54729E87 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		F5AEB8AA934AA24B78BD8F8F /* TableWithOptionalButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableWithOptionalButtonView.swift; sourceTree = "<group>"; };
 		F5AEB8B4C3D4EB533D1DED28 /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		F5AEB935EF554EE4E26F8FBA /* VehiclesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesViewModel.swift; sourceTree = "<group>"; };
+		F5AEB94919A07DCA5A02120A /* VehicleDetailsSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDetailsSectionDataSource.swift; sourceTree = "<group>"; };
 		F5AEB965D873CA5CFA26E41B /* ParkingZonesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingZonesService.swift; sourceTree = "<group>"; };
 		F5AEB9C48F6EC7BEB999B98B /* NotificationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
 		F5AEB9CA46A30A9449A96BFD /* ParkerlyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkerlyModel.swift; sourceTree = "<group>"; };
 		F5AEBA639EF42D10AEDA0BD3 /* FlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		F5AEBA7094C8B169C6553A11 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F5AEBA9814410AA3EDD1A420 /* CloseableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseableViewController.swift; sourceTree = "<group>"; };
 		F5AEBB1F86F93F46DF556DF0 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F5AEBB2DB45FE80BAC4E2CEA /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		F5AEBB407587DC2C4D76E60B /* RequestFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
@@ -359,6 +369,15 @@
 			path = History;
 			sourceTree = "<group>";
 		};
+		F5AEB306D6C3E9F8A044121F /* Closeable */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEBA9814410AA3EDD1A420 /* CloseableViewController.swift */,
+				F5AEB65EC2BD0306F102222A /* CloseableView.swift */,
+			);
+			path = Closeable;
+			sourceTree = "<group>";
+		};
 		F5AEB3A48E9AAC17A5F719F9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +410,8 @@
 			isa = PBXGroup;
 			children = (
 				F5AEB628CCAC685B2F5D070D /* VehiclesSectionDataSource.swift */,
+				F5AEB935EF554EE4E26F8FBA /* VehiclesViewModel.swift */,
+				F5AEB7182562F943FC7E4C0A /* VehicleDetails */,
 			);
 			path = Vehicles;
 			sourceTree = "<group>";
@@ -415,6 +436,15 @@
 				F5AEB9CA46A30A9449A96BFD /* ParkerlyModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F5AEB7182562F943FC7E4C0A /* VehicleDetails */ = {
+			isa = PBXGroup;
+			children = (
+				F5AEB94919A07DCA5A02120A /* VehicleDetailsSectionDataSource.swift */,
+				F5AEB03A28D792322C4A0043 /* VehicleDetailsViewModel.swift */,
+			);
+			path = VehicleDetails;
 			sourceTree = "<group>";
 		};
 		F5AEB7C950927B2CD65C4E7E /* Launch */ = {
@@ -553,6 +583,7 @@
 				F5AEB3AF447792C7E4C70F0F /* ContainerViewController.swift */,
 				F5AEB50F12E4F508D579FDE0 /* Views */,
 				F5AEB7E32EBE4F31489CAEA5 /* Collections */,
+				F5AEB306D6C3E9F8A044121F /* Closeable */,
 			);
 			path = Scaffolding;
 			sourceTree = "<group>";
@@ -902,6 +933,11 @@
 				F5AEB57F58B743C4A74A418E /* VehiclesSectionDataSource.swift in Sources */,
 				F5AEB24F5ACD0E6BE571C636 /* StartParkingLocationAssistant.swift in Sources */,
 				F5AEB3BC47D82326D6802728 /* ParkingZoneAnnotation.swift in Sources */,
+				F5AEB36896DB52179A02682D /* CloseableViewController.swift in Sources */,
+				F5AEB7990FDDBEDA4E36FF81 /* CloseableView.swift in Sources */,
+				F5AEBD17EFCC0AA147F474CD /* VehiclesViewModel.swift in Sources */,
+				F5AEB4658CA7867877C8354C /* VehicleDetailsSectionDataSource.swift in Sources */,
+				F5AEB0038D8FFBF59BE6FD95 /* VehicleDetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

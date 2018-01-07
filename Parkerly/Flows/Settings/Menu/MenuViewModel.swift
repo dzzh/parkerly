@@ -8,13 +8,13 @@ import os.log
 
 protocol MenuViewModelDelegate: class {
 
-    func wantsProfile()
+    func logout()
 
     func wantsHistory()
 
-    func logout()
+    func wantsProfile()
 
-    func closeMenu()
+    func wantsVehicles()
 }
 
 class MenuViewModel: TableWithOptionalButtonViewModel {
@@ -44,14 +44,14 @@ private extension MenuViewModel {
 
     func handle(_ menuOption: MenuOption) {
         switch menuOption {
-        case .profile:
-            delegate?.wantsProfile()
         case .history:
             delegate?.wantsHistory()
         case .logout:
-             delegate?.logout()
-        case .closeMenu:
-            delegate?.closeMenu()
+            delegate?.logout()
+        case .profile:
+            delegate?.wantsProfile()
+        case .vehicles:
+            delegate?.wantsVehicles()
         }
     }
 }

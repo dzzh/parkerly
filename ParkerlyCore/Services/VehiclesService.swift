@@ -90,7 +90,7 @@ extension VehiclesService: VehiclesServiceType {
                     completion?(ParkerlyServiceOperation.failed(.noData))
                 }
             case .failed(let error):
-                    completion?(ParkerlyServiceOperation.failed(error))
+                completion?(ParkerlyServiceOperation.failed(error))
             }
         }
     }

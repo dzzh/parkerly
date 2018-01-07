@@ -6,31 +6,29 @@
 import Foundation
 import os.log
 
-enum MenuOption {
-    case profile
+enum MenuOption: Int {
+    case profile = 0
     case history
+    case vehicles
     case logout
-    case closeMenu
+
+    static var all: [MenuOption] = [.profile, .history, .vehicles, .logout]
 
     var title: String {
         switch self {
-        case .profile: return "Profile"
         case .history: return "History"
         case .logout: return "Logout"
-        case .closeMenu: return "Close menu"
+        case .profile: return "Profile"
+        case .vehicles: return "Vehicles"
         }
     }
 
     static func option(for row: Int) -> MenuOption? {
-        switch row {
-        case 0: return .profile
-        case 1: return .history
-        case 2: return .logout
-        case 3: return .closeMenu
-        default:
+        guard let option = MenuOption(rawValue: row) else {
             os_log("Unexpected row %d", row)
             return nil
         }
+        return option
     }
 }
 
@@ -41,7 +39,7 @@ extension MenuOption: TableCellDataType {
 class MenuSectionDataSource: TableSectionDataSource {
 
     override var numberOfRows: Int {
-        return 4
+        return MenuOption.all.count
     }
 
     override var header: String? {

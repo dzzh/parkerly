@@ -16,19 +16,15 @@ class VehiclesSectionDataSource: TableSectionDataSource {
 
     // MARK: - Initialization
 
-    init(user: User, vehiclesService: VehiclesServiceType) {
-        self.user = user
+    init(vehiclesService: VehiclesServiceType, user: User) {
         self.vehiclesService = vehiclesService
+        self.user = user
     }
 
     // MARK: - TableSectionDataSource
 
     override var numberOfRows: Int {
         return vehicles.count
-    }
-
-    override var header: String? {
-        return "Vehicles"
     }
 
     override func object(for row: Int) -> Any? {

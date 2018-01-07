@@ -22,7 +22,7 @@ class StartParkingView: UIView {
     let selectedZoneDescription = UILabel()
     let selectedZoneValue = UILabel()
     let selectedVehicleDescription = UILabel()
-    let selectedVehicleValue = UIButton() // todo handler
+    let selectedVehicleValue = UIButton()
 
     // MARK: - Initialization
 
@@ -71,6 +71,7 @@ private extension StartParkingView {
         mapView.showsUserLocation = true
         selectedZoneDescription.text = "Zone: "
         selectedVehicleDescription.text = "Vehicle: "
+        selectedVehicleValue.setTitleColor(tintColor, for: .normal)
         update(forZone: nil, vehicle: nil)
 
         // MARK: - Subviews layout

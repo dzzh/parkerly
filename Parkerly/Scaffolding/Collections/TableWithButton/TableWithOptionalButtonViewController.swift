@@ -40,6 +40,18 @@ class TableWithOptionalButtonViewController: UIViewController {
         castedView.actionButton.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.reload { [weak self] error in
+            if let error = error {
+                self?.presentError(error)
+            } else {
+                self?.castedView.tableView.reloadData()
+            }
+        }
+    }
+
     // MARK: - Target-actions
 
     @objc func didTapActionButton() {

@@ -4,8 +4,8 @@
 //
 
 import MapKit
-import ParkerlyCore
 import os.log
+import ParkerlyCore
 
 protocol ParkingViewModelDelegate: class {
 
@@ -14,6 +14,8 @@ protocol ParkingViewModelDelegate: class {
     func didStop(_ parkingAction: ParkingAction)
 
     func wantsMenu()
+
+    func wantsVehicles()
 }
 
 protocol ParkingViewModelSelectionDelegate: class {
@@ -40,6 +42,8 @@ protocol ParkingViewModelType {
 
     func handleParkingAction()
 
+    func handleVehicleTap()
+
     func didSelect(_ annotation: MKAnnotation)
 
     func didDeselect(_ annotation: MKAnnotation)
@@ -58,13 +62,18 @@ class ParkingViewModel: ParkingViewModelType {
     private let locationAssistant = StartParkingLocationAssistant()
     private let userService: UserServiceType
     private let parkingZonesService: ParkingZonesServiceType
+    private let vehiclesService: VehiclesServiceType
 
     weak var delegate: ParkingViewModelDelegate?
     weak var selectionDelegate: ParkingViewModelSelectionDelegate?
 
-    init(userService: UserServiceType, parkingZonesService: ParkingZonesServiceType) {
+    init(userService: UserServiceType, parkingZonesService: ParkingZonesServiceType,
+         vehiclesService: VehiclesServiceType) {
         self.userService = userService
         self.parkingZonesService = parkingZonesService
+        self.vehiclesService = vehiclesService
+
+        updateSelectedVehicle()
     }
 
     var parkingAction: ParkingAction?
@@ -119,6 +128,10 @@ class ParkingViewModel: ParkingViewModelType {
         delegate?.wantsMenu()
     }
 
+    func handleVehicleTap() {
+        delegate?.wantsVehicles()
+    }
+
     func didSelect(_ annotation: MKAnnotation) {
         if let parkingZoneAnnotation = annotation as? ParkingZoneAnnotation {
             selectedZone = parkingZoneAnnotation.parkingZone
@@ -147,5 +160,24 @@ class ParkingViewModel: ParkingViewModelType {
 
     func stopTrackingLocation() {
         locationAssistant.stopTrackingLocation()
+    }
+}
+
+private extension ParkingViewModel {
+
+    func updateSelectedVehicle() {
+        guard let currentUser = userService.currentUser else {
+            os_log("not logged in")
+            return
+        }
+
+        vehiclesService.getDefault(for: currentUser) { [weak self] operation in
+            switch operation {
+            case .completed(let vehicle):
+                self?.selectedVehicle = vehicle
+            case .failed(let error):
+                self?.selectedVehicle = nil
+            }
+        }
     }
 }

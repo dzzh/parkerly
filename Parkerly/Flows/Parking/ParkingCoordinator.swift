@@ -11,18 +11,20 @@ class ParkingCoordinator: FlowCoordinator {
 
     private let userService: UserServiceType
     private let parkingActionsService: ParkingActionsServiceType
-    private let parkingZonesService: ParkingZonesServiceType
+    private let vehiclesService: VehiclesServiceType
 
     private let navigationController = UINavigationController()
     private var viewModel: ParkingViewModelType
     private let parkingContainerViewController: ParkingContainerViewController
 
     init(userService: UserServiceType, parkingActionsService: ParkingActionsServiceType,
-         parkingZonesService: ParkingZonesServiceType, presentationContext: UIViewController) {
+         parkingZonesService: ParkingZonesServiceType, vehiclesService: VehiclesServiceType,
+         presentationContext: UIViewController) {
         self.userService = userService
         self.parkingActionsService = parkingActionsService
-        self.parkingZonesService = parkingZonesService
-        viewModel = ParkingViewModel(userService: userService, parkingZonesService: parkingZonesService)
+        self.vehiclesService = vehiclesService
+        viewModel = ParkingViewModel(userService: userService, parkingZonesService: parkingZonesService,
+            vehiclesService: vehiclesService)
         parkingContainerViewController = ParkingContainerViewController(viewModel: viewModel)
         super.init(presentationContext: presentationContext)
         viewModel.delegate = self
@@ -45,6 +47,11 @@ class ParkingCoordinator: FlowCoordinator {
 
         container.containedViewController = navigationController
     }
+
+    override func cleanup(completion: () -> Void) {
+        (presentationContext as? ContainerViewController)?.containedViewController = nil
+        super.cleanup(completion: completion)
+    }
 }
 
 extension ParkingCoordinator: ParkingViewModelDelegate {
@@ -59,10 +66,20 @@ extension ParkingCoordinator: ParkingViewModelDelegate {
 
     func wantsMenu() {
         let settingsCoordinator = SettingsCoordinator(userService: userService, parkingActionsService: parkingActionsService,
-            initialScreen: .menu, presentationMode: .modal, presentationContext: parkingContainerViewController, delegate: self)
+            vehiclesService: vehiclesService, initialScreen: .menu, presentationContext: parkingContainerViewController,
+            delegate: self)
         settingsCoordinator.delegate = self
-        childCoordinators.append(settingsCoordinator)
         settingsCoordinator.start()
+        childCoordinator = settingsCoordinator
+    }
+
+    func wantsVehicles() {
+        let settingsCoordinator = SettingsCoordinator(userService: userService, parkingActionsService: parkingActionsService,
+            vehiclesService: vehiclesService, initialScreen: .vehicles, presentationContext: parkingContainerViewController,
+            delegate: self)
+        settingsCoordinator.delegate = self
+        settingsCoordinator.start()
+        childCoordinator = settingsCoordinator
     }
 }
 

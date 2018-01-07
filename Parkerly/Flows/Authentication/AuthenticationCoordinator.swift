@@ -37,18 +37,12 @@ class AuthenticationCoordinator: FlowCoordinator {
             return
         }
 
-        loginDataSection.reload { [weak self] error in
-            guard let `self` = self else {
-                os_log("already deallocated")
-                return
-            }
+        container.containedViewController = self.navigationController
+    }
 
-            if let error = error {
-                container.presentError(error)
-            } else {
-                container.containedViewController = self.navigationController
-            }
-        }
+    override func cleanup(completion: () -> Void) {
+        (presentationContext as? ContainerViewController)?.containedViewController = nil
+        super.cleanup(completion: completion)
     }
 }
 
@@ -69,10 +63,5 @@ extension AuthenticationCoordinator: RegistrationViewModelDelegate {
             return
         }
         navigationController.popViewController(animated: true)
-        guard let loginViewController = navigationController.topViewController as? TableWithOptionalButtonViewController else {
-            os_log("unexpected state")
-            return
-        }
-        loginViewController.reload()
     }
 }

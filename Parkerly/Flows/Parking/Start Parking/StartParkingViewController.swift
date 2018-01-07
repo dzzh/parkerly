@@ -42,12 +42,13 @@ class StartParkingViewController: UIViewController {
         super.viewDidLoad()
         title = "Start parking"
 
-        castedView.mapView.delegate = self
+        viewModel.selectionDelegate = self
 
+        castedView.mapView.delegate = self
         castedView.mapView.register(MKMarkerAnnotationView.self,
             forAnnotationViewWithReuseIdentifier: parkingZoneAnnotationIdentifier)
 
-        viewModel.selectionDelegate = self
+        castedView.selectedVehicleValue.addTarget(self, action: #selector(wantsToSelectVehicle), for: .touchUpInside)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +74,12 @@ class StartParkingViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.stopTrackingLocation()
+    }
+
+    // MARK: - Target-actions
+
+    @objc func wantsToSelectVehicle() {
+        viewModel.handleVehicleTap()
     }
 }
 

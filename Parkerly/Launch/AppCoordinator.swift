@@ -8,7 +8,7 @@ import ParkerlyCore
 
 class AppCoordinator {
 
-    private var childCoordinators: [FlowCoordinatorType] = []
+    private var childCoordinator: FlowCoordinatorType?
 
     private let serviceLocator: ServiceLocatorType
     private let userService: UserServiceType
@@ -41,24 +41,25 @@ private extension AppCoordinator {
     }
 
     @objc func onDidLogin(_ notification: Notification) {
-        guard childCoordinators.count > 0, childCoordinators.last is AuthenticationCoordinator else {
-            os_log("Inconsistent state of child coordinators")
+        guard let authCoordinator = childCoordinator as? AuthenticationCoordinator else {
+            os_log("Unexpected or missing child coordinator")
             return
         }
-        childCoordinators.removeLast()
-        if childCoordinators.isEmpty {
-            showParking()
+
+        authCoordinator.cleanup { [weak self] in
+            self?.showParking()
         }
     }
 
     @objc func onDidLogout(_ notification: Notification) {
-        while !childCoordinators.isEmpty, !(childCoordinators.last is AuthenticationCoordinator) {
-            childCoordinators.removeLast()
+        guard let child = childCoordinator else {
+            os_log("Unexpected or missing child coordinator")
+            return
         }
-        if childCoordinators.last is AuthenticationCoordinator {
-            childCoordinators.removeLast()
+
+        child.cleanup { [weak self] in
+            self?.showAuthentication()
         }
-        showAuthentication()
     }
 }
 
@@ -69,15 +70,18 @@ private extension AppCoordinator {
     func showAuthentication() {
         let authCoordinator = AuthenticationCoordinator(userService: userService, presentationContext: rootViewController)
         authCoordinator.start()
-        childCoordinators.append(authCoordinator)
+        childCoordinator = authCoordinator
     }
 
     func showParking() {
         let parkingActionsService: ParkingActionsServiceType = serviceLocator.getUnwrapped()
         let parkingZonesService: ParkingZonesServiceType = serviceLocator.getUnwrapped()
-        let parkingCoordinator = ParkingCoordinator(userService: userService, parkingActionsService: parkingActionsService,
-            parkingZonesService: parkingZonesService, presentationContext: rootViewController)
+        let vehiclesService: VehiclesServiceType = serviceLocator.getUnwrapped()
+        let parkingCoordinator = ParkingCoordinator(
+            userService: userService, parkingActionsService: parkingActionsService,
+            parkingZonesService: parkingZonesService, vehiclesService: vehiclesService,
+            presentationContext: rootViewController)
         parkingCoordinator.start()
-        childCoordinators.append(parkingCoordinator)
+        childCoordinator = parkingCoordinator
     }
 }
