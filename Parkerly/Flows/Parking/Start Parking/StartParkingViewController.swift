@@ -69,6 +69,8 @@ class StartParkingViewController: UIViewController {
                 self?.presentError(error)
             }
         }
+
+        viewModel.updateSelectedVehicle()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

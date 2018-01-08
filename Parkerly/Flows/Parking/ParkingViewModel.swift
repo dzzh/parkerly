@@ -30,6 +30,7 @@ protocol ParkingViewModelSelectionDelegate: class {
 protocol ParkingViewModelType {
 
     var delegate: ParkingViewModelDelegate? { get set }
+
     var selectionDelegate: ParkingViewModelSelectionDelegate? { get set }
 
     var parkingAction: ParkingAction? { get }
@@ -51,6 +52,8 @@ protocol ParkingViewModelType {
     func didSelect(_ annotation: MKAnnotation)
 
     func didDeselect(_ annotation: MKAnnotation)
+
+    func updateSelectedVehicle()
 
     // MARK: - Tracking location
 
@@ -160,6 +163,22 @@ class ParkingViewModel: ParkingViewModelType {
         }
     }
 
+    func updateSelectedVehicle() {
+        guard let currentUser = userService.currentUser else {
+            os_log("not logged in")
+            return
+        }
+
+        vehiclesService.getDefault(for: currentUser) { [weak self] operation in
+            switch operation {
+            case .completed(let vehicle):
+                self?.selectedVehicle = vehicle
+            case .failed(_):
+                self?.selectedVehicle = nil
+            }
+        }
+    }
+
     // MARK: - Tracking location
 
     var locationAssistantDelegate: StartParkingLocationAssistantDelegate? {
@@ -229,24 +248,6 @@ private extension ParkingViewModel {
                 self?.delegate?.didStop(action)
             case .failed(let error):
                 completion?(error)
-            }
-        }
-    }
-
-    // TODO: this is not nice, selected vehicle should be specific for device and stored e.g. in user defaults
-    // but I don't have time for this now
-    func updateSelectedVehicle() {
-        guard let currentUser = userService.currentUser else {
-            os_log("not logged in")
-            return
-        }
-
-        vehiclesService.getDefault(for: currentUser) { [weak self] operation in
-            switch operation {
-            case .completed(let vehicle):
-                self?.selectedVehicle = vehicle
-            case .failed(_):
-                self?.selectedVehicle = nil
             }
         }
     }

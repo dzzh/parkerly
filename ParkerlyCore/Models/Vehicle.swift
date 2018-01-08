@@ -30,4 +30,33 @@ public struct Vehicle: ParkerlyModel {
     public func copy(withId id: NetworkId?) -> Vehicle {
         return Vehicle(id: id, userId: userId, title: title, vrn: vrn, isDefault: isDefault)
     }
+
+    public func copy(withDefault isDefault: Bool) -> Vehicle {
+        return Vehicle(id: id, userId: userId, title: title, vrn: vrn, isDefault: isDefault)
+    }
+
+    // MARK: - Helpers
+
+    public static var randomTitle: String {
+        let titles = ["BMW", "Harley-Davidson", "Indian", "Ducati", "Yamaha", "Aprilia"]
+        let randomNumber = Int(arc4random_uniform(UInt32(titles.count)))
+        return titles[randomNumber]
+    }
+
+    public static var randomVrn: String {
+        let symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        var result = ""
+
+        for i in 0..<6 {
+            let randomNumber = Int(arc4random_uniform(UInt32(symbols.count)))
+            let index = symbols.index(symbols.startIndex, offsetBy: randomNumber)
+            let newCharacter = symbols[index]
+            result += String(newCharacter)
+            if i == 1 || i == 3 {
+                result += "-"
+            }
+        }
+
+        return result
+    }
 }

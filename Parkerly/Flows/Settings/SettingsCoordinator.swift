@@ -145,7 +145,7 @@ extension SettingsCoordinator: VehiclesViewModelDelegate {
             case .failed(_):
                 hasVehicles = true
             }
-            let newVehicle = Vehicle(id: nil, userId: userId, title: "New vehicle", vrn: "XX-YY-ZZ", isDefault: !hasVehicles)
+            let newVehicle = Vehicle(id: nil, userId: userId, title: Vehicle.randomTitle, vrn: Vehicle.randomVrn, isDefault: !hasVehicles)
             self?.wantsVehicleDetails(newVehicle)
         }
     }
@@ -200,7 +200,7 @@ private extension SettingsCoordinator {
         }
 
         let historySection = ParkingHistorySectionDataSource(parkingActionsService: parkingActionsService, user: user)
-        var viewModel = TableWithOptionalButtonViewModel(sections: [historySection], actionButtonTitle: nil)
+        let viewModel = TableWithOptionalButtonViewModel(sections: [historySection], actionButtonTitle: nil)
         viewModel.isTableSelectable = false
         let viewController = TableWithOptionalButtonViewController(viewModel: viewModel)
         viewController.title = "History"
