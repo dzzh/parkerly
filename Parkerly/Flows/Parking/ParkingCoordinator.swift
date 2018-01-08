@@ -17,6 +17,7 @@ class ParkingCoordinator: FlowCoordinator {
 
     private let userService: UserServiceType
     private let parkingActionsService: ParkingActionsServiceType
+    private let parkingZonesService: ParkingZonesServiceType
     private let vehiclesService: VehiclesServiceType
 
     private let navigationController = UINavigationController()
@@ -28,6 +29,7 @@ class ParkingCoordinator: FlowCoordinator {
          presentationContext: UIViewController) {
         self.userService = userService
         self.parkingActionsService = parkingActionsService
+        self.parkingZonesService = parkingZonesService
         self.vehiclesService = vehiclesService
         viewModel = ParkingViewModel(userService: userService, parkingActionsService: parkingActionsService,
             parkingZonesService: parkingZonesService, vehiclesService: vehiclesService)
@@ -141,7 +143,8 @@ private extension ParkingCoordinator {
             return
         }
 
-        let parkingActionData = ParkingActionSectionDataSource(parkingAction: parkingAction, user: user)
+        let parkingActionData = ParkingActionSectionDataSource(parkingZonesService: parkingZonesService,
+            vehiclesService: vehiclesService, parkingAction: parkingAction, user: user)
         let parkingActionViewModel = TableWithOptionalButtonViewModel(sections: [parkingActionData], actionButtonTitle: nil)
         parkingActionViewModel.isTableSelectable = false
         let parkingActionViewController = TableWithOptionalButtonViewController(viewModel: parkingActionViewModel)
